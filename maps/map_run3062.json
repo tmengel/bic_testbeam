@@ -1,0 +1,121 @@
+{
+  "source": "Shift-crew hookup table 'After 13/08 (Thu entry - beam studies - Jared + Halen) GOOD FOR RUNS 3061-3063'. Supersedes HallD-BIC-09-15-2026.pdf wherever they differ: the boards were re-hooked on 8/13, so slide 13 (KCU1 ASIC labels) and slide 19 (paddle channels) describe the earlier hookup.",
+  "run": 3062,
+  "setup": "August week 2: SFIL1-4 on passive summing boards, both ends on KCU0; SFIL5 on individual-SiPM boards on KCU1, only the South end alive",
+  "streams": {
+    "ROC_0": "KCU0",
+    "ROC_1": "KCU1"
+  },
+  "kcu0": {
+    "asic0": "SFIL 1-4 South, passive summing boards, ch 0-71",
+    "asic1": "trigger paddles 3-6, ch 72-143",
+    "asic2": "SFIL 1-4 North, passive summing boards, ch 144-215",
+    "asic3": "Baby BCAL North, BBS01-40 on J1-J40, ch 216-287",
+    "board_note": "ASIC2+ASIC3 are on the HGCROC board swapped in from KCU1 on the night of 8/8-8/9 ('it magically started working')",
+    "sfil_grid_layout": "[row][SFIL layer], row r = hookup cell r+1. Per B. Kim SiPM deck 10/8 update (ANL LED bench test): on v2 SiPM boards cells 1 and 2 both read SiPM1+SiPM2 mixed; cell 3 = SiPM3 (beam row); cell 4 = SiPM4. v2 boards = all South SFIL1-4 and North SFIL2-4; North SFIL1 is v1 (one-to-one). Run 3062: r(cell1,cell2)=0.97-0.99 on v2, 0.20 on v1.",
+    "south": [
+      [
+        2,
+        21,
+        63,
+        43
+      ],
+      [
+        6,
+        25,
+        59,
+        37
+      ],
+      [
+        10,
+        29,
+        52,
+        0
+      ],
+      [
+        14,
+        33,
+        48,
+        4
+      ]
+    ],
+    "north": [
+      [
+        146,
+        165,
+        207,
+        187
+      ],
+      [
+        150,
+        169,
+        203,
+        186
+      ],
+      [
+        154,
+        173,
+        196,
+        144
+      ],
+      [
+        158,
+        177,
+        192,
+        148
+      ]
+    ],
+    "paddles": {
+      "3": 84,
+      "4": 86,
+      "5": 81,
+      "6": 97
+    },
+    "paddle_connectors": {
+      "3": "J18",
+      "4": "J4",
+      "5": "J17 (table says J5, but J5 is ch 93; data and edge-board table say ch 81 = J17)",
+      "6": "J6"
+    },
+    "notes": [
+      "Hookup table confirms the slide-24 values 43/37 (not slide 18's 42/38) and the full South and North grids channel for channel.",
+      "SFIL4 South cells 1 and 2 are on edge-board connectors J63/J64; every other South channel is on J1-J16. On North only cell 1 is on J63, cell 2 moved to J13. That asymmetry, not a mapping error, explains slide 24's 'those two look smaller on South wrt North'.",
+      "Slide 24's suggested ch150/ch165 swap is NOT in the hookup table: 150 = SFIL1 cell 2 North, 165 = SFIL2 cell 1 North, as mapped here.",
+      "Slide 19's paddle channels (82/86/93/97) are the pre-8/13 hookup. Run 3062 data: 84/86/81/97 fire at 43-59%, 82 and 93 are quiet.",
+      "Baby BCAL North gave nothing in run 3062: ch252-287 railed at ADC 1023, ch216-251 clean pedestal but zero channels above 20 ADC. Matches slide 16 'Baby BCAL - Noise only -> Added CAEN on South Side'. Use the CAEN stream for Baby BCAL."
+    ]
+  },
+  "kcu1": {
+    "asic2": "SFIL5 South, individual SiPMs on Samtec, NO light guides and no cookies, ch 144-215. The only live half of KCU1.",
+    "asic0": "SFIL5 North, individual SiPMs, LGs + cookies, ch 0-71",
+    "asic1": "SFIL5 North, same board, ch 72-143",
+    "board_note": "ASIC0/ASIC1 are the HGCROC board that came off KCU0. The hookup table already says it 'is not working well'; run 3062 confirms it.",
+    "notes": [
+      "'Half of SFIL 5' in the run log = the South end only, because the North board was dead. It is not a transverse half.",
+      "No per-SiPM channel numbers exist for SFIL5. In run 3062, 53 channels respond, spanning ch154-214. Each 36-channel group splits into a quieter lower part and a hotter upper part (ch154-160 / ch180-196 at 17-28% hit rate, ch162-178 / ch198-214 at 33-59%), consistent with two 16-SiPM cells per group.",
+      "Which SFIL5 cell is which is NOT established. Correlating each KCU1 channel against the KCU0 cells over 16198 matched pairs cannot separate them: with a single-row beam the dominant variation is total shower energy, so every live KCU1 channel picks SFIL3 cell 3 as its best partner (r = 0.20-0.58, decoy < 0.03).",
+      "SFIL5 North: ch0-35 and ch72-107 are railed at ADC 1023; ch36-71 and ch108-143 pedestal normally at ~80 ADC but only ch47, 54, 60, 65, 66 ever cross 20 ADC."
+    ],
+    "asic2_layout": "Individual-SiPM ASIC layout (Olaiya; Kim slide 6/31): array A = 144-151,153-160; B = 162-169,171-178; C = 180-187,189-196; D = 198-205,207-214; 152,161,170,179,188,197,206,215 not connected (= the every-9th gaps seen in run 3062). SFIL5 boards are v1 (no SiPM1+2 mixing).",
+    "asic2_vertical_order": "From run-3062 data (sync/sfil5_map.py), bottom to top in AstroPix y: A < B < D < C. B below D and C above D are firm (AstroPix share profiles and the SFIL3-4 upper-cell fraction agree); A at the bottom is weaker (6/16 live). No height structure is resolved within an array. With the May-board analogy A=SiPM1, B=SiPM2, D=SiPM3, C=SiPM4 the order is monotonic but opposite to SFIL1-4 (SiPM1+2 above SiPM3 there), i.e. the SFIL5 South board is flipped relative to SFIL1-4 if the analogy holds. Not bench-confirmed."
+  },
+  "dead_groups_run3062": {
+    "description": "Slide 23's '36-group channels with very high pedestal or not responding', located. Railed = pedestal median 1023 ADC, MAD 0, over 4000 waveforms.",
+    "kcu0_railed": [
+      "ch252-287 (ASIC3 grp1)"
+    ],
+    "kcu1_railed": [
+      "ch0-35 (ASIC0 grp0)",
+      "ch72-107 (ASIC1 grp0)",
+      "ch216-287 (ASIC3, unconnected)"
+    ],
+    "healthy_pedestal_range_adc": [
+      79,
+      102
+    ]
+  },
+  "source_notes": [
+    "Kim run log says 3060-3063 'KCU1 was taken out (no SFIL5)'; run 3062 ROC_1 data contradicts this (53 live SFIL5 South channels, tick-matched to KCU0).",
+    "B. Kim 'SiPM info' 2026-09-29, updated 10/8 (SiPM3,4 -> SiPM1,2 correction): KCU config history, edge-board J->channel table, v2 SiPM1/2 mixing."
+  ]
+}

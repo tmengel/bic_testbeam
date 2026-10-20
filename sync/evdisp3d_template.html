@@ -1,0 +1,225 @@
+<title>BIC Run 3062 Event Viewer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: detector-viewer workbench: 3D scene left, event readout column right; stacks on phones. Dark by design. */
+:root {
+  --bg: #0a0e13; --panel: #111820; --line: #233040; --fg: #d9e2ea; --muted: #8796a6;
+  --beam: #ffb020; --hit: #ff5a5f; --geo: #5f7a96;
+  --ui: "Barlow Semi Condensed", "Arial Narrow", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--fg); font-family: var(--ui); font-size: 15px; margin: 0; }
+.wrap { display: flex; flex-direction: column; min-height: 100%; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 14px; gap: 12px; box-sizing: border-box; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; }
+h1 { font-size: 22px; font-weight: 600; margin: 0; letter-spacing: 0.01em; text-wrap: balance; }
+.sub { color: var(--muted); font-size: 14px; }
+.events { display: flex; flex-wrap: wrap; gap: 6px; }
+.events button { font: 500 13px var(--mono); color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 6px 9px; cursor: pointer; }
+.events button[aria-pressed="true"] { border-color: var(--beam); color: var(--beam); }
+.events button:focus-visible, .tools button:focus-visible { outline: 2px solid var(--beam); outline-offset: 2px; }
+.main { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 12px; flex: 1; min-height: 560px; }
+@media (max-width: 900px) { .main { grid-template-columns: minmax(0, 1fr); } .scene { height: 62vh; } }
+.scene { position: relative; background: radial-gradient(ellipse at 40% 35%, #121b26 0%, var(--bg) 70%); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; min-height: 420px; }
+.scene canvas { display: block; width: 100%; height: 100%; }
+.tools { position: absolute; top: 10px; left: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+.tools button { font: 500 12px var(--ui); letter-spacing: 0.04em; text-transform: uppercase; color: var(--fg); background: rgba(17,24,32,0.85); border: 1px solid var(--line); border-radius: 4px; padding: 5px 8px; cursor: pointer; }
+.scale { position: absolute; right: 12px; bottom: 12px; font: 11px var(--mono); color: var(--muted); display: grid; gap: 3px; justify-items: end; }
+.scale .bar { width: 160px; height: 8px; border-radius: 2px; background: linear-gradient(90deg, #000004, #3b0f70, #8c2981, #de4968, #fe9f6d, #fcfdbf); }
+.labels { position: absolute; inset: 0; pointer-events: none; font: 11px var(--mono); color: var(--muted); }
+.labels span { position: absolute; transform: translate(-50%, -50%); white-space: nowrap; text-shadow: 0 0 3px var(--bg); }
+aside { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; min-width: 0; }
+.card h2 { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+dl { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; margin: 0; font-size: 14px; }
+dt { color: var(--muted); }
+dd { margin: 0; font-family: var(--mono); font-size: 13px; font-variant-numeric: tabular-nums; }
+.wf { width: 100%; height: 110px; display: block; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 10px; font: 11px var(--mono); color: var(--muted); margin-top: 4px; }
+.legend i { display: inline-block; width: 10px; height: 3px; margin-right: 4px; vertical-align: middle; }
+.note { color: var(--muted); font-size: 13px; line-height: 1.45; max-width: 75ch; }
+.pill { font: 500 11px var(--mono); padding: 1px 6px; border-radius: 3px; border: 1px solid var(--line); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>BIC test beam, run 3062</h1>
+    <span class="sub">Synchronized triggers: KCU0 + KCU1 + CAEN on one clock, AstroPix matched by its 10 MHz phase</span>
+  </header>
+  <nav class="events" id="events" aria-label="Choose event"></nav>
+  <div class="main">
+    <div class="scene" id="scene">
+      <div class="labels" id="labels"></div>
+      <div class="tools">
+        <button id="view-iso" type="button">3/4 view</button>
+        <button id="view-side" type="button">Side (y–z)</button>
+        <button id="view-top" type="button">Top (x–z)</button>
+        <button id="toggle-labels" type="button">Labels</button>
+      </div>
+      <div class="scale"><span>cell signal, ADC (√S·N for SFIL1–4)</span><div class="bar"></div><span>0 ··· 1000</span></div>
+    </div>
+    <aside>
+      <section class="card"><h2>Event</h2><dl id="summary"></dl></section>
+      <section class="card"><h2>KCU0 SFIL beam row (cell 3), 25 ns samples</h2><canvas class="wf" id="wf0"></canvas>
+        <div class="legend"><span><i style="background:#9fb3c8"></i>SFIL1</span><span><i style="background:#ff6b6b"></i>SFIL2</span><span><i style="background:#4dabf7"></i>SFIL3</span><span><i style="background:#69db7c"></i>SFIL4</span><span>solid S · dashed N</span></div></section>
+      <section class="card"><h2>KCU1 SFIL5 South arrays, 25 ns samples</h2><canvas class="wf" id="wf1"></canvas>
+        <div class="legend"><span><i style="background:#868e96"></i>A</span><span><i style="background:#ff6b6b"></i>B</span><span><i style="background:#4dabf7"></i>D</span><span><i style="background:#69db7c"></i>C</span><span>bottom → top</span></div></section>
+      <section class="card"><h2>CAEN, 2 ns per point</h2><canvas class="wf" id="wfc"></canvas>
+        <div class="legend"><span><i style="background:#d9e2ea"></i>Baby BCAL South sum</span><span><i style="background:#ffb020"></i>paddle that fired</span><span><i style="background:#5f7a96"></i>other paddles</span></div></section>
+    </aside>
+  </div>
+  <p class="note">Geometry is schematic. Measured: x along the module and y from AstroPix (0.5 mm pixels, chip 0 at the North end), paddle positions along x, the order of SFIL cells in y (cells 1+2 above the beam row, cell 4 below) and the SFIL5 South array order (A, B, D, C bottom to top). Placeholders: the z positions and thicknesses of paddles, AstroPix, SFILs and Baby BCAL, cell heights (12 mm), fibre length, and the Baby BCAL channel layout. A true GEANT4 view needs the setup metrology or simulation geometry.</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const EVENTS = __DATA__;
+const PADX = { P4: [0, 20], P3: [40, 80], P6: [100, 140], P5: [160, 180] };
+const PBIT = { P3: 1, P4: 2, P5: 4, P6: 8 };
+const Z = { pad: -260, astro: -130, sfil: [0, 45, 90, 135, 180], bb: [240, 440] };
+const XF = [-60, 240];                           // fibre extent along x (placeholder)
+const CELLY = { 1: [23, 35], 2: [11, 23], 3: [-1, 11], 4: [-13, -1] };   // cells 1+2 above the beam row, 4 below
+const ARRY = { A: [-13, -1], B: [-1, 11], D: [11, 23], C: [23, 35] };     // SFIL5 South, measured order
+
+function inferno(t) {
+  const s = [[0,0,4],[59,15,112],[140,41,129],[222,73,104],[254,159,109],[252,253,191]];
+  t = Math.max(0, Math.min(1, t)) * (s.length - 1); const i = Math.min(s.length - 2, Math.floor(t)), f = t - i;
+  return new THREE.Color(...s[i].map((v, k) => (v + (s[i + 1][k] - v) * f) / 255));
+}
+const host = document.getElementById('scene');
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+host.prepend(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(38, 1, 1, 5000);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.target.set(90, 10, 60); controls.enableDamping = true;
+scene.add(new THREE.AmbientLight(0xffffff, 0.75));
+const dl = new THREE.DirectionalLight(0xffffff, 0.5); dl.position.set(-300, 400, -200); scene.add(dl);
+
+const geoMat = new THREE.LineBasicMaterial({ color: 0x5f7a96, transparent: true, opacity: 0.55 });
+function box(x0, x1, y0, y1, z0, z1, color, opacity, edges = true) {
+  const g = new THREE.BoxGeometry(x1 - x0, y1 - y0, z1 - z0);
+  const m = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color, transparent: true, opacity, depthWrite: opacity > 0.9 }));
+  m.position.set((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2);
+  const grp = new THREE.Group(); grp.add(m);
+  if (edges) grp.add(Object.assign(new THREE.LineSegments(new THREE.EdgesGeometry(g), geoMat), { position: m.position.clone() }));
+  return grp;
+}
+let dynamic = new THREE.Group(); scene.add(dynamic);
+const labels = [];
+function label(text, x, y, z) { labels.push({ text, v: new THREE.Vector3(x, y, z) }); }
+
+// static frame: fibre direction arrow and module outline
+label('North end', XF[0] - 25, 40, 0); label('South end', XF[1] + 25, 40, 0);
+label('beam', 90, 50, -420);
+for (let k = 0; k < 5; k++) label(`SFIL${k + 1}`, XF[1] + 50, 46, Z.sfil[k] + 12);
+label('Baby BCAL', XF[1] + 55, 52, (Z.bb[0] + Z.bb[1]) / 2); label('AstroPix', -40, 26, Z.astro); label('paddles', -40, 46, Z.pad);
+
+function render(ev) {
+  scene.remove(dynamic); dynamic = new THREE.Group(); scene.add(dynamic);
+  const vis = v => Math.max(0, Math.min(1, v / 1000));
+  // paddles
+  for (const [nm, [x0, x1]] of Object.entries(PADX)) {
+    const on = ev.pad >= 0 && (ev.pad & PBIT[nm]);
+    dynamic.add(box(x0, x1, -20, 40, Z.pad - 4, Z.pad + 4, on ? 0xffb020 : 0x2a3a4c, on ? 0.95 : 0.35));
+  }
+  // AstroPix: nine chips, the matched pixel
+  for (let c = 0; c < 9; c++) dynamic.add(box(c * 20, c * 20 + 17.5, 0, 17.5, Z.astro - 0.6, Z.astro + 0.6, c === ev.astro.chip ? 0x3d5470 : 0x1b2633, 0.85));
+  const hy = ev.astro.y ?? 5, hasY = ev.astro.y !== null;
+  if (hasY) dynamic.add(box(ev.astro.x - 0.25, ev.astro.x + 0.25, hy - 0.25, hy + 0.25, Z.astro - 1.5, Z.astro + 1.5, 0xff5a5f, 1, false));
+  else dynamic.add(box(ev.astro.x - 0.25, ev.astro.x + 0.25, 0, 17.5, Z.astro - 1.5, Z.astro + 1.5, 0xff5a5f, 0.9, false));
+  // beam track: straight along z through the AstroPix hit (no measured angle; one layer)
+  const tg = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(ev.astro.x, hy, -420), new THREE.Vector3(ev.astro.x, hy, Z.sfil[0])]);
+  const tl = new THREE.Line(tg, hasY ? new THREE.LineBasicMaterial({ color: 0xffb020 }) : new THREE.LineDashedMaterial({ color: 0xffb020, dashSize: 8, gapSize: 6 }));
+  if (!hasY) tl.computeLineDistances(); dynamic.add(tl);
+  // SFIL1-4 cells: body = sqrt(S*N), end caps = S (South) and N (North)
+  for (let L = 0; L < 4; L++) for (let c = 1; c <= 4; c++) {
+    const s = Math.max(ev.sfil_s[c - 1][L], 1), n = Math.max(ev.sfil_n[c - 1][L], 1), g = Math.sqrt(s * n), [y0, y1] = CELLY[c], z = Z.sfil[L];
+    dynamic.add(box(XF[0], XF[1], y0 + 0.4, y1 - 0.4, z, z + 25, inferno(vis(g)), 0.06 + 0.8 * vis(g)));
+    dynamic.add(box(XF[1], XF[1] + 6, y0 + 0.4, y1 - 0.4, z, z + 25, inferno(vis(s)), 0.95, false));
+    dynamic.add(box(XF[0] - 6, XF[0], y0 + 0.4, y1 - 0.4, z, z + 25, inferno(vis(n)), 0.95, false));
+  }
+  // SFIL5: South arrays only (North board dead in 3062)
+  for (const [nm, [y0, y1]] of Object.entries(ARRY)) {
+    const v = ev.sfil5_arrays[nm] / 8, z = Z.sfil[4];
+    dynamic.add(box(XF[0], XF[1], y0 + 0.4, y1 - 0.4, z, z + 25, inferno(vis(v)), 0.06 + 0.8 * vis(v)));
+    dynamic.add(box(XF[1], XF[1] + 6, y0 + 0.4, y1 - 0.4, z, z + 25, inferno(vis(v)), 0.95, false));
+  }
+  // Baby BCAL: block shaded by the South sum, 12 South readouts on a schematic 3 x 4 grid
+  const bsum = ev.bbcal.reduce((a, b) => a + Math.max(b, 0), 0);
+  dynamic.add(box(XF[0], XF[1], -25, 45, Z.bb[0], Z.bb[1], inferno(vis(bsum / 2)), 0.05 + 0.5 * vis(bsum / 2)));
+  ev.bbcal.forEach((v, k) => { const r = Math.floor(k / 4), q = k % 4, y0 = -25 + r * 23.3, z0 = Z.bb[0] + q * 50;
+    dynamic.add(box(XF[1], XF[1] + 6, y0 + 1, y0 + 22.3, z0 + 2, z0 + 48, inferno(vis(v * 3)), 0.95, false)); });
+  drawSummary(ev); drawWaveforms(ev);
+}
+
+const fmt = (v, d = 0) => (v === null || v === undefined || Number.isNaN(v)) ? 'n/a' : Number(v).toFixed(d);
+function drawSummary(ev) {
+  const pads = Object.keys(PBIT).filter(k => ev.pad >= 0 && (ev.pad & PBIT[k])).join(', ') || 'none';
+  const sum = L => [0, 2, 3].reduce((a, c) => a + Math.sqrt(Math.max(ev.sfil_s[c][L], 1) * Math.max(ev.sfil_n[c][L], 1)), 0);
+  const rows = [['trigger row', ev.row], ['run time', fmt(ev.t_s, 3) + ' s'], ['paddle', pads], ['AstroPix chip', ev.astro.chip],
+    ['AstroPix x, y', fmt(ev.astro.x, 1) + ' mm, ' + (ev.astro.y === null ? 'no row hit' : fmt(ev.astro.y, 1) + ' mm')],
+    ['match purity', fmt(ev.astro.purity, 2)], ['readout latency', fmt(ev.astro.latency_ms, 1) + ' ms'],
+    ['SFIL1–4 √S·N', [0, 1, 2, 3].map(L => fmt(sum(L))).join(' · ')],
+    ['SFIL5 A·B·D·C', ['A', 'B', 'D', 'C'].map(k => fmt(ev.sfil5_arrays[k])).join(' · ')],
+    ['BBCAL South sum', fmt(ev.bbcal.reduce((a, b) => a + b, 0))]];
+  document.getElementById('summary').innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
+}
+function plot(id, series, ymin, ymax) {
+  const cv = document.getElementById(id), r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+  cv.width = r.width * dpr; cv.height = r.height * dpr; const g = cv.getContext('2d'); g.scale(dpr, dpr);
+  const W = r.width, H = r.height, pl = 34, pb = 14, py = y => 4 + (H - pb - 4) * (1 - (y - ymin) / (ymax - ymin));
+  g.strokeStyle = '#233040'; g.lineWidth = 1; g.fillStyle = '#8796a6'; g.font = '10px JetBrains Mono, monospace';
+  [ymin, 0, ymax].forEach(v => { g.beginPath(); g.moveTo(pl, py(v)); g.lineTo(W, py(v)); g.stroke(); g.fillText(String(Math.round(v)), 0, py(v) + 3); });
+  for (const s of series) {
+    g.strokeStyle = s.color; g.lineWidth = s.width || 1.6; g.setLineDash(s.dash || []); g.beginPath();
+    s.y.forEach((v, i) => { const x = pl + (W - pl - 4) * i / (s.y.length - 1), y = py(Math.max(ymin, Math.min(ymax, v))); i ? g.lineTo(x, y) : g.moveTo(x, y); });
+    g.stroke();
+  }
+  g.setLineDash([]);
+}
+function drawWaveforms(ev) {
+  const cols = ['#9fb3c8', '#ff6b6b', '#4dabf7', '#69db7c'];
+  plot('wf0', [...ev.wf_kcu0_beamrow_s.map((y, k) => ({ y, color: cols[k] })), ...ev.wf_kcu0_beamrow_n.map((y, k) => ({ y, color: cols[k], dash: [4, 3] }))], -100, 1000);
+  const a = ev.wf_kcu1_arrays, mx = Math.max(1000, ...Object.values(a).flat()) * 1.05;
+  plot('wf1', [['A', '#868e96'], ['B', '#ff6b6b'], ['D', '#4dabf7'], ['C', '#69db7c']].map(([k, c]) => ({ y: a[k], color: c })), -300, mx);
+  const order = ['P3', 'P4', 'P5', 'P6'];
+  plot('wfc', [...ev.wf_caen_pad.map((y, k) => ({ y, color: (ev.pad >= 0 && (ev.pad & PBIT[order[k]])) ? '#ffb020' : '#5f7a96' })), { y: ev.wf_caen_bbcal, color: '#d9e2ea', width: 2 }], -2200, 400);
+}
+
+// event chooser
+const nav = document.getElementById('events');
+EVENTS.forEach((ev, i) => {
+  const b = document.createElement('button'); b.type = 'button'; b.id = `ev-${ev.row}`;
+  const pads = Object.keys(PBIT).filter(k => ev.pad >= 0 && (ev.pad & PBIT[k])).join('+');
+  b.textContent = `${pads} · chip ${ev.astro.chip} · ${ev.row}`; b.setAttribute('aria-pressed', 'false');
+  b.onclick = () => select(i); nav.appendChild(b);
+});
+function select(i) { [...nav.children].forEach((b, k) => b.setAttribute('aria-pressed', String(k === i))); render(EVENTS[i]); try { localStorage.setItem('bic-ev', i); } catch (e) {} }
+
+// views and labels
+const views = { iso: [[-260, 200, -380], [90, 10, 60]], side: [[-620, 15, 60], [90, 10, 60]], top: [[90, 700, 61], [90, 10, 60]] };
+function setView(k) { const [p, t] = views[k]; camera.position.set(...p); controls.target.set(...t); controls.update(); }
+document.getElementById('view-iso').onclick = () => setView('iso');
+document.getElementById('view-side').onclick = () => setView('side');
+document.getElementById('view-top').onclick = () => setView('top');
+let showLabels = true; document.getElementById('toggle-labels').onclick = () => { showLabels = !showLabels; };
+const lab = document.getElementById('labels');
+function resize() { const r = host.getBoundingClientRect(); renderer.setSize(r.width, r.height, false); camera.aspect = r.width / Math.max(1, r.height); camera.updateProjectionMatrix(); }
+window.addEventListener('resize', () => { resize(); const i = [...nav.children].findIndex(b => b.getAttribute('aria-pressed') === 'true'); if (i >= 0) drawWaveforms(EVENTS[i]); });
+function loop() {
+  controls.update(); renderer.render(scene, camera);
+  const r = host.getBoundingClientRect();
+  lab.innerHTML = showLabels ? labels.map(l => { const p = l.v.clone().project(camera);
+    return (p.z < 1) ? `<span style="left:${(p.x + 1) / 2 * r.width}px;top:${(1 - p.y) / 2 * r.height}px">${l.text}</span>` : ''; }).join('') : '';
+  requestAnimationFrame(loop);
+}
+resize(); setView('iso');
+let start = 2; try { const s = parseInt(localStorage.getItem('bic-ev'), 10); if (s >= 0 && s < EVENTS.length) start = s; } catch (e) {}
+select(start); loop();
+</script>

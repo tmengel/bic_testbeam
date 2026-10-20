@@ -1,0 +1,10 @@
+# data and outputs
+data/*
+!data/events_3062_skim.root
+sync/out/
+
+# build products
+sync/ts_dump
+sync/wf_acc
+__pycache__/
+*.pyc
