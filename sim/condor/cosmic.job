@@ -1,0 +1,13 @@
+# cosmic muons, 20 x 100k, geometry v4 (2026-10-30)
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/sim/condor
+Executable         = $(initialDir)/cosmic.sh
+Arguments          = 100000 $(seed)
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 2GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/bic_testbeam/sim/condor/logs/cosmic_s$(seed).out
+Error              = /sphenix/user/tmengel/eic/bic_testbeam/sim/condor/logs/cosmic_s$(seed).err
+Log                = /tmp/condor-bic_cosmic-$ENV(USER).log
+Queue seed from seq 101 120 |

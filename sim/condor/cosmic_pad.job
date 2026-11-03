@@ -1,0 +1,15 @@
+# cosmic muons started over the paddle footprint only (x -110..130, z -200..-40 mm): the subsample that hits a paddle and the stack, as the
+# 3088 trigger selects (100 % of the two-end tags carry a paddle dip); 20 x 100k, output sim/cosmic/pad/
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/sim/condor
+Executable         = $(initialDir)/cosmic.sh
+Arguments          = 100000 $(seed) pad
+environment        = "EXTRA='/bic/gun/cosmicX0 -110;/bic/gun/cosmicX1 130;/bic/gun/cosmicZ0 -200;/bic/gun/cosmicZ1 -40'"
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 2GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/bic_testbeam/sim/condor/logs/cosmic_pad_s$(seed).out
+Error              = /sphenix/user/tmengel/eic/bic_testbeam/sim/condor/logs/cosmic_pad_s$(seed).err
+Log                = /tmp/condor-bic_cosmic-$ENV(USER).log
+Queue seed from seq 201 220 |

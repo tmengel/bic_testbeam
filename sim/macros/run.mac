@@ -1,0 +1,18 @@
+/control/execute geometry_default.mac
+/run/initialize
+/control/verbose 1
+/run/verbose 1
+/tracking/verbose 0
+# beam: positrons, 4 GeV, 5 mm spot on the beam row: cell 3 (index 2) spans -19.05 < y < 0 for 4 cells of 19.05 mm; the official geometry puts the
+# beam 5 mm from the slab centre line and the data put it in cell 3 with some light in cell 2 and none in cell 4, so y = -5 mm (5 mm inside cell 3 on the cell-2 side),
+# at x = +30 mm = under paddle P6 (AstroPix chips 5-6); chip 0 is at x = -80 mm (North), chip 8 at +80 mm
+# (beam x is in the AstroPix frame, x = 0 at chip 4, from where the run-3062 AstroPix hits put P6 / P5 triggers; the survey places the
+# paddles themselves at P6 = +13 mm, P5 = +100 mm, which disagrees with those hits: see README, geometry v4)
+/bic/gun/particle e+
+/bic/gun/energy 4000
+/bic/gun/sigmaE 0
+/bic/gun/x 30
+/bic/gun/y -5
+/bic/gun/sigmaXY 5
+/bic/output bic_sim.root
+/run/beamOn 100

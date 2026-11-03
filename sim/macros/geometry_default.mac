@@ -1,0 +1,20 @@
+# all values can be overridden before /run/initialize. v3 (2026-10-23): SFIL cell height, fibre length, layer pitch, Baby BCAL gap and paddle sizes from the
+# epic BeamTest branch (compact/ecal/baby_barrel_interlayers_Summer2026.xml); the AstroPix v3 module stays in the stack (slot after SFIL1, position assumed); it is commented out in the official file but was present in August
+# v4 (2026-10-29): /bic/geom/layout 1 (the default) takes the SFIL lengths, x and z positions, the AstroPix x/z, the Baby BCAL x/z and
+# the paddle positions and sizes from the August survey (context/MeasureMap2_Complete.pdf; see BicGeometry.hh). In that layout
+# fiberLength, sfilGap, astroSlot and bbcalGap below are ignored; /bic/geom/layout 0 restores v3.
+/bic/geom/layout 1
+/bic/geom/fiberLength 510 mm
+/bic/geom/cellHeight 19.05 mm
+/bic/geom/nCells 4
+/bic/geom/nSfil 5
+/bic/geom/sfilGap 43.1 mm
+/bic/geom/astroSlot 0
+/bic/geom/bbcalLayers 10
+/bic/geom/bbcalRowsPerLayer 18
+/bic/geom/bbcalCells 4
+/bic/geom/bbcalGap 61 mm
+/bic/geom/attenuationLength 4182 mm
+/bic/geom/attenuationLength1 608.7 mm
+/bic/geom/attenuationAlpha 0.181
+/bic/geom/vEff 170

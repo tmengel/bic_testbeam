@@ -1,0 +1,22 @@
+# v4b = v4 geometry with the light model from the 3062 data: single-exponential attenuation lambda_eff 1500 mm (measured 1329 / 1646 mm on
+# SFIL2 / SFIL3 from the AstroPix x, against the FTBF two-component curve's 2341 mm) and v_eff 160 mm/ns (N-S timing 157-162); output sim/v4b/
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/sim/condor
+Executable         = $(initialDir)/scan.sh
+Arguments          = $(energy) $(nevents) $(seed) $(xbeam) 0 -5 v4b
+environment        = "EXTRA='/bic/geom/attenuationAlpha 0;/bic/geom/attenuationLength 1500 mm;/bic/geom/vEff 160'"
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 2GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/bic_testbeam/sim/condor/logs/scan_v4b_e$(energy)_x$(xbeam)_s$(seed).out
+Error              = /sphenix/user/tmengel/eic/bic_testbeam/sim/condor/logs/scan_v4b_e$(energy)_x$(xbeam)_s$(seed).err
+Log                = /tmp/condor-bic_sim-$ENV(USER)-v4b-$(seed).log
+Queue energy, nevents, seed, xbeam from (
+  3000 5000 91 30
+  4000 5000 92 30
+  5000 5000 93 30
+  6000 5000 94 30
+  5000 5000 95 80
+  6000 5000 96 80
+)

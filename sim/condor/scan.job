@@ -1,0 +1,19 @@
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/sim/condor
+Executable         = $(initialDir)/scan.sh
+Arguments          = $(energy) $(nevents) $(seed) $(xbeam)
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 2GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/bic_testbeam/sim/condor/logs/scan_e$(energy)_x$(xbeam)_s$(seed).out
+Error              = /sphenix/user/tmengel/eic/bic_testbeam/sim/condor/logs/scan_e$(energy)_x$(xbeam)_s$(seed).err
+Log                = /tmp/condor-bic_sim-$ENV(USER)-$(energy)-$(seed).log
+Queue energy, nevents, seed, xbeam from (
+  3000 5000 41 30
+  4000 5000 42 30
+  5000 5000 43 30
+  6000 5000 44 30
+  5000 5000 45 80
+  6000 5000 46 80
+)

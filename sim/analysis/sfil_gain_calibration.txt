@@ -1,0 +1,2 @@
+simulation: /sphenix/tg/tg01/jets/tmengel/eic/sim/v1_purePb
+simulation points (paddle, E): [(5, 3000), (5, 4000), (5, 5000), (5, 6000), (6, 3000), (6, 4000), (6, 5000), (6, 6000)]

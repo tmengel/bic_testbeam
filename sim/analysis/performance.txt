@@ -1,0 +1,22 @@
+attenuation correction to x = 0 with the paddle position: lambda_eff [1500.0, 1329.0, 1646.0, 1500.0] mm (SFIL1-4), 1500 (SFIL5), 1500 (Baby BCAL); factors at P4/P3/P6/P5: [1.055, 1.02, 0.98, 0.948]
+showers with SFIL1-5 and Baby BCAL: 99858 of 1971542 fit-cache showers
+gains used (4 GeV anchor): SFIL1-4 [8.19, 23.82, 18.53, 15.01] ADC/MeV, SFIL5 210 KCU1 ADC/MeV, Baby BCAL per channel from bbcal_gains_yfine
+
+model per energy: mean visible (MeV), core sigma/mu, shares SFIL1-5 + BB:
+  3000 MeV: <E_vis> 191.5  sigma/mu 0.0514  shares [0.031 0.117 0.178 0.174 0.134 0.364]
+  4000 MeV: <E_vis> 257.9  sigma/mu 0.0482  shares [0.025 0.101 0.166 0.175 0.14  0.393]
+  5000 MeV: <E_vis> 325.1  sigma/mu 0.0443  shares [0.021 0.09  0.155 0.169 0.142 0.423]
+  6000 MeV: <E_vis> 393.5  sigma/mu 0.0424  shares [0.018 0.08  0.146 0.165 0.144 0.447]
+
+per paddle: n, energy (P6 anchor + geometric-mean curve; P4 from the SFIL2-5 shape), shape-fit energy from the SFIL2-5 shares (10 % systematic), data and model SFIL2-5 shares, <E_vis> (attenuation-corrected), core sigma/mu, model sigma/mu
+  P4 (x -80): n  22664  E 3.45 GeV (shape fit 3.30)  SFIL2-5 shares data [0.177 0.315 0.283 0.225] model [0.185 0.291 0.294 0.231]  <E_vis> 213.9 MeV (model 221.5)  sigma/mu 0.1324 (model 0.0500)
+  P3 (x -30): n  22743  E 4.00 GeV (shape fit 3.83)  SFIL2-5 shares data [0.169 0.304 0.295 0.232] model [0.173 0.285 0.301 0.241]  <E_vis> 243.2 MeV (model 257.9)  sigma/mu 0.1219 (model 0.0482)
+  P6 (x +30): n  25169  E 4.00 GeV (shape fit 4.72)  SFIL2-5 shares data [0.164 0.279 0.308 0.249] model [0.173 0.285 0.301 0.241]  <E_vis> 256.2 MeV (model 257.9)  sigma/mu 0.1091 (model 0.0482)
+  P5 (x +80): n  29282  E 4.50 GeV (shape fit 5.62)  SFIL2-5 shares data [0.156 0.267 0.317 0.26 ] model [0.167 0.282 0.302 0.248]  <E_vis> 292.2 MeV (model 291.5)  sigma/mu 0.1047 (model 0.0462)
+core sigma/mu of SFIL1-4 alone per paddle: P4 0.2986  P3 0.2650  P6 0.2038  P5 0.1877; model SFIL1-4 alone at 4 GeV 0.1773
+
+energy spread implied per paddle if the model resolution holds: sigma_E/E = sqrt(data^2 - model^2): P4 12.3 %  P3 11.2 %  P6 9.8 %  P5 9.4 %
+linearity: <E_vis>/E_fit per paddle: P4 62.0 MeV/GeV  P3 60.8 MeV/GeV  P6 64.1 MeV/GeV  P5 64.9 MeV/GeV   (model 64.5 MeV/GeV at 4 GeV)
+shape-fit energy ratios (SFIL2-5 profile): P5/P6 1.190, P3/P6 0.810, P4/P6 0.698  (geometric-mean curve: P5/P6 1.12, P3/P6 1.00)
+containment: Baby BCAL share per paddle data [0.307, 0.322, 0.343, 0.362] vs model at E_fit [0.377, 0.393, 0.393, 0.408]; model energy behind the Baby BCAL (escape) 15-16 %
+wrote performance.png

@@ -1,0 +1,95 @@
+data: P5 33468 showers, P6 27856 showers (triple-matched, SFIL1-4 sum > 1200)
+simulation points available: [(5, 5000), (5, 6000), (6, 3000), (6, 4000), (6, 5000), (6, 6000)]
+
+Per-element gains data/sim, and the P5/P6 gain ratio (1 = consistent) per energy hypothesis
+
+  scaled May map: P6 5 GeV, P5 6 GeV
+  element           gain P6      gain P5      P5/P6
+  SFIL1 c1+2         23.826       23.098      0.969
+  SFIL1 c3           22.123       20.888      0.944
+  SFIL1 c4            1.771        1.689      0.954
+  SFIL2 c1+2          3.657        3.232      0.884
+  SFIL2 c3           47.226       45.050      0.954
+  SFIL2 c4            0.631        0.566      0.896
+  SFIL3 c1+2          6.824        7.476      1.095
+  SFIL3 c3           29.734       26.046      0.876
+  SFIL3 c4            0.423        0.342      0.810
+  SFIL4 c1+2          3.460        3.619      1.046
+  SFIL4 c3           24.081       22.074      0.917
+  SFIL4 c4            0.494        0.368      0.744
+  SFIL5 S           142.706      132.319      0.927
+  BBCAL S           235.329      219.054      0.931
+  beam-row + SFIL5 + BBCAL: mean P5/P6 ratio 0.925, rms 0.025
+
+  equal energies 5 GeV
+  element           gain P6      gain P5      P5/P6
+  SFIL1 c1+2         23.826       25.886      1.086
+  SFIL1 c3           22.123       21.821      0.986
+  SFIL1 c4            1.771        1.742      0.984
+  SFIL2 c1+2          3.657        3.529      0.965
+  SFIL2 c3           47.226       48.652      1.030
+  SFIL2 c4            0.631        0.621      0.983
+  SFIL3 c1+2          6.824        8.340      1.222
+  SFIL3 c3           29.734       29.579      0.995
+  SFIL3 c4            0.423        0.390      0.922
+  SFIL4 c1+2          3.460        4.203      1.215
+  SFIL4 c3           24.081       25.970      1.078
+  SFIL4 c4            0.494        0.436      0.883
+  SFIL5 S           142.706      160.612      1.125
+  BBCAL S           235.329      279.665      1.188
+  beam-row + SFIL5 + BBCAL: mean P5/P6 ratio 1.067, rms 0.072
+
+  equal energies 6 GeV
+  element           gain P6      gain P5      P5/P6
+  SFIL1 c1+2         21.769       23.098      1.061
+  SFIL1 c3           21.378       20.888      0.977
+  SFIL1 c4            1.696        1.689      0.996
+  SFIL2 c1+2          3.278        3.232      0.986
+  SFIL2 c3           43.449       45.050      1.037
+  SFIL2 c4            0.576        0.566      0.982
+  SFIL3 c1+2          5.946        7.476      1.257
+  SFIL3 c3           26.102       26.046      0.998
+  SFIL3 c4            0.375        0.342      0.914
+  SFIL4 c1+2          2.906        3.619      1.245
+  SFIL4 c3           20.189       22.074      1.093
+  SFIL4 c4            0.418        0.368      0.879
+  SFIL5 S           116.904      132.319      1.132
+  BBCAL S           186.256      219.054      1.176
+  beam-row + SFIL5 + BBCAL: mean P5/P6 ratio 1.069, rms 0.071
+
+  reversed: P6 6 GeV, P5 5 GeV
+  element           gain P6      gain P5      P5/P6
+  SFIL1 c1+2         21.769       25.886      1.189
+  SFIL1 c3           21.378       21.821      1.021
+  SFIL1 c4            1.696        1.742      1.028
+  SFIL2 c1+2          3.278        3.529      1.076
+  SFIL2 c3           43.449       48.652      1.120
+  SFIL2 c4            0.576        0.621      1.077
+  SFIL3 c1+2          5.946        8.340      1.403
+  SFIL3 c3           26.102       29.579      1.133
+  SFIL3 c4            0.375        0.390      1.041
+  SFIL4 c1+2          2.906        4.203      1.446
+  SFIL4 c3           20.189       25.970      1.286
+  SFIL4 c4            0.418        0.436      1.043
+  SFIL5 S           116.904      160.612      1.374
+  BBCAL S           186.256      279.665      1.502
+  beam-row + SFIL5 + BBCAL: mean P5/P6 ratio 1.239, rms 0.165
+
+Gain-free double ratios [element/SFIL3 c3]_P5 / [element/SFIL3 c3]_P6: data, and simulation per hypothesis
+  element          data scaled May map: P6 5 G   equal energies 5 GeV   equal energies 6 GeV reversed: P6 6 GeV, P5
+  SFIL1 c1+2      1.015                  0.917                  0.929                  0.954                  0.967
+  SFIL1 c3        0.987                  0.916                  0.995                  1.008                  1.096
+  SFIL1 c4        1.009                  0.927                  1.020                  1.011                  1.113
+  SFIL2 c1+2      0.957                  0.948                  0.986                  0.968                  1.007
+  SFIL2 c3        1.044                  0.958                  1.008                  1.004                  1.056
+  SFIL2 c4        0.991                  0.968                  1.003                  1.007                  1.042
+  SFIL3 c1+2      1.203                  0.962                  0.980                  0.955                  0.972
+  SFIL3 c3        1.000                  1.000                  1.000                  1.000                  1.000
+  SFIL3 c4        0.935                  1.011                  1.008                  1.021                  1.018
+  SFIL4 c1+2      1.224                  1.025                  1.002                  0.980                  0.959
+  SFIL4 c3        1.092                  1.043                  1.007                  0.996                  0.962
+  SFIL4 c4        0.895                  1.053                  1.008                  1.016                  0.972
+  SFIL5 S         1.135                  1.073                  1.003                  1.001                  0.936
+  BBCAL S         1.201                  1.131                  1.006                  1.019                  0.907
+
+SFIL1-4 South total (all cells): data P5/P6 = 1.051;  simulation South light P5(x=80)/P6(x=30) at equal energy: 5000 GeV 1.013, 6000 GeV 1.008

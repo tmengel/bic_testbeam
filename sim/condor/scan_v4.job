@@ -1,0 +1,23 @@
+# geometry v4 (survey layout, the default since 2026-10-29) energy scan, same points and statistics as the v3b scan (seeds 41-46)
+# output: /sphenix/tg/tg01/jets/tmengel/eic/sim/v4/bic_sim_e<E>[_x80]_s<seed>.root
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/sim/condor
+Executable         = $(initialDir)/scan.sh
+Arguments          = $(energy) $(nevents) $(seed) $(xbeam) 0 -5 v4
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 2GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/bic_testbeam/sim/condor/logs/scan_v4_e$(energy)_x$(xbeam)_s$(seed).out
+Error              = /sphenix/user/tmengel/eic/bic_testbeam/sim/condor/logs/scan_v4_e$(energy)_x$(xbeam)_s$(seed).err
+Log                = /tmp/condor-bic_sim-$ENV(USER)-v4-$(seed).log
+Queue energy, nevents, seed, xbeam from (
+  3000 5000 81 30
+  4000 5000 82 30
+  5000 5000 83 30
+  6000 5000 84 30
+  5000 5000 85 80
+  6000 5000 86 80
+  4000 5000 87 80
+  3000 5000 88 80
+)

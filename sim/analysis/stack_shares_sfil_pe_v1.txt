@@ -1,0 +1,18 @@
+simulation: /sphenix/tg/tg01/jets/tmengel/eic/sim/v1_purePb  gain factors applied to the South layer sums (SFIL1-4): [1.    0.672 1.    1.   ]
+equal-gain shares: [0.025 0.277 0.377 0.32 ]
+pe-equalised shares, all paddles: [0.027 0.205 0.415 0.353]
+  P3: [0.029 0.205 0.429 0.337]
+  P4: [0.033 0.212 0.439 0.316]
+  P5: [0.024 0.201 0.397 0.378]
+  P6: [0.025 0.206 0.408 0.361]
+  sim 3 GeV: [0.07  0.267 0.362 0.301]
+  sim 4 GeV: [0.061 0.251 0.366 0.323]
+  sim 5 GeV: [0.054 0.239 0.367 0.34 ]
+  sim 6 GeV: [0.049 0.23  0.368 0.354]
+inner bar (SFIL2/SFIL3 gain ratio: stat (+) 10 %): [0.001 0.016 0.009 0.007]
+outer bar (+ SFIL1, SFIL4 gains unknown, +-17.5 %): [0.005 0.021 0.027 0.041]
+  all  SFIL2-4 pe-equalised shares [0.211 0.427 0.362] -> E = 6.0 GeV (5.3-6.0), chi2min 6.6
+  P3   SFIL2-4 pe-equalised shares [0.211 0.442 0.347] -> E = 5.9 GeV (4.8-6.0), chi2min 11.5
+  P4   SFIL2-4 pe-equalised shares [0.219 0.455 0.326] -> E = 4.7 GeV (3.9-5.8), chi2min 16.6
+  P5   SFIL2-4 pe-equalised shares [0.206 0.406 0.388] -> E = 6.0 GeV (5.7-6.0), chi2min 4.8
+  P6   SFIL2-4 pe-equalised shares [0.211 0.419 0.37 ] -> E = 6.0 GeV (5.5-6.0), chi2min 4.9

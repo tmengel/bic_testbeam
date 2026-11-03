@@ -1,0 +1,20 @@
+fit-tree triggers matched to the event table: 1.000; with KCU1 present: 708086
+
+model South light ratio <L5>/<L4> (cells 1-3, beam under P6): 3 GeV 0.770  4 GeV 0.802  5 GeV 0.842  6 GeV 0.869
+model, beam under P5 (x = 80): 5 GeV 0.832  6 GeV 0.870
+
+Data <A5 (KCU1 ADC)> / <A4 (KCU0 ADC, fitted)> and the relative gain g5/g4 = ratio / model ratio, per paddle
+sample          n     <A5>     <A4>    A5/A4 | g5/g4@3GeV g5/g4@4GeV g5/g4@5GeV g5/g4@6GeV
+all          393623     8236    731.3   11.261 |      14.63      14.04      13.37      12.96
+P4            89233     6403    571.9   11.196 |      14.54      13.96      13.29      12.88
+P3            89238     7408    674.9   10.976 |      14.26      13.68      13.03      12.63
+P6            99556     8526    754.8   11.296 |      14.67      14.08      13.41      13.00
+P5           115596    10039    877.6   11.438 |        nan        nan      13.75      13.14
+all,nosat4   266277     7416    542.1   13.681 |      17.77      17.05      16.24      15.74
+P4,nosat4     74467     5997    469.4   12.776 |      16.60      15.92      15.17      14.70
+P3,nosat4     67019     6967    526.5   13.234 |      17.19      16.50      15.71      15.23
+P6,nosat4     64719     7934    573.2   13.840 |      17.98      17.25      16.43      15.93
+P5,nosat4     60072     9116    615.9   14.802 |        nan        nan      17.80      17.01
+
+Note: the "nosat4" rows drop showers whose SFIL4 South beam-row channel saturates (a selection against large SFIL4 pulses; the model
+ratio is not re-cut, so those rows are a cross-check of the fit recovery, not a calibration). SFIL5 South single SiPMs DO saturate (ceiling ~943 ADC above pedestal; an earlier check used a 1000 ADC threshold on pedestal-subtracted peaks and missed it).

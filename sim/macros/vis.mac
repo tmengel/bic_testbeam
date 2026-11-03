@@ -1,0 +1,11 @@
+/control/execute geometry_default.mac
+/run/initialize
+/vis/open OGL 900x700-0+0
+/vis/drawVolume
+/vis/viewer/set/viewpointThetaPhi 70 20
+/vis/viewer/set/style surface
+/vis/scene/add/trajectories smooth
+/vis/scene/add/axes 0 0 0 100 mm
+/vis/scene/endOfEventAction accumulate
+/bic/gun/energy 4000
+/bic/gun/y -6.4

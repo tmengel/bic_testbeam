@@ -1,0 +1,18 @@
+/control/execute geometry_default.mac
+/run/initialize
+/control/verbose 1
+/run/verbose 1
+/tracking/verbose 0
+# cosmic muons from a plane 250 mm above the stack (SFIL top at +38 mm, paddles reach +75 mm), 800 x 1100 mm^2 over paddles to Baby BCAL,
+# cos^2 zenith distribution (flux through the plane), log-flat kinetic energy 0.5-20 GeV; mu- (the MIP response of mu+ is the same)
+/bic/gun/particle mu-
+/bic/gun/cosmic 1
+/bic/gun/cosmicY 250
+/bic/gun/cosmicX0 -400
+/bic/gun/cosmicX1 400
+/bic/gun/cosmicZ0 -350
+/bic/gun/cosmicZ1 750
+/bic/gun/cosmicEmin 500
+/bic/gun/cosmicEmax 20000
+/bic/output bic_cosmic.root
+/run/beamOn 1000

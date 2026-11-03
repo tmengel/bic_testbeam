@@ -1,0 +1,47 @@
+data_fit_layers_3064_part00.npz: 3845378 triggers, 2621240 showers
+data_fit_layers_3064_part01.npz: 3853859 triggers, 2640293 showers
+data_fit_layers_3064_part02.npz: 3835261 triggers, 2611969 showers
+data_fit_layers_3064_part03.npz: 3842490 triggers, 2632219 showers
+data_fit_layers_3064_part04.npz: 3869495 triggers, 2651229 showers
+data_fit_layers_3064_part05.npz: 3845140 triggers, 2632951 showers
+data_fit_layers_3064_part06.npz: 3848310 triggers, 2630606 showers
+data_fit_layers_3064_part07.npz: 3851397 triggers, 2632960 showers
+data_fit_layers_3064_part08.npz: 3860860 triggers, 2641329 showers
+data_fit_layers_3064_part09.npz: 3852177 triggers, 2603904 showers
+data_fit_layers_3064_part10.npz: 3851135 triggers, 2607192 showers
+data_fit_layers_3064_part11.npz: 3855278 triggers, 2607992 showers
+data_fit_layers_3064_part12.npz: 3843933 triggers, 2601851 showers
+data_fit_layers_3064_part13.npz: 3555953 triggers, 2386886 showers
+
+14 parts, 53610666 triggers, 36502621 showers (South total > 600 ADC), 36502621 in the beam parts
+model (/sphenix/tg/tg01/jets/tmengel/eic/sim/v4) SFIL1-4 South light: 3 GeV <L> 98.5 MeV sigma/mu 0.1757  4 GeV <L> 123.4 MeV sigma/mu 0.1800  5 GeV <L> 146.1 MeV sigma/mu 0.1907  6 GeV <L> 166.1 MeV sigma/mu 0.1978
+
+per paddle (beam parts): n, SFIL1-4 South shares (equal gains), pe-equalised SFIL2-4 shares -> shape energy, <E_vis> [MeV] and core sigma/mu with the v4 4 GeV gains; run 3062 SFIL1-4 alone: P4 0.299 P3 0.265 P6 0.204 P5 0.188
+  P4: n 8501410  shares [0.03  0.285 0.399 0.285]  pe-eq SFIL2-4 [0.218 0.456 0.326] -> E 3.00 GeV (3.00-3.15, chi2 22.7)  <E_vis> 114.2 MeV  sigma/mu 0.2961  (model at that E: 0.1757)
+  P3: n 8348336  shares [0.027 0.276 0.39  0.307]  pe-eq SFIL2-4 [0.21  0.442 0.347] -> E 3.00 GeV (3.00-3.35, chi2 14.6)  <E_vis> 126.2 MeV  sigma/mu 0.2668  (model at that E: 0.1757)
+  P6: n 9186335  shares [0.024 0.278 0.371 0.328]  pe-eq SFIL2-4 [0.211 0.419 0.37 ] -> E 3.27 GeV (3.00-3.92, chi2 6.3)  <E_vis> 130.1 MeV  sigma/mu 0.2064  (model at that E: 0.1769)
+  P5: n 10466540  shares [0.023 0.272 0.361 0.344]  pe-eq SFIL2-4 [0.206 0.407 0.387] -> E 3.88 GeV (3.23-4.80, chi2 3.7)  <E_vis> 139.5 MeV  sigma/mu 0.1907  (model at that E: 0.1795)
+  all: n 36502621  pe-eq SFIL2-4 [0.211 0.428 0.362] -> E 3.02 GeV (3.00-3.67)  <E_vis> 128.9 MeV  sigma/mu 0.2360
+linearity (E_vis per GeV of the shape energy): P4 38.1 MeV/GeV  P3 42.1 MeV/GeV  P6 39.7 MeV/GeV  P5 36.0 MeV/GeV  (model 30.8 MeV of SFIL1-4 South light per GeV at 4 GeV)
+
+per part (~3829333 triggers each): per paddle <E_vis> [MeV] and core sigma/mu
+part   P4: <E>  s/mu   P3: <E>  s/mu   P6: <E>  s/mu   P5: <E>  s/mu    n showers
+00      114.5 0.2967   126.2 0.2684   129.9 0.2067   139.2 0.1914   2621240
+01      114.7 0.2937   126.6 0.2644   130.3 0.2050   139.8 0.1889   2640293
+02      114.7 0.2963   126.7 0.2659   130.6 0.2053   140.0 0.1908   2611969
+03      114.6 0.2940   126.6 0.2640   130.3 0.2064   139.9 0.1895   2632219
+04      114.9 0.2959   126.8 0.2655   130.6 0.2051   140.0 0.1896   2651229
+05      114.6 0.2943   126.6 0.2648   130.5 0.2045   139.8 0.1888   2632951
+06      114.1 0.2947   126.0 0.2670   129.9 0.2068   139.4 0.1909   2630606
+07      113.7 0.2941   125.7 0.2666   129.6 0.2074   139.2 0.1918   2632960
+08      113.4 0.2953   125.6 0.2664   129.5 0.2088   139.1 0.1924   2641329
+09      114.0 0.2982   126.1 0.2703   130.0 0.2072   139.5 0.1918   2603904
+10      113.9 0.2968   125.7 0.2686   129.9 0.2057   139.2 0.1916   2607192
+11      114.4 0.2970   126.4 0.2673   130.2 0.2067   139.7 0.1908   2607992
+12      114.1 0.2967   126.0 0.2668   130.0 0.2063   139.3 0.1905   2601851
+13      113.3 0.3011   125.4 0.2691   129.6 0.2073   139.1 0.1913   2386886
+  P4 over the beam parts: <E_vis> mean 114.2 rms 0.5 (0.43 %), sigma/mu mean 0.2961 rms 0.0019
+  P3 over the beam parts: <E_vis> mean 126.2 rms 0.4 (0.35 %), sigma/mu mean 0.2668 rms 0.0018
+  P6 over the beam parts: <E_vis> mean 130.1 rms 0.4 (0.28 %), sigma/mu mean 0.2064 rms 0.0011
+  P5 over the beam parts: <E_vis> mean 139.5 rms 0.3 (0.25 %), sigma/mu mean 0.1907 rms 0.0011
+wrote performance_3064.png

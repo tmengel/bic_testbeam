@@ -1,0 +1,27 @@
+simulation: /sphenix/tg/tg01/jets/tmengel/eic/sim  anchor energy for the SFIL5 / Baby BCAL gains and the common SFIL1-4 gain: 4000 MeV  photostatistics gain factors on SFIL1-4: [1.    0.672 1.    1.   ]
+
+SFIL1-4: 1971542 showers (South total > 600 ADC); SFIL5 / Baby BCAL: 136584 triple-matched single-paddle showers
+gains at the anchor: SFIL1-4 common 14.26 ADC/MeV (SFIL2-4 vs sim), SFIL5 173.0 KCU1 ADC/MeV, Baby BCAL 315.5 CAEN units/MeV
+data MeV per element at the anchor: [  4.   29.9  60.5  51.4  47.  118.7]  sum 311 MeV (sim at the anchor: 325)
+shares, all paddles: [0.013 0.096 0.194 0.165 0.151 0.381]
+  sim 3 GeV: [0.029 0.112 0.18  0.184 0.147 0.349]
+  sim 4 GeV: [0.023 0.097 0.166 0.18  0.152 0.383]
+  sim 5 GeV: [0.019 0.086 0.155 0.176 0.154 0.409]
+  sim 6 GeV: [0.017 0.078 0.146 0.173 0.157 0.43 ]
+  P3: [0.014 0.1   0.209 0.164 0.149 0.364]
+  P4: [0.016 0.105 0.218 0.157 0.15  0.353]
+  P5: [0.011 0.09  0.178 0.17  0.15  0.401]
+  P6: [0.012 0.094 0.187 0.166 0.153 0.388]
+
+North/South of the layer sums, SFIL2-4: [1.276 0.972 0.64 ]  -> per-layer gain uncertainty (rms of ln N/S) 0.284
+
+Systematic uncertainties on the shares (absolute):
+source                SFIL1      SFIL2      SFIL3      SFIL4      SFIL5  Baby BCAL
+threshold            0.0012     0.0034     0.0082     0.0062     0.0047     0.0119
+saturation           0.0002     0.0005     0.0059     0.0035     0.0025     0.0062
+noise bias           0.0009     0.0005     0.0001     0.0002     0.0005     0.0012
+statistics           0.0000     0.0000     0.0000     0.0000     0.0000     0.0003
+anchor 3-6 GeV  -0.001/+0.001-0.010/+0.008-0.020/+0.015-0.017/+0.013-0.004/+0.004-0.033/+0.045
+measurement sum -0.002/+0.002-0.011/+0.008-0.023/+0.018-0.019/+0.015-0.007/+0.007-0.036/+0.047
+gain uniformity      0.0037     0.0098     0.0094     0.0394     0.0073     0.0184
+paddle spread   -0.002/+0.004-0.006/+0.009-0.016/+0.024-0.008/+0.005-0.001/+0.003-0.028/+0.020
