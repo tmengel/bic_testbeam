@@ -1,0 +1,31 @@
+<section id="decoders" style="background:#FFFFFF;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 100px 28px;display:flex;flex-direction:column;gap:56px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Decoders and data integrity</h2>
+<div style="display:flex;gap:64px;align-items:flex-start">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px">
+<ul style="font-size:36px;line-height:1.35;padding:0 0 0 28px">
+<li><b>TOT mask:</b> stock decoder kept 6 of 10 bits; fixed, now in the central install</li>
+<li><b>Last sample:</b> dropped from every packet; fixed, now central</li>
+<li><b>Out-of-order lines:</b> fragmented waveforms; reorder window in our fork only</li>
+<li><b>CRC-32:</b> recomputed per frame in our fork only</li>
+<li>Validated against the raw bytes: 75.5 M channel words per board, 0 mismatches</li>
+</ul>
+<p style="font-size:36px;line-height:1.35">Remaining loss is UDP datagram loss in the DAQ, not decoding.</p>
+</div>
+<div style="width:760px;display:flex;flex-direction:column;gap:16px">
+<table style="font-size:32px;color:#000000">
+<tr><th style="width:50%;text-align:left;color:#5C6E73">complete waveforms</th><th style="width:25%;text-align:right;color:#5C6E73">KCU0</th><th style="width:25%;text-align:right;color:#5C6E73">KCU1</th></tr>
+<tr><td>stock, per packet</td><td style="text-align:right">61 %</td><td style="text-align:right">48 %</td></tr>
+<tr><td>fixed, per packet</td><td style="text-align:right">75 %</td><td style="text-align:right">79 %</td></tr>
+<tr><td>with the pool</td><td style="text-align:right"><b>88 %</b></td><td style="text-align:right"><b>83 %</b></td></tr>
+</table>
+<p style="font-size:28px;line-height:1.35;color:#5C6E73">Fraction of recorded triggers with all 20 samples on every channel.</p>
+</div>
+</div>
+<div style="display:flex;gap:16px;align-items:baseline">
+<p style="font-size:36px">CRC check and reorder window: pull requests to online_distribution and ROC_pool opened October 29</p>
+<p style="font-size:24px;font-weight:700;color:#2B6B47">DONE</p>
+</div>
+<p style="position:absolute;left:14px;bottom:20px;width:600px;font-size:32px">October 26, 2026</p>
+<p style="position:absolute;right:28px;bottom:20px;width:120px;font-size:32px;text-align:right">3</p>
+<aside>CRC failures only on the dead SFIL5 North board; Hamming flags on 2.5 percent of KCU0 triggers. The central install of 21 Oct has the TOT, last-sample and Hamming fixes.</aside>
+</section>

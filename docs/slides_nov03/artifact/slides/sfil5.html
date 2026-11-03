@@ -1,0 +1,12 @@
+<section id="sfil5" data-transition="fade" style="background:#ffffff;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 110px;display:flex;flex-direction:column;gap:22px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">SFIL5: clipped pulses and the SFIL5 / SFIL4 gain ratio</h2>
+<ul style="font-size:32px;line-height:1.3">
+<li>KCU1 single SiPMs clip at ~940 ADC above pedestal → amplitude from the time-over-threshold word</li>
+<li>SFIL5 / SFIL4 pulse-height ratio per shower vs simulated light ratio: <b>gain ratio 14.0</b> (13.7-14.3 by paddle)</li>
+<li>No MIP or LED calibration from these data (cosmics: nothing above 30 ADC)</li>
+</ul>
+<img src="/_blob/bc8504c3b1e79f455f12626662322c76" alt="SFIL5 over SFIL4 pulse-height ratio per shower by paddle and the implied gain ratio versus the beam energy hypothesis" style="position:absolute;left:56px;top:340px;width:1808px;height:630px;object-fit:contain">
+<p style="position:absolute;left:56px;bottom:40px;font-size:32px;color:#404040">November 3, 2026</p>
+<p style="position:absolute;right:56px;bottom:40px;width:200px;text-align:right;font-size:32px;color:#404040">23</p>
+<aside>kcu1_tot/kcu1_sat_recovery.py, sim/analysis/sfil5_sfil4_gain.py: A = 943 + b (TOT - T_c), b = 0.40 adopted with the band 0-0.76 (+8 % on g5/g4 at b = 0.76). The North board was dead in 3062 (4 live channels only). KCU1 ADC per photoelectron from the North pairs: 24-34, i.e. 2.5-3.5 x the KCU0 summed-channel chain.</aside>
+</section>

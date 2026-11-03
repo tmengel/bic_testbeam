@@ -1,0 +1,13 @@
+<section id="bk-dual" data-transition="fade" style="background:#ffffff;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 110px;display:flex;flex-direction:column;gap:22px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Backup: dual-sided readout, paddles and rate</h2>
+<ul style="font-size:30px;line-height:1.3">
+<li><b>Dual-sided readout, 2017 sPHENIX EmCal study repeated on the SFIL2 / SFIL3 beam cell:</b> asymmetry (S - N) / (S + N) changes 0.116 / 0.094 over 160 mm (2017: 0.014), attenuation 1382 / 1702 mm. N - S time 2.0-2.2 ns from P4 to P5 (2017: 2.37 ns), light speed ~150 mm/ns, per-shower width 1.7-2.3 ns (2017: ~9 ns)</li>
+<li><b>Trigger paddles as pulse-height devices:</b> CAEN pulses 10 ns wide, sharp threshold edge at 1325 / 1275 / 1925 / 2150 counts (P3 / P4 / P5 / P6), peak 10 % above → spectrum truncated by the discriminator, no paddle gain from the beam</li>
+<li><b>Rate and pile-up:</b> none at 10^-3 from 0.1 to 5 ms since the previous trigger and 1 to 5 kHz → no rate correction</li>
+</ul>
+<img src="/_blob/0a8e60cbed5778c8c6e10fd55a99a40e" alt="Mean light asymmetry against the beam position along the fibres, SFIL2 and SFIL3, from the paddles and from the AstroPix position" style="position:absolute;left:56px;top:540px;width:880px;height:430px;object-fit:contain">
+<img src="/_blob/37ecd0f32ca0b212455d84e7c6e37504" alt="Mean North minus South time against the beam position for the CFD, ADC 50 percent and template estimators" style="position:absolute;left:984px;top:540px;width:880px;height:430px;object-fit:contain">
+<p style="position:absolute;left:56px;bottom:40px;font-size:32px;color:#404040">November 3, 2026</p>
+<p style="position:absolute;right:56px;bottom:40px;width:200px;text-align:right;font-size:32px;color:#404040">44</p>
+<aside>dual_sided/dual_sided.py and note/dual_sided_note.pdf (2026-10-28): one paddle, neither end clipped (35.5 % of showers clipped), South gain scaled so the asymmetry is 0 at x = 0. CFD f = 0.8, d = 25 ns. calibration/paddles/paddle_gains.py (2026-10-24): CAEN channels 12-15 cell-corrected, KCU0 paddles negative and railing at 0. calibration/rate/rate_dependence.py (2026-10-24): 1.97 M showers, SFIL1-4 South sum normalised per paddle, 1.000 +- 0.001 in every bin.</aside>
+</section>

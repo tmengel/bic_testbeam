@@ -1,0 +1,19 @@
+<section id="runs" data-transition="fade" style="background:#ffffff;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 110px;display:flex;flex-direction:column;gap:26px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">All August runs decoded, pulse-fitted and synchronized</h2>
+<ul style="font-size:31px;line-height:1.3">
+<li>CAEN alignment of the 12 h run had started in a beam-off interval, now starts from the busiest part: <b>3064 matches like 3062</b> (54 % within 100 ns, MAD 6.4 ns)</li>
+<li>KCU0 - KCU1: one constant offset per run (92.7 % at 0 ticks, 7.3 % at -4). CAEN clock ratio 1.3653407 in every run</li>
+</ul>
+<table style="font-size:26px;width:1808px;line-height:1.3">
+<tr style="background:#f2f2f2"><th style="width:11%;text-align:left">run</th><th style="width:15%;text-align:left">type</th><th style="width:14%;text-align:left">length</th><th style="width:13%;text-align:left">KCU0 triggers</th><th style="width:17%;text-align:left">KCU1 offset [ticks]</th><th style="width:12%;text-align:left">CAEN matched</th><th style="width:18%;text-align:left">use</th></tr>
+<tr><td>3062</td><td>beam</td><td>25 min</td><td>2.9 M</td><td>-1 143 665 946</td><td>50 %</td><td>reference</td></tr>
+<tr><td>3063</td><td>beam</td><td>2 min</td><td>236 k</td><td>357 099</td><td>66 %</td><td>extends 3062 by 6 %</td></tr>
+<tr><td>3064</td><td>beam</td><td>12 h</td><td>69 M</td><td>306 738</td><td>54 %</td><td>main sample, 18 x 3062</td></tr>
+<tr><td>3066-3069</td><td>beam, 0.3-0.8 nA</td><td>13-21 min each</td><td>17-34 k</td><td>198 368 …</td><td>99.5 %</td><td>trigger unknown</td></tr>
+<tr><td>3088</td><td>cosmics</td><td>15 h</td><td>1.04 M</td><td>-203 777</td><td>9.5 %</td><td>MIP sample, CAEN on its own trigger</td></tr>
+<tr><td>3091</td><td>cosmics</td><td>20 min</td><td>13 k</td><td>306 604</td><td>99.9 %</td><td>AstroPix on</td></tr>
+</table>
+<p style="position:absolute;left:56px;bottom:40px;font-size:32px;color:#404040">November 3, 2026</p>
+<p style="position:absolute;right:56px;bottom:40px;width:200px;text-align:right;font-size:32px;color:#404040">11</p>
+<aside>sync/run_sync.py per run, output/sync_runs/run&lt,RUN&gt,/sync.txt. The host-clock time stamps wander by 1.3-1.6 s over 12 h, so the coarse offset is only good to ~1 s. The alignment now starts from the most significant of 15 slices over the middle 90 % of the run (±10 s search). AstroPix: 3066 locks strongly (218 sigma), 3064 only in a wide scan (21.9 sigma, no 10 MHz phase lock). 3063 / 3091 weak. 3088: 912 k of its 1.01 M CAEN triggers have no KCU partner, so the CAEN had its own cosmic trigger.</aside>
+</section>

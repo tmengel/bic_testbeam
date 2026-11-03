@@ -1,0 +1,18 @@
+<section id="simvsdata" data-transition="fade" style="background:#ffffff;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 110px;display:flex;flex-direction:column;gap:28px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Simulation against the data: what holds and what does not</h2>
+<table style="font-size:28px;width:1808px;line-height:1.3">
+<tr style="background:#f2f2f2"><th style="width:30%;text-align:left">observable</th><th style="width:40%;text-align:left">data against simulation</th><th style="width:30%;text-align:left">reading</th></tr>
+<tr><td>Energy share per layer, SFIL1-5</td><td>within 0.01-0.03 per layer, SFIL3 +0.05 high at every energy</td><td><span style="color:#2B6B47"><b>holds</b></span>, one residual</td></tr>
+<tr><td>Energy from the depth profile (SFIL2-4)</td><td>3.0 GeV (3.0-3.3) for P3, P4, P6, 3.3 for P5</td><td>consistent with the cosmic-muon scale</td></tr>
+<tr><td>Cosmic-muon scale, SFIL3</td><td>27 ± 2 vs 18.4 ADC / MeV implied by 4 GeV</td><td>P6 showers ~3 GeV, not 4</td></tr>
+<tr><td>Attenuation along the fibres</td><td>1329 / 1646 mm measured vs 2341 mm (Fermilab parametrisation)</td><td>measured value now used (v4b)</td></tr>
+<tr><td>Light in the cells beside the beam</td><td>data 3-10 x less, cell 4 0.5 % vs 5-11 %</td><td><span style="color:#97243A"><b>open</b></span>: beam height, cells or model</td></tr>
+<tr><td>Baby BCAL share</td><td>0.31-0.36 of visible energy vs 0.38-0.41</td><td>deep-row gains (x3 fall)</td></tr>
+<tr><td>Depth ratios between paddles (SFIL5 / SFIL3 and Baby BCAL / SFIL3, P5 over P6)</td><td>1.135 / 1.201 vs 1.062 / 1.095 for a 1 GeV step</td><td>step > 1 GeV, or simulated depth dependence too weak</td></tr>
+<tr><td>Cosmic trigger geometry</td><td>near-horizontal muons through the paddles reproduced</td><td><span style="color:#2B6B47"><b>holds</b></span></td></tr>
+</table>
+<p style="font-size:30px;color:#404040">Next: assume 3 GeV, settle paddle positions with the survey author, test the lateral deficit vs beam height and cell edges</p>
+<p style="position:absolute;left:56px;bottom:40px;font-size:32px;color:#404040">November 3, 2026</p>
+<p style="position:absolute;right:56px;bottom:40px;width:200px;text-align:right;font-size:32px;color:#404040">31</p>
+<aside>Sources: stack_shares_pe.py (depth-profile energy, saturation removed on both sides), stack_shares_sfil5.py (five-element shares), cosmic_mip_sim.py (MIP scale), astro_x_attenuation.py (attenuation), cell_equalisation.py (lateral), performance.py (Baby BCAL share), south_gain_calibration.py (depth ratios between paddles). The two independent absolute measurements (cosmic-muon scale and depth profile) agreeing at ~3 GeV is the strongest statement the data make about the energy scale without the pair-spectrometer map.</aside>
+</section>

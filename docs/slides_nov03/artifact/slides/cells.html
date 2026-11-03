@@ -1,0 +1,13 @@
+<section id="cells" data-transition="fade" style="background:#ffffff;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 110px;display:flex;flex-direction:column;gap:22px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">The four cells of a layer: a shared SiPM pair and an empty cell</h2>
+<ul style="font-size:32px;line-height:1.3">
+<li>Four cells per layer, cell 1 top, cell 4 bottom, beam in cell 3</li>
+<li><b>Cells 1 and 2: same SiPM pair on both channels</b> (correlation 0.97-0.99) → use the sum</li>
+<li><b>Cell 4: 0.5 % of the beam cell</b> vs 5-11 % simulated. Side cells 3-10 x less light than simulated</li>
+<li>3064 = 3062 within 2 %</li>
+</ul>
+<img src="/_blob/d4b697b55a65c9077281604b112625a6" alt="Pulse height of the cells beside the beam relative to the beam cell per layer, data against simulation, South and North" style="position:absolute;left:56px;top:400px;width:1808px;height:570px;object-fit:contain">
+<p style="position:absolute;left:56px;bottom:40px;font-size:32px;color:#404040">November 3, 2026</p>
+<p style="position:absolute;right:56px;bottom:40px;width:200px;text-align:right;font-size:32px;color:#404040">18</p>
+<aside>calibration/cells/cell_equalisation.py (raw peaks, triggers with an unsaturated beam cell). v2 SiPM boards (all South, North SFIL2-4): cell 3 = SiPM3 = the beam cell, cell 4 = SiPM4, cells 1 and 2 both read SiPM1 + SiPM2 (B. Kim deck, 10/8 version). Model at beam y = -5 mm. The bands are the beam-y scan. Whether the lateral deficit is the beam height, the cell-4 channels or the model is open.</aside>
+</section>

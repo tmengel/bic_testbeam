@@ -1,0 +1,19 @@
+<section id="decoders" data-transition="fade" style="background:#ffffff;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 110px;display:flex;flex-direction:column;gap:28px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Decoders: three fixes, validated against the raw bytes</h2>
+<ul style="font-size:32px;line-height:1.3">
+<li>H2GCROC format understood bit by bit (docs/data_format.md)</li>
+<li>Stock decoder: 6 of 10 TOT bits, out-of-order lines into the wrong sample, no checksum check</li>
+<li>All three fixed in forks of online_distribution and ROC_pool, bit-exact vs raw bytes (75.5 M words per board, 0 mismatches)</li>
+<li><b>Pull requests opened October 29</b> <b><span style="color:#2B6B47">DONE</span></b></li>
+</ul>
+<table style="font-size:27px;width:1808px;line-height:1.3">
+<tr style="background:#f2f2f2"><th style="width:22%;text-align:left">item</th><th style="width:30%;text-align:left">stock decoder</th><th style="width:48%;text-align:left">now</th></tr>
+<tr><td>time over threshold (TOT)</td><td>6 of 10 bits (capped at 63)</td><td>full 10-bit word, grows with samples at the ceiling (corr. 0.74 / 0.89)</td></tr>
+<tr><td>data lines arriving out of order</td><td>start a new, fragmented waveform</td><td>placed by timestamp</td></tr>
+<tr><td>frame checksum (CRC-32)</td><td>not checked</td><td>checked: KCU0 0 failures (live board), KCU1 only on the dead SFIL5 North board</td></tr>
+<tr><td>complete waveforms per packet</td><td>61 % KCU0, 48 % KCU1</td><td>75 % KCU0, 79 % KCU1 (88 / 83 % across packets)</td></tr>
+</table>
+<p style="position:absolute;left:56px;bottom:40px;font-size:32px;color:#404040">November 3, 2026</p>
+<p style="position:absolute;right:56px;bottom:40px;width:200px;text-align:right;font-size:32px;color:#404040">4</p>
+<aside>decoder_tests/README.md. The central install (M. Purschke, Oct 21) has the TOT mask, the kept last sample and the Hamming flags. The CRC check and the reorder window are in the PRs. Hamming flags on 2.5 % of KCU0 triggers, mostly the paddle half and the SFIL North half. The remaining incomplete waveforms are UDP datagram loss in the DAQ, not decoding.</aside>
+</section>

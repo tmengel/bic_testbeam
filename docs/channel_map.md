@@ -1,7 +1,7 @@
 # Channel mapping, run 3062
 
 
-### 3.1 Authority and comparison with `roc_analysis/channel_mapping.txt`
+### 3.1 Authority and comparison with `maps/channel_mapping.txt`
 
 `channel_mapping.txt` is the shift-crew table "After 13/08 (Thu entry - beam studies - Jared +
 Halen), GOOD FOR RUNS 3061-3063". **It is the map used here, and it matches the data channel for
@@ -91,7 +91,7 @@ SFIL1-4 grid (`kSouth` / `kNorth` in `maps/BicMap.h`, row = hookup cell - 1):
 
 - **Gaps:** ch 152, 161, 170, 179, 188, 197, 206 and 215 are not connected (Olaiya's layout,
   Kim deck p31). 53 of 64 SiPMs fire.
-- **Vertical order from data** (`sync/sfil5_map.py`, `out/sfil5_map.png`, 2026-10-20): bottom to top
+- **Vertical order from data** (`astropix/sfil5_map.py`, `out/sfil5_map.png`, 2026-10-20): bottom to top
   in AstroPix y, the order is **A < B < D < C**.
   - **AstroPix (background-subtracted):** B and D cross near y = 7 mm. D peaks at y ~ 12 mm and turns
     down while C keeps rising. A's share is low and roughly flat, highest at the lowest y.

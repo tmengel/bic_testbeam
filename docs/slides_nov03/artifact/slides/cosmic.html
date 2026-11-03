@@ -1,0 +1,12 @@
+<section id="cosmic" data-transition="fade" style="background:#ffffff;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 110px;display:flex;flex-direction:column;gap:22px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Cosmic run 3088: real muons in SFIL3 and SFIL4</h2>
+<ul style="font-size:32px;line-height:1.3">
+<li><b>Muon candidate:</b> pulse at both ends of one cell (different chips), same time, normal shape. Noise 0.8-2.5 ADC after removing the chip-wide baseline shift</li>
+<li>SFIL3: 350-530 candidates per cell vs < 36 accidentals. Spectra peak 15-20 ADC with Landau tail (cells 2-4 shown)</li>
+<li>97-100 % with a paddle pulse (52 % of all triggers): <b>near-horizontal muons through the upstream paddles</b>, 1.4 / min</li>
+</ul>
+<img src="/_blob/2b538f43ebf4f78fef26fa742579547d" alt="Pulse-height spectra of the SFIL3 muon candidates, cells 2 to 4" style="position:absolute;left:56px;top:440px;width:1808px;height:530px;object-fit:contain">
+<p style="position:absolute;left:56px;bottom:40px;font-size:32px;color:#404040">November 3, 2026</p>
+<p style="position:absolute;right:56px;bottom:40px;width:200px;text-align:right;font-size:32px;color:#404040">24</p>
+<aside>calibration/cosmics/cosmic_mip.C, cosmic_mip_fit.py on the full run (984 k triggers). The “late pulses” of the first look were baseline ramps shared by the connected channels of an ASIC half. The per-half median over connected channels removes them. SFIL1 and SFIL2 cells 3-4 candidates are accidentals (noisy ends). The coincidences between cells of one board on SFIL1 S, SFIL2 S and SFIL5 N are noise bursts within the board, not muons. The candidate rate is 45 x higher in triggers with a paddle pulse. The rate matches near-horizontal tracks through the 33 cm2 paddle faces into SFIL3, not a paddle laid on the stack (~30 per minute).</aside>
+</section>

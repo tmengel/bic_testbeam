@@ -1,0 +1,21 @@
+<section id="simreadout" data-transition="fade" style="background:#ffffff;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 110px;display:flex;flex-direction:column;gap:24px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Geant4 model: readout model and version history</h2>
+<ul style="font-size:30px;line-height:1.3">
+<li><b>Light per fibre end:</b> fibre energy, Birks-quenched (kB 0.126 mm/MeV), x attenuation to that end</li>
+<li><b>Timing:</b> earliest arrival per end at the effective light speed. <b>AstroPix:</b> energy per pixel > 1 keV. <b>Baby BCAL:</b> per depth segment and column. Escaping energy recorded</li>
+<li>No SiPM, shaping or time-stamp model → gains from data</li>
+<li><b>Outputs:</b> one tree entry per particle (per-cell light, times, positions, pixels), scans of 5000 e+ per energy and paddle, cosmic mode (plane above, or through a paddle)</li>
+</ul>
+<table style="font-size:26px;width:1808px;line-height:1.3">
+<tr style="background:#f2f2f2"><th style="width:12%;text-align:left">version</th><th style="width:56%;text-align:left">what changed</th><th style="width:32%;text-align:left">effect</th></tr>
+<tr><td>v1 (Oct 22)</td><td>pure Pb, assumed 12.8 mm cells, 300 mm fibres</td><td>sampling fraction 0.083, 16 % lateral leakage</td></tr>
+<tr><td>v2 (Oct 23)</td><td>ePIC materials (Pb + glue), Baby BCAL as measured at FTBF</td><td>sampling fraction 0.112, shower maximum in SFIL4</td></tr>
+<tr><td>v3 (Oct 23)</td><td>official ePIC test-beam geometry: 19.05 mm cells, 510 mm fibres, 65 mm pitch, fibre-to-cell bug fixed</td><td>sampling fraction 0.102, cell-level results valid from here</td></tr>
+<tr><td>v3 + attenuation (Oct 24)</td><td>two-component attenuation (Fermilab Baby BCAL test), paddles on two planes</td><td>South light ± 7 % across the paddles</td></tr>
+<tr><td>v4 (Oct 29)</td><td>every position from the August survey, no carbon frames</td><td>layer shares within 0.01 of v3, Baby BCAL share +6 %</td></tr>
+<tr><td>v4b (Oct 30)</td><td>measured single-exponential attenuation (1500 mm) and v_eff 160 mm/ns</td><td>+4 % on gains, shares unchanged</td></tr>
+</table>
+<p style="position:absolute;left:56px;bottom:40px;font-size:32px;color:#404040">November 3, 2026</p>
+<p style="position:absolute;right:56px;bottom:40px;width:200px;text-align:right;font-size:32px;color:#404040">29</p>
+<aside>Readout: sfil_ls / sfil_ln are the South / North light in MeV per cell after attenuation, sfil_ts / sfil_tn the earliest arrival times, sfil_x the energy-weighted position. Bb_ls per depth segment and column. Paddle_e per paddle. Astro_n / chip / row / col / e / t. The longitudinal picture was stable from v2 on: v1 to v4 moved the layer shares by under 0.01 while the lateral picture changed. The cell-assignment bug of v1 / v2 (fibre copy number overflow for rows 10-16) voided every cell-level result before v3. Layer sums were fine.</aside>
+</section>

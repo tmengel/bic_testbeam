@@ -1,0 +1,32 @@
+<section id="status" style="background:#FFFFFF;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 100px 28px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Calibration status</h2>
+<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:24px">
+<div style="display:flex;flex-direction:column;gap:6px;background:#F7F8F6;border:2px solid #D6DCD9;border-top:6px solid #2B6B47;padding:24px 28px">
+<p style="font-size:24px;font-weight:700;color:#2B6B47">STEPS 1–3 · SOLVED</p>
+<p style="font-size:40px;font-weight:700;color:#10161A">SFIL1–4 <span style="color:#2B6B47">±7 %</span></p>
+<p style="font-size:28px;color:#5C6E73">pedestal, saturation, attenuation, relative gains</p>
+<p style="font-size:28px;color:#10161A"><b>Done:</b> cosmic run 3088 gives SFIL3 27 ± 2 ADC / MeV</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px;background:#F7F8F6;border:2px solid #D6DCD9;border-top:6px solid #A9541C;padding:24px 28px">
+<p style="font-size:24px;font-weight:700;color:#A9541C">STEP 4 · NEEDS LED DATA</p>
+<p style="font-size:40px;font-weight:700;color:#10161A">SFIL5 <span style="color:#A9541C">g₅/g₄ = 14.0 ± 8 %</span></p>
+<p style="font-size:28px;color:#5C6E73">TOT rebuild, slope band 0–0.76</p>
+<p style="font-size:28px;color:#10161A"><b>Next:</b> LED runs 3179–3190</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px;background:#F7F8F6;border:2px solid #D6DCD9;border-top:6px solid #A9541C;padding:24px 28px">
+<p style="font-size:24px;font-weight:700;color:#A9541C">STEP 5 · NEEDS COSMICS</p>
+<p style="font-size:40px;font-weight:700;color:#10161A">Baby BCAL <span style="color:#A9541C">×3 fall</span></p>
+<p style="font-size:28px;color:#5C6E73">gain with depth; rows 0–1 usable</p>
+<p style="font-size:28px;color:#10161A"><b>Next:</b> Baby BCAL MIP peaks from 3088 (CAEN on its own trigger)</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px;background:#F7F8F6;border:2px solid #D6DCD9;border-top:6px solid #97243A;padding:24px 28px">
+<p style="font-size:24px;font-weight:700;color:#97243A">STEP 6 · NEEDS PS MAP</p>
+<p style="font-size:40px;font-weight:700;color:#10161A">Beam energy <span style="color:#97243A">10–20 %</span></p>
+<p style="font-size:28px;color:#5C6E73">per paddle, three estimators</p>
+<p style="font-size:28px;color:#10161A"><b>Data say</b> ~3 GeV under P6; the PS momentum map is still needed</p>
+</div>
+</div>
+<p style="position:absolute;left:14px;bottom:20px;width:600px;font-size:32px">October 26, 2026</p>
+<p style="position:absolute;right:28px;bottom:20px;width:120px;font-size:32px;text-align:right">17</p>
+<aside>Every step possible from run 3062 alone is done. The remaining gaps need data that exist but are not on our disk: cosmic run 3089 (47 h), the LED and pedestal runs, HGCROC calibration run 2804, and the PS momentum map. Run 3064 (12 h) and the August survey are in hand: 3064 gives the same performance as 3062 with 17 x the statistics and gains stable to better than 1 %. Not part of the energy chain and left out here: AstroPix ToT (one-point 34 keV anchor on chips 0-4, needs module8 source scans) and the trigger-paddle pulse heights (the discriminator truncates the spectra at the peak).</aside>
+</section>

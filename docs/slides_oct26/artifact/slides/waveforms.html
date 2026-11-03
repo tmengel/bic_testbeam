@@ -1,0 +1,16 @@
+<section id="waveforms" style="background:#FFFFFF;color:#000000;font-family:Arial, sans-serif;padding:24px 28px 84px 28px;display:flex;flex-direction:column;gap:20px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Step 1 · Pedestal and saturation (KCU0)</h2>
+<div style="display:flex;gap:32px;align-items:center;flex:1">
+<ul style="width:560px;font-size:30px;line-height:1.35;padding:0 0 0 28px">
+<li><b>Pedestal:</b> per-trigger common shift of 20–45 ADC on all SFIL channels, removed with samples 1–3</li>
+<li><b>Noise:</b> 3–5 ADC; SFIL1 North column 19–50 ADC, masked</li>
+<li><b>Pile-up:</b> tails on 2 % of beam-row waveforms, flagged</li>
+<li><b>Saturation:</b> 53–66 % of SFIL3 beam-row pulses hit 1023</li>
+<li><b>Template fit:</b> recovers amplitudes to ~1800 ADC</li>
+</ul>
+<img src="/_blob/8aa5b0a28a383837bcfb18d33b75ddab" alt="Per-channel pulse templates for the SFIL channels on KCU0: two-sample rise, peak at samples 7 to 9, long tail" style="width:1272px;height:573px;object-fit:contain">
+</div>
+<p style="position:absolute;left:14px;bottom:20px;width:600px;font-size:32px">October 26, 2026</p>
+<p style="position:absolute;right:28px;bottom:20px;width:120px;font-size:32px;text-align:right">6</p>
+<aside>Only 30 percent of showers have no saturated sample, so the template fit is required, not optional. 6.98 M amplitudes from 2.91 M triggers. Every SFIL1-4 South amplitude after this step is a fitted layer sum with saturation recovered. SFIL5 on KCU1 clips differently and is handled in step 4.</aside>
+</section>

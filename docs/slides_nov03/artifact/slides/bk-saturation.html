@@ -1,0 +1,12 @@
+<section id="bk-saturation" data-transition="fade" style="background:#ffffff;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 110px;display:flex;flex-direction:column;gap:28px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Backup: saturation handled on both sides</h2>
+<ul style="font-size:33px;line-height:1.35">
+<li>South beam cell at the ADC ceiling in 29 / 54 / 32 % of showers for SFIL2 / 3 / 4 (rising P4 &lt; P3 &lt; P6 &lt; P5), recovered by the pulse-shape fit</li>
+<li>Below the ceiling: raw peak and fitted amplitude give the same layer shares to 0.004 → fit unbiased</li>
+<li>Simulation comparison: same fraction of the largest showers dropped per layer as the data lose to the ceiling → same differences as full sample (SFIL3 +0.06, SFIL4 -0.03)</li>
+<li>Ceiling as absolute reference: gain reproducing the saturation fraction = 1.3 x gain from the mean amplitude, every layer and energy</li>
+</ul>
+<p style="position:absolute;left:56px;bottom:40px;font-size:32px;color:#404040">November 3, 2026</p>
+<p style="position:absolute;right:56px;bottom:40px;width:200px;text-align:right;font-size:32px;color:#404040">41</p>
+<aside>stack_shares_pe.py nosat, sat_gain.py. Selecting unsaturated showers by a threshold is biased against large pulses: it kept 80 % of the simulated showers against 30 % of the data.</aside>
+</section>

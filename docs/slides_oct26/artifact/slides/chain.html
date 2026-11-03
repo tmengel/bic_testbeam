@@ -1,0 +1,16 @@
+<section id="chain" style="background:#FFFFFF;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 100px 28px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Calibration chain: raw ADC to energy</h2>
+<table style="font-size:32px;color:#000000">
+<tr><th style="width:7%;text-align:left;color:#5C6E73">step</th><th style="width:29%;text-align:left;color:#5C6E73">correction</th><th style="width:44%;text-align:left;color:#5C6E73">how</th><th style="width:20%;text-align:left;color:#5C6E73">status</th></tr>
+<tr><td>1</td><td><b>Pedestal and saturation</b></td><td>per-trigger pedestal, template fit, DRS4 cell table</td><td><span style="color:#2B6B47"><b>DONE</b></span></td></tr>
+<tr><td>2</td><td><b>Attenuation to x = 0</b></td><td>North / South ratio against the AstroPix x</td><td><span style="color:#2B6B47"><b>DONE</b></span></td></tr>
+<tr><td>3</td><td><b>SFIL1–4 relative gains</b></td><td>three methods agree to ±7 %</td><td><span style="color:#2B6B47"><b>DONE</b></span></td></tr>
+<tr><td>4</td><td><b>SFIL5 to SFIL4</b></td><td>clipped pulses rebuilt from the TOT, ±8 %</td><td><span style="color:#A9541C"><b>NEEDS LED</b></span></td></tr>
+<tr><td>5</td><td><b>Baby BCAL gains</b></td><td>per-array gains against the model</td><td><span style="color:#A9541C"><b>NEEDS COSMICS</b></span></td></tr>
+<tr><td>6</td><td><b>Energy scale</b></td><td>P6 = 4 GeV on the model; the cosmic scale and the shower shape say ~3 GeV</td><td><span style="color:#97243A"><b>NEEDS PS MAP</b></span></td></tr>
+</table>
+<p style="font-size:32px;color:#33444A">Reference for steps 3, 5 and 6: the Geant4 model v4 of the August stack (survey geometry)</p>
+<p style="position:absolute;left:14px;bottom:20px;width:600px;font-size:32px">October 26, 2026</p>
+<p style="position:absolute;right:28px;bottom:20px;width:120px;font-size:32px;text-align:right">5</p>
+<aside>This is the order the corrections are applied in the performance numbers at the end. Step 1 is data only; step 2 uses the AstroPix-matched showers; steps 3 to 6 need the model or an outside input. Left out of the chain because they do not change the energy: trigger-paddle pulse heights (the discriminator cuts the spectrum at the peak), AstroPix ToT (imaging only), per-shower position along the fibres, off-beam cell equalisation (cannot be separated from the beam height with data alone), and the KCU0 TOA timing (separate deck). Rate dependence was checked: flat to 0.1 percent from 0.1 to 5 ms and 1 to 5 kHz, so no rate correction.</aside>
+</section>

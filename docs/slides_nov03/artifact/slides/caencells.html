@@ -1,0 +1,12 @@
+<section id="caencells" data-transition="fade" style="background:#ffffff;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 110px;display:flex;flex-direction:column;gap:22px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">CAEN pedestals: one pedestal per sampling capacitor</h2>
+<ul style="font-size:32px;line-height:1.3">
+<li><b>CAEN stores each sample in one of 1024 capacitors</b>, each with its own pedestal: 28 counts rms, same on all 16 channels, looked like a common shift</li>
+<li><b>Per-capacitor table</b> from pre-pulse samples → baseline 2 counts (9 in the tail). Applied to 3062, 3064, 3088, 3091</li>
+<li>CAEN 0-11 = Baby BCAL A0 A1 A3 A4 A2 A5 A6 A7 A8 A9 A14 A11 (run-log sheet), A3 / A4 dead. 12-15 = paddles P3-P6</li>
+</ul>
+<img src="/_blob/f50bcd4efc9987f11e52d49f2265bbf6" alt="Baby BCAL channel shares and on-counts after the cell-pedestal correction, per paddle class" style="position:absolute;left:56px;top:440px;width:1808px;height:530px;object-fit:contain">
+<p style="position:absolute;left:56px;bottom:40px;font-size:32px;color:#404040">November 3, 2026</p>
+<p style="position:absolute;right:56px;bottom:40px;width:200px;text-align:right;font-size:32px;color:#404040">22</p>
+<aside>calibration/caen_calib/caen_apply.py, bbcal_classes.py. Run 3062 has no MIP or cosmic sample for the Baby BCAL (no pulser, no muons, about 8 random cosmic coincidences). The 3088 CAEN data, taken on the CAEN’s own cosmic trigger, are the first candidate. An earlier row-2 anomaly was a label shift.</aside>
+</section>

@@ -1,0 +1,12 @@
+<section id="cosmicmip" data-transition="fade" style="background:#ffffff;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 110px;display:flex;flex-direction:column;gap:22px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Cosmic MIP scale: muons simulated through the trigger paddles</h2>
+<ul style="font-size:32px;line-height:1.3">
+<li><b>Simulation:</b> sea-level cosmic muons, every one sent through a trigger paddle. 10 M muons → 5-10 k paddle + SFIL3 crossings per cell</li>
+<li>Readout per end: photoelectrons from simulated light (yield fitted) x measured ADC / pe + measured noise</li>
+<li><b>SFIL3: 26.5 / 27.8 / 29.2 ADC per MeV for cell 3, cell 4, cells 1+2 summed → 27 ± 2</b>. SFIL1, 2, 4: no scale (accidentals, noisy ends)</li>
+</ul>
+<img src="/_blob/72f3605c9730067fd9617f638f2df554" alt="SFIL3 muon pulse-height spectra, data against the simulation at the fitted light yield, cells 3, 4 and the summed cells 1 and 2" style="position:absolute;left:56px;top:440px;width:1808px;height:530px;object-fit:contain">
+<p style="position:absolute;left:56px;bottom:40px;font-size:32px;color:#404040">November 3, 2026</p>
+<p style="position:absolute;right:56px;bottom:40px;width:200px;text-align:right;font-size:32px;color:#404040">25</p>
+<aside>calibration/cosmics/cosmic_mip_sim.py on sim/cosmic/tgt (condor/cosmic_tgt.job, /bic/gun/cosmicTarget 1). ADC per pe from the photostatistics (SFIL3 9.5, North = South x 1.03). The fit is repeated for 0.7 and 1.4 x that (24-28). The choice of muon sample (from a plane above the stack or through the paddles) moves the result by under 5 %. Cells 1 and 2 must be summed (shared SiPM pair). Fitted separately they give 18-20. SFIL1: accidental candidates. SFIL2: noisy cells 3-4, too few in 1-2. SFIL4: North end at 0.29 of South, tag efficiency 1 %.</aside>
+</section>

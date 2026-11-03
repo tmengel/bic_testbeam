@@ -1,0 +1,12 @@
+<section id="tplfit" data-transition="fade" style="background:#ffffff;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 110px;display:flex;flex-direction:column;gap:22px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Pulse-shape fits recover the pulses at the ADC ceiling</h2>
+<ul style="font-size:32px;line-height:1.3">
+<li><b>One pulse shape per channel</b> from clean pulses below the ceiling, then amplitude, time, pedestal fitted per pulse</li>
+<li><b>KCU0 pulses at the 10-bit ceiling</b> (up to 66 % of SFIL3 beam-cell pulses under P5) recovered to ~1800 ADC</li>
+<li><b>KCU1 single SiPMs clip at ~940 ADC:</b> amplitude from the time-over-threshold word (slope 0.40, band 0-0.76 ADC per unit)</li>
+</ul>
+<img src="/_blob/294b4a5f43eec04124c1266ff87622ee" alt="SFIL3 South beam cell: pulse template and fitted amplitude versus raw peak" style="position:absolute;left:56px;top:400px;width:1808px;height:570px;object-fit:contain">
+<p style="position:absolute;left:56px;bottom:40px;font-size:32px;color:#404040">November 3, 2026</p>
+<p style="position:absolute;right:56px;bottom:40px;width:200px;text-align:right;font-size:32px;color:#404040">10</p>
+<aside>kcu0_sfil_fit.C / kcu1_sfil5_fit.C. Pulse finder threshold 60 ADC, peak at samples 7-9, chi2/ndf under 8 with a 5 ADC noise and 5 % shape error. Saturated samples are masked in the fit. Templates from 100-1000 ADC pulses. Channels with fewer than 100 clean pulses take the template from another run. Run 3064: 137 M KCU0 and 229 M KCU1 fitted pulses (processed in 14 + 5 batch jobs). The KCU1 time-over-threshold slope cannot be measured without the LED runs. 0.40 with the band 0-0.76 is adopted from the width of the SFIL5 / SFIL4 ratio.</aside>
+</section>

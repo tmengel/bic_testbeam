@@ -1,0 +1,18 @@
+<section id="rawroot" data-transition="fade" style="background:#ffffff;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 110px;display:flex;flex-direction:column;gap:28px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Raw format and per-trigger ROOT trees by subsystem</h2>
+<ul style="font-size:32px;line-height:1.3">
+<li>Begin-run record: DAQ settings (100 us busy, 20 samples), no chip analog-gain registers → preamp gains not readable</li>
+<li>Every stream → ROOT tree, entry i = trigger i, segment boundaries de-duplicated</li>
+<li>Same converters on every new run, one reader module for all four streams <b><span style="color:#2B6B47">DONE</span></b></li>
+</ul>
+<table style="font-size:28px;width:1808px;line-height:1.3">
+<tr style="background:#f2f2f2"><th style="width:40%;text-align:left">stream</th><th style="width:25%;text-align:left">run 3062 triggers</th><th style="width:17%;text-align:left">complete</th><th style="width:18%;text-align:left">size</th></tr>
+<tr><td>KCU0 (SFIL1-4, paddles)</td><td>3.77 M</td><td>88 %</td><td>19 GB</td></tr>
+<tr><td>KCU1 (SFIL5 South)</td><td>1.53 M</td><td>83 %</td><td>6 GB</td></tr>
+<tr><td>CAEN (Baby BCAL South, paddles)</td><td>1.51 M</td><td>–</td><td>7 GB</td></tr>
+<tr><td>AstroPix</td><td>2.86 M hit records</td><td>–</td><td>60 MB</td></tr>
+</table>
+<p style="position:absolute;left:56px;bottom:40px;font-size:32px;color:#404040">November 3, 2026</p>
+<p style="position:absolute;right:56px;bottom:40px;width:200px;text-align:right;font-size:32px;color:#404040">5</p>
+<aside>decoding/kcu_to_root.cc, kcu_merge.cc, condor jobs. Checks in decoding/kcu0_root_check.py. Files on /sphenix/tg/tg01/jets/tmengel/eic/{kcu0,kcu1,caen,astropix}/. Raw-format write-up: docs/data_format.md (48-word HGCROC line map, characterization-mode words Tc Tp ADC TOT TOA, CAEN rollover word, AstroPix record layout). Ask for the DAQ YAML to get Global_Analog.</aside>
+</section>

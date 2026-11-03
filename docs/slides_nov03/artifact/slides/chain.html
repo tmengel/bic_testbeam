@@ -1,0 +1,16 @@
+<section id="chain" data-transition="fade" style="background:#ffffff;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 110px;display:flex;flex-direction:column;gap:28px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Calibration chain: raw ADC to energy</h2>
+<table style="font-size:28px;width:1808px;line-height:1.3">
+<tr style="background:#f2f2f2"><th style="width:6%;text-align:left">step</th><th style="width:26%;text-align:left">correction</th><th style="width:44%;text-align:left">how</th><th style="width:24%;text-align:left">status</th></tr>
+<tr><td>1</td><td><b>Pedestal and saturation</b></td><td>per-trigger pedestal, pulse-shape fit (KCU0), amplitude from TOT (KCU1), per-capacitor pedestals (CAEN)</td><td><b><span style="color:#2B6B47">DONE</span></b></td></tr>
+<tr><td>2</td><td><b>Attenuation to the fibre centre</b></td><td>N / S ratio vs AstroPix position: 1329 / 1646 mm</td><td><b><span style="color:#2B6B47">DONE</span></b></td></tr>
+<tr><td>3</td><td><b>SFIL1-4 relative gains</b></td><td>photoelectron statistics, mean light, saturation fraction agree to ± 7 %, SFIL3 absolute from cosmics</td><td><b><span style="color:#2B6B47">DONE</span></b></td></tr>
+<tr><td>4</td><td><b>SFIL5 to SFIL4</b></td><td>clipped pulses from TOT, SFIL5 / SFIL4 gain ratio 14.0 ± 8 %</td><td><b><span style="color:#A9541C">NEEDS LED</span></b></td></tr>
+<tr><td>5</td><td><b>Baby BCAL gains</b></td><td>per-array gains vs simulation, x3 fall with depth unexplained</td><td><b><span style="color:#A9541C">NEEDS 3088 MIPs</span></b></td></tr>
+<tr><td>6</td><td><b>Energy scale</b></td><td>4 GeV under P6 assumed, cosmics and depth profile say ~3 GeV</td><td><b><span style="color:#97243A">NEEDS PS MAP</span></b></td></tr>
+</table>
+<p style="font-size:30px;color:#404040">Order of application. Steps 3, 5, 6 use the Geant4 simulation (slides 28-31). Gains stable to < 1 % over 12 h of 3064 → one set for both runs</p>
+<p style="position:absolute;left:56px;bottom:40px;font-size:32px;color:#404040">November 3, 2026</p>
+<p style="position:absolute;right:56px;bottom:40px;width:200px;text-align:right;font-size:32px;color:#404040">13</p>
+<aside>Left out of the chain because they do not change the energy: trigger-paddle pulse heights (the discriminator cuts the spectrum at the peak), AstroPix time over threshold (imaging only), per-shower position along the fibres, the gains of the cells beside the beam (not separable from the beam height with data alone), the KCU0 time stamps. Rate dependence checked: flat to 0.1 % from 0.1 to 5 ms and 1 to 5 kHz, so no rate correction.</aside>
+</section>
