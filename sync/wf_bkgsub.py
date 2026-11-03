@@ -9,6 +9,7 @@ Columns: chip 0 (P4), chips 2-3 (P3), chips 5-6 (P6), chip 8 (P5).
 Rows: KCU0 paddles (true partner), KCU0 SFIL3 beam row S and N, KCU1 SFIL5 arrays B and D (sums),
       CAEN paddle channels (true partner), CAEN Baby BCAL South sum."""
 import numpy as np, uproot, glob, ROOT
+import sys; sys.path.insert(0, '/sphenix/user/tmengel/eic/bic_testbeam/common')
 from plotstyle import setup, finish, legend, headroom, colz
 setup()
 

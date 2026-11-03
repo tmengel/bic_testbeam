@@ -1,4 +1,5 @@
-// wf_acc: weighted sums of pedestal-subtracted waveforms for listed triggers, stock decoders only.
+// wf_acc: weighted sums of pedestal-subtracted waveforms for listed triggers, stock decoders
+// (plus ROC_pool for the KCU streams, which stitches the waveforms split across Packets).
 //
 //   wf_acc <kcu0|kcu1|caen> keys.txt out.root in1.evt [in2.evt ...]
 //
@@ -18,6 +19,8 @@
 #include <Event/fileEventiterator.h>
 #include <Event/packet.h>
 #include <Event/EventTypes.h>
+#include <Event/oncsSubConstants.h>
+#include <ROC_pool/h2gcroc3_10G_pool.h>
 
 #include <TFile.h>
 #include <TH1D.h>
@@ -62,6 +65,41 @@ int main(int argc, char **argv)
   TFile fout(argv[3], "RECREATE");
   std::vector<double> v(nsmp);
   long long caenrow = 0;
+
+  // add one waveform (key) of ns samples, read through sample_of(s, ch), to the classes it is listed in
+  auto accumulate = [&](long long key, int ns, auto sample_of)
+    {
+      auto hit = keys.find(key);
+      if (hit == keys.end()) return;
+      for (int i = 0; i < nch; i++)
+        {
+          const int ch = chans[i];
+          for (int s = 0; s < ns; s++) v[s] = sample_of(s, ch);
+          double ped = 0;
+          if (raw) ped = 0;
+          else if (mode == "caen") { for (int s = 0; s < 20; s++) ped += v[s]; ped /= 20; }
+          else ped = (v[1] + v[2] + v[3]) / 3.;
+          for (auto &[c, w] : hit->second)
+            {
+              Acc &a = acc[c];
+              for (int s = 0; s < ns; s++)
+                {
+                  const double d = v[s] - ped;
+                  a.s[i * nsmp + s] += w * d; a.q[i * nsmp + s] += w * w * d * d;
+                }
+            }
+        }
+      for (auto &[c, w] : hit->second) { acc[c].w += w; acc[c].w2 += w * w; acc[c].n += 1; }
+    };
+  // the KCU streams are read through ROC_pool, which stitches the waveforms split across Packets
+  auto kcu_waveforms = [&](h2gcroc3_10G_pool *pool)
+    {
+      for (int n = 0; n < pool->iValue(0, "NR_WF"); n++)
+        if (pool->iValue(n, "SAMPLESIZE") == 20)
+          accumulate(pool->lValue(n, 0, 0), 20, [&](int s, int ch) { return pool->iValue(n, s, ch); });
+    };
+  h2gcroc3_10G_pool *pool = nullptr;   // locks to the packet id of the first Packet it gets
+
   for (int f = 4; f < argc; f++)
     {
       int status = 0;
@@ -73,40 +111,29 @@ int main(int argc, char **argv)
           if (e->getEvtType() != DATAEVENT) { delete e; continue; }
           Packet *p = e->getPacket(mode == "caen" ? 2001 : (mode == "kcu0" ? 12001 : 12002));
           if (!p) { delete e; continue; }
-          // one (key, waveform index) list per event
-          std::vector<std::pair<long long, int>> todo;
-          if (mode == "caen") todo.push_back({caenrow++, 0});
-          else
-            for (int n = 0; n < p->iValue(0, "NR_WF"); n++)
-              if (p->iValue(n, "SAMPLESIZE") == 20) todo.push_back({p->lValue(n, 0, 0), n});
-          for (auto &[key, n] : todo)
+          if (mode == "caen")
             {
-              auto hit = keys.find(key);
-              if (hit == keys.end()) continue;
-              const int ns = mode == "caen" ? std::min(nsmp, p->iValue(0, "SAMPLES")) : 20;
-              for (int i = 0; i < nch; i++)
+              accumulate(caenrow++, std::min(nsmp, p->iValue(0, "SAMPLES")), [&](int s, int ch) { return p->iValue(s, ch); });
+            }
+          else
+            {
+              if (!pool)
                 {
-                  const int ch = chans[i];
-                  for (int s = 0; s < ns; s++) v[s] = mode == "caen" ? p->iValue(s, ch) : p->iValue(n, s, ch);
-                  double ped = 0;
-                  if (raw) ped = 0;
-                  else if (mode == "caen") { for (int s = 0; s < 20; s++) ped += v[s]; ped /= 20; }
-                  else ped = (v[1] + v[2] + v[3]) / 3.;
-                  for (auto &[c, w] : hit->second)
-                    {
-                      Acc &a = acc[c];
-                      for (int s = 0; s < ns; s++)
-                        {
-                          const double d = v[s] - ped;
-                          a.s[i * nsmp + s] += w * d; a.q[i * nsmp + s] += w * w * d * d;
-                        }
-                    }
+                  if (p->getHitFormat() != IDH2GCROC3_10G) { std::cerr << "packet " << p->getIdentifier() << " has format " << p->getHitFormat() << ", not IDH2GCROC3_10G\n"; delete p; delete e; return 1; }
+                  pool = new h2gcroc3_10G_pool();
                 }
-              for (auto &[c, w] : hit->second) { acc[c].w += w; acc[c].w2 += w * w; acc[c].n += 1; }
+              pool->addPacket(p);
+              while (pool->depth_ok()) { kcu_waveforms(pool); pool->next(); }
             }
           delete p; delete e;
         }
       std::cerr << argv[f] << " done\n";
+    }
+  if (pool)
+    {
+      pool->drain();
+      while (pool->depth_ok()) { kcu_waveforms(pool); pool->next(); }
+      delete pool;
     }
   fout.cd();
   for (auto &[c, a] : acc)

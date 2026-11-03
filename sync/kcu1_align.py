@@ -9,6 +9,7 @@ Both KCUs count the same 160 MHz clock (6.25 ns ticks) but start at different re
 Panels: (1) differences around the coarse offset, 10 us bins; (2) residual of the matched pairs after
         the offset, 1-tick bins."""
 import numpy as np, uproot, glob, ROOT
+import sys; sys.path.insert(0, '/sphenix/user/tmengel/eic/bic_testbeam/common')
 from plotstyle import setup, finish, legend, headroom
 setup()
 def kcu(pat):

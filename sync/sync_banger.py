@@ -1,6 +1,7 @@
 """One-figure summary: every BIC stream of run 3062 on the KCU0 clock (stock decoders).
 Each panel: real pairing (filled) vs a null control (red)."""
 import numpy as np, uproot, glob, ROOT
+import sys; sys.path.insert(0, '/sphenix/user/tmengel/eic/bic_testbeam/common')
 from plotstyle import setup, finish, legend, headroom
 setup()
 tk=np.load('out/kcu0_ts.npy').astype(np.int64)

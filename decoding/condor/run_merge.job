@@ -1,0 +1,15 @@
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/decoding/condor
+Executable         = $(initialDir)/run_merge.sh
+Arguments          = $(stream) $(run) $(part)
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 4GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/output/root_logs/$(stream)_$(run)_merge$(part).out
+Error              = /sphenix/user/tmengel/eic/output/root_logs/$(stream)_$(run)_merge$(part).err
+Log                = /tmp/condor-run_merge-$ENV(USER)-$(stream)-$(run)$(part).log
+# submit by hand once every segment job of the listed runs has finished (no DAGMan); an optional third column is the part
+# number (10 segments each, run 3064: run_merge_list_3064.txt)
+list               = run_merge_list.txt
+Queue stream, run, part from $(list)

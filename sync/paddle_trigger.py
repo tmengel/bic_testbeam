@@ -4,6 +4,7 @@
  2 P(CAEN paddle | KCU0 paddle) on all triggers both recorded (trigger_table.py)
  3 paddle multiplicity per trigger, KCU0 and CAEN"""
 import numpy as np, uproot, ROOT
+import sys; sys.path.insert(0, '/sphenix/user/tmengel/eic/bic_testbeam/common')
 from plotstyle import setup, finish, legend, colz
 setup(); ROOT.gStyle.SetPaintTextFormat(".3f")
 d = uproot.open('out/kcuwf_0001.root')['kcuwf'].arrays(['wf'], library='np'); w = d['wf'].astype(float).reshape(-1, 8, 20)

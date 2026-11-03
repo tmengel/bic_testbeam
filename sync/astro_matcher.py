@@ -64,4 +64,3 @@ for sub,s in (("chips 3,5,6,8",np.isin(chip,[3,5,6,8])&odd),("n>=2",(c['n']>=2)&
     for cut in (1.0,2.0):
         fs=(bS[s]>cut).mean(); fc=0.5*((bC1[s]>cut).mean()+(bC2[s]>cut).mean())
         print(f"  {sub:14s} cut {cut}: accepted {fs:.4f}, random {fc:.4f}, purity {(fs-fc)/max(fs,1e-9):.2f}, matched clusters {int((fs-fc)*s.sum())}")
-np.savez('out/astro_best.npz',bestL=bS,bestK=kS,bestL_ctrl1=bC1,bestL_ctrl2=bC2)

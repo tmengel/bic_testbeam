@@ -1,0 +1,11 @@
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/decoding/condor
+Executable         = $(initialDir)/caen_merge.sh
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 3GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/output/root_logs/caen_merge.out
+Error              = /sphenix/user/tmengel/eic/output/root_logs/caen_merge.err
+Log                = /tmp/condor-caen_merge-$ENV(USER).log
+Queue

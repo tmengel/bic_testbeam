@@ -1,0 +1,11 @@
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/decoding/condor
+Executable         = $(initialDir)/astro_to_root.sh
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 2GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/output/root_logs/astro_to_root.out
+Error              = /sphenix/user/tmengel/eic/output/root_logs/astro_to_root.err
+Log                = /tmp/condor-astro_to_root-$ENV(USER).log
+Queue

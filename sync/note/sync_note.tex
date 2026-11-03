@@ -1,0 +1,170 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{graphicx,booktabs,amsmath,caption,float}
+\usepackage[hidelinks]{hyperref}
+\captionsetup{font=small}
+
+\title{Decoding and Synchronization of the BIC Test-Beam Runs 3061--3091\\[4pt]\large The four data streams of the August 2026 runs on a common trigger clock}
+\author{Tanner Mengel}
+\date{October 28, 2026}
+
+\begin{document}
+\maketitle
+
+\section*{Introduction}
+
+The BIC test-beam stack is read out by four independent data acquisition streams: two KCU105 boards with
+H2GCROC3 chips (KCU0: SFIL1--4, the trigger paddles and the Baby BCAL North end; KCU1: SFIL5), a CAEN DT5742
+digitizer (Baby BCAL South and the paddles), and an AstroPix layer. Each stream writes its own RCDAQ file with
+its own clock, and no counter is reset in common. Before the streams can be combined, every trigger of every
+stream has to be placed on one clock.
+
+This was first done for run 3062. The runs added to disk on 2026-10-27 (beam runs 3061, 3063--3069 and
+cosmic runs 3088, 3090, 3091) are processed here with the same method. Every constant is re-measured on each
+run. This note describes
+\begin{itemize}
+  \item the decoding of the raw files into per-trigger ROOT trees, and its checks;
+  \item the synchronization of KCU1, CAEN and AstroPix to KCU0, and its checks;
+  \item the resulting common trigger table of each run.
+\end{itemize}
+Run 3062 is processed again with the new run-generic code, as a check against its published constants.
+
+%%RUNS%%
+
+\section*{Decoding}
+
+\subsection*{Raw data}
+
+Every run is split into four streams, \texttt{\{beam,cosmics\}\_\{ROC\_0,ROC\_1,CAEN,AstroPix\}-0000RRRR-SSSS.evt}.
+The files roll over at 3\,GB, so long runs have several segments (run 3064: 140 KCU0, 43 KCU1 and 42 CAEN
+segments). Each RCDAQ event carries one data packet and a host-clock packet (RTCLOCK, 1\,ns, the time the
+buffer was closed):
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+stream & packet & one RCDAQ event holds & clock used for synchronization \\
+\midrule
+KCU0 & 12001 & 200 UDP frames, $\sim$9 triggers & FPGA timestamp, 6.25\,ns, 64 bit \\
+KCU1 & 12002 & same & FPGA timestamp, 6.25\,ns, 64 bit \\
+CAEN & 2001 & one trigger & group trigger time, 8.533\,ns, 30+30 bit \\
+AstroPix & 13001 & a chunk of the SPI stream & on-chip \texttt{ts} (10\,MHz, 8 bit) and \texttt{fpga\_ts} (40\,MHz, 32 bit) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{KCU streams}
+
+A KCU trigger is 20 samples of 288 channels, i.e.\ 160 lines of 36 channels (8 lines per sample: 4 ASICs
+$\times$ 2 halves). The lines arrive in UDP frames, and a trigger can be spread over two RCDAQ events. The
+converter (\texttt{kcu\_to\_root}) uses the local fork of the online decoder pool:
+\begin{itemize}
+  \item samples are assembled by timestamp: a line joins the open sample within 5 ticks, and samples close
+        4 sample periods behind the newest timestamp, so lines arriving out of order do not split a waveform;
+  \item the bytes of every line are then looked up by (timestamp, link) and decoded field by field, so the
+        trees hold the raw words: ADC, TOA, the full 10-bit TOT code, the TOT flags, the frame header, the
+        common mode, the calibration channel and the CRC-32 of every line;
+  \item every 7th channel of every sample is compared with the decoder's own ADC value.
+\end{itemize}
+Each trigger becomes one entry of the \texttt{header} tree and of one tree per subsystem
+(\texttt{sfil1}--\texttt{sfil4}, \texttt{paddles}, \texttt{bbcal}, \texttt{unused} on KCU0;
+\texttt{sfil5}, \texttt{sfil5north}, \texttt{unused} on KCU1). A line lost in the network leaves $-1$ in its 36
+channels for that sample.
+
+\paragraph{Channel map.} The map follows the run-log hookup tables. Runs up to 3069 use the 13 August table,
+as for run 3062. After 14 August 21:55 CT (runs from 3085 on) the four SFIL5 North summed boards are on KCU0
+ASIC2, channels 153, 156, 163 and 167; for these runs they are written to a new tree \texttt{sfil5n}
+(cells 1--4). For runs before 3085 the output is bit-identical to the previous converter.
+
+\paragraph{Segment boundaries.} One condor job converts one segment. It also reads the first 6 packets of
+the next segment, so the trigger crossing the boundary is written complete. Triggers with a line in the
+segment's first packet go to a separate head file; the merge step drops from it the triggers the previous
+segment already holds, and chains head and main files in time order.
+
+\paragraph{Stale clock at run start.} The first few triggers of each KCU file carry the FPGA counter from
+before the reset at run start; the counter then restarts near zero. Each file therefore has exactly one
+backward timestamp step, flagged in \texttt{header.backward}. The synchronization drops the entries before it.
+
+\subsection*{CAEN}
+
+One RCDAQ event is one trigger: 16 channels (Baby BCAL South ch 0--11, paddles P3--P6 ch 12--15) of 256
+DRS4 cells at 1\,GS/s. The converter (\texttt{caen\_to\_root}) checks the event size and marker, and compares a
+sample of every 50th trigger and the group trigger time with the stock decoder. The two 30-bit group trigger
+times are joined into one counter, \texttt{gtt}, that does not wrap over a run. The 32-bit event time tag
+steps back by $2^{31}$ and is not used.
+
+\subsection*{AstroPix}
+
+The stream is a sequence of SPI records rather than triggers. The converter (\texttt{astro\_to\_root}) writes
+one entry per 11-byte hit record (\texttt{hits}) and keeps every other record (SPI filler and records cut at
+a packet end) in \texttt{records}. A hit is valid if it is on layer 1, chip 0--8. The hit count is compared
+with the stock decoder.
+
+\subsection*{Processing}
+
+The 269 segment files were converted by condor jobs, one per segment and stream, and merged per stream and
+run. Run 3064 is merged in parts of 10 segments: a single file would be $\sim$350\,GB for KCU0, beyond ROOT's
+100\,GB tree limit. Each part starts on a de-duplicated head file, so the parts read in order give every
+trigger once.
+
+%%DECODE%%
+
+\section*{Synchronization}
+
+All streams are put on the KCU0 clock (6.25\,ns ticks). Every step is checked against a null control: the
+stream shifted by 10\,ms, a neighbouring trigger, or shuffled timestamps. The code is
+\texttt{sync/run\_sync.py}; it reads only the merged ROOT files.
+
+\paragraph{Triggers.} A KCU trigger is a \texttt{header} entry after the stale-clock prefix. An entry with
+fewer than 20 samples lying $k \times 164$ ticks ($k = 1..19$, $\pm 4$) after another entry is a fragment of
+that trigger, not a new trigger.
+
+\paragraph{KCU1 to KCU0.} Both boards count the same 160\,MHz clock from different resets. A coarse offset
+comes from the host-clock epochs, $L = t_\mathrm{host} - 6.25\,\mathrm{ns} \times \mathrm{ts}$, per board.
+The exact offset is the most common value of $\mathrm{ts}(\mathrm{KCU0}) - \mathrm{ts}(\mathrm{KCU1})$ over
+all pairs within $\pm 20$\,ms of the coarse value, for 100\,k sampled KCU1 triggers. It is measured again in
+ten time slices of the run.
+
+\paragraph{CAEN to KCU0.} The CAEN time is $t_C = 8.533\,\mathrm{ns} \times \mathtt{gtt}$. The coarse offset
+uses the 1st percentile of $t_\mathrm{host} - t$ for both streams, because the CAEN buffers reach the host up
+to 2\,s late. The run is cut into slices of at most 300 CAEN triggers and at most 5\,s. In the first slice the
+coincidence peak of all KCU0--CAEN time differences is searched over $\pm 3$\,s; each later slice is searched
+within $\pm 2$\,ms of the extrapolated offset, in 10\,$\mu$s bins. A straight line through the slice offsets
+gives the clock drift. A running median of the nearest-neighbour residuals (201 pairs) then removes the slow
+wander of a few $\mu$s. The 5\,s limit on a slice matters at low trigger rates: with a drift of 5\,ppm, a
+300-trigger slice of a 20\,Hz run would otherwise smear the peak over 75\,$\mu$s.
+
+\paragraph{Common trigger table.} The KCU0 triggers, the KCU1 triggers moved by the offset and the CAEN
+triggers on the KCU0 clock are grouped within 16 ticks (100\,ns). Each row of the table is one trigger,
+with the entry number in each stream's merged file ($-1$ where the stream missed it).
+
+\paragraph{Paddle cross-check.} The paddles are read by both KCU0 and CAEN, which gives an independent check
+of the matching: on every trigger seen by both, the pattern of fired paddles is compared. A paddle fired on
+KCU0 if the pedestal minus the minimum of samples 6--19 exceeds 65 ADC, and on CAEN if the pedestal minus the
+minimum of samples 20--229 exceeds 200 ADC. The decoy is the CAEN pattern of the neighbouring trigger.
+
+\paragraph{AstroPix to KCU0.} The AstroPix \texttt{fpga\_ts} stamps the SPI readout, not the hit, so it places
+a hit only to within the readout latency (tens of ms). The trigger-level handle is the on-chip
+\texttt{ts}: in run 3062 it is a 10\,MHz counter locked to the KCU clock,
+$\mathtt{ts} = ((K + s)\,//\,16 - \phi) \bmod 256$ for the partner trigger at KCU0 tick $K$, with a fixed
+phase $\phi$. Hits are grouped into clusters (\texttt{ts} within $\pm 2$, read within 1\,ms). Then:
+\begin{enumerate}
+  \item a coarse offset from the readout envelopes (the 1st percentile of $t_\mathrm{host} - t$ per 10\,s, for
+        the last record of each RCDAQ event);
+  \item a wide scan: for a subset of clusters, every KCU0 trigger within $\pm 60$\,s is histogrammed in time
+        offset (10\,ms bins) and phase; true pairs pile up in one cell, random pairs are flat in phase;
+  \item a phase scan within $\pm 250$\,ms of that cell for all clusters, against the same scan with
+        \texttt{ts} shuffled between clusters;
+  \item the readout latency: the time difference of phase-matched pairs minus that of pairs in the
+        opposite phase (control).
+\end{enumerate}
+Step 2 replaces the beam on/off correlation used for run 3062, which fails in the low-rate runs (no visible
+beam structure).
+
+%%SYNC%%
+
+\section*{Summary}
+
+%%SUMMARY%%
+
+\end{document}

@@ -1,0 +1,15 @@
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/decoding/condor
+Executable         = $(initialDir)/kcu_merge.sh
+Arguments          = $(board) $(nseg)
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 4GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/output/root_logs/kcu$(board)_merge.out
+Error              = /sphenix/user/tmengel/eic/output/root_logs/kcu$(board)_merge.err
+Log                = /tmp/condor-kcu_merge-$ENV(USER)-$(board).log
+# board and nseg come from the command line: condor_submit -a "board = 0" -a "nseg = 8" kcu_merge.job
+board              = 0
+nseg               = 8
+Queue

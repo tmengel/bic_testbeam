@@ -1,6 +1,7 @@
 """AstroPix summary: 10 MHz phase lock, readout latency, paddle hit fraction per chip for log10LR > 2.5
 matches, and the final matches by latency, chip and run time -> out/astro_summary.png"""
 import numpy as np, ROOT
+import sys; sys.path.insert(0, '/sphenix/user/tmengel/eic/bic_testbeam/common')
 from plotstyle import setup, finish, legend, headroom, colz
 setup()
 H=np.load('out/astro_ts10_H.npy')                        # [true/shuffled][sub][256]

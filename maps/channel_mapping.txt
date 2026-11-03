@@ -1,0 +1,57 @@
+After 13/08 (Thu entry - beam studies - Jared + Halen)						GOOD FOR RUNS 3061-3063									
+															
+ASIC 0	Passive SFIL South	on ASIC	ASIC 1	Paddles	On ASIC		On ASIC		ASIC 3	Baby BCAL North		ASIC 2	SFIL North		We switched the HGCROC board that was hosting SFIL North and Baby BCAL (ASIC 2 and 3) to the spare one that we had before in KCU1 and we swapped on Friday night 8/8 - 8/9. It magically started working.
+16 channels			4 channels						40 channels			16 channels			
+SFIL 1 1 S	J1	ch2	Paddle 3	J18	84		82		BBS01	J1			Edge board	ASIC2	
+SFIL 1 2 S	J2	ch6	Paddle 4	J4	86		86		BBS02	J2		SFIL 1 1N	J1	146	
+SFIL 1 3	J3	ch10	Paddle 5	J5	81		93		BBS03	J3		SFIL 1 2N	J2	150	
+SFIL 1 4	J4	CH14	Paddle 6	J6	97		97		BBS04	J4		SFIL 1 3N	J3	154	
+SFIL 2 1	J5	CH21							BBS05	J5		SFIL 1 4	J4	158	
+SFIL 2 2	J6	CH25							BBS06	J6		SFIL 2 1	J5	165	
+SFIL 2 3	J7	CH29							BBS07	J7		SFIL 2 2	J6	169	
+SFIL 2 4	J8	CH33							BBS08	J8		SFIL 2 3	J7	173	
+SFIL 3 1	J9	CH63							BBS09	J9		SFIL 2 4	J8	177	
+SFIL 3 2	J10	CH59							BBS10	J10		SFIL 3 1	J9	207	
+SFIL 3 3	J11	CH52							BBS11	J11		SFIL 3 2	J10	203	
+SFIL 3 4	J12	CH48							BBS12	J12		SFIL 3 3	J11	196	
+SFIL 4 1	J63	ch43							BBS13	J13		SFIL 3 4	J12	192	
+SFIL 4 2	J64	ch37							BBS14	J14		SFIL 4 1	J63	187	
+SFIL 4 3	J15	ch0							BBS15	J15		SFIL 4 2	J13	186	
+SFIL 4 4	J16	ch4							BBS16	J16		SFIL 4 3	J15	144	
+SFIL 5 1	Individual Sipms samtec								BBS17	J17		SFIL 4 4	J16	148	
+SFIL 5 2									BBS18	J18		SFIL 5 1	Individual Sipms samtec		
+SFIL 5 3									BBS19	J19		SFIL 5 2			
+SFIL 5 4									BBS20	J20		SFIL 5 3			
+									BBS21	J21		SFIL 5 4			
+									BBS22	J22					
+									BBS23	J23					
+									BBS24	J24					
+									BBS25	J25					
+									BBS26	J26					
+									BBS27	J27					
+									BBS28	J28					
+									BBS29	J29					
+									BBS30	J30					
+									BBS31	J31					
+									BBS32	J32					
+									BBS33	J33					
+									BBS34	J34					
+									BBS35	J35					
+									BBS36	J36					
+									BBS37	J37					
+									BBS38	J38					
+									BBS39	J39	modified on Aug 6				
+									BBS40	J40					
+															
+															
+															
+															
+KCU 1															
+															
+A2	SFIL5 South - stayed as it was														
+Sigle SiPM boards															
+No LGs and no cookies															
+															
+A0	SFIL5 North	We added HGCROC from KCU0 (before hosting SFIL North and Baby BCAL) on slots A0 and A1, but clearly it is not working well. 													
+Sigle SiPM boards															
+LGs and cookies															

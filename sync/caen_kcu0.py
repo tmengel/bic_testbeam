@@ -6,6 +6,7 @@ matched-pair residuals. Shift control: same matching with CAEN moved by +10 ms.
 """
 import uproot, numpy as np
 import ROOT
+import sys; sys.path.insert(0, '/sphenix/user/tmengel/eic/bic_testbeam/common')
 from plotstyle import setup, finish, legend, headroom
 setup()
 

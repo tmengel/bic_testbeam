@@ -1,0 +1,15 @@
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/decoding/condor
+Executable         = $(initialDir)/run_to_root.sh
+Arguments          = $(stream) $(run) $(seg)
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 3GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/output/root_logs/$(stream)_$(run)_seg$(seg).out
+Error              = /sphenix/user/tmengel/eic/output/root_logs/$(stream)_$(run)_seg$(seg).err
+Log                = /tmp/condor-run_to_root-$ENV(USER)-$(stream)-$(run)-$(seg).log
+# one job per segment and stream of every run on /gpfs01/eic/data1/BIC_Beamtest (list made from the files, empty files left out);
+# a different list: condor_submit -a "list = other.txt" run_to_root.job
+list               = run_to_root_list.txt
+Queue stream, run, seg from $(list)

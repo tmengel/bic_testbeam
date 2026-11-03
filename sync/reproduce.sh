@@ -1,6 +1,7 @@
 #!/bin/bash
 # Reproduce the run-3062 stream synchronization (KCU0 reference; KCU1, CAEN, AstroPix).
-# Stock online_distribution decoders only.
+# Stock online_distribution decoders only, plus ROC_pool for the KCU streams (ts_dump, wf_acc), from
+# the local forks built into $ONLINE_MAIN (TOT 10 bits, CRC/hamming flags, out-of-order lines).
 #
 #   ./reproduce.sh [stage ...]      stages: build dump prep caen astro events plots diag   (default: all)
 #
@@ -10,10 +11,14 @@
 #   astro_*.py        O  = envelope offset - 0.43 s (beam on/off correction, astro_onoff.py)
 #                     phase 189, latency windows 12-24 / 82-94 ms
 #   sync_banger.py, astro_geo_kcu1_caen.py   KCU1 offset -1143665946 ticks
+# Locations: raw .evt files in RAW (default ../data/raw -> /sphenix/user/tmengel/eic/data), all
+# outputs in out/ (a symlink to /sphenix/user/tmengel/eic/output, 5.7 GB). Override with RAW=... OUT=...
 set -e
 cd "$(dirname "$0")"
 source ../setup.sh >/dev/null 2>&1
-RAW=../data/raw
+RAW=${RAW:-../data/raw}
+OUT=${OUT:-out}
+[ "$OUT" != out ] && ln -sfn "$OUT" out
 RUN=00003062
 STAGES=${@:-build dump prep caen astro events plots diag}
 mkdir -p out
@@ -59,16 +64,17 @@ for s in $STAGES; do
     python3 skim_events.py ;;     # out/events_3062_skim.root: three-stream or AstroPix-matched triggers (in git)
   plots)
     python3 sync_banger.py        # out/sync_banger.{png,pdf}
-    python3 astro_geo_kcu0.py     # out/astro_geo_kcu0.png
-    python3 astro_geo_kcu1_caen.py     # out/astro_geo_kcu1_caen.png
+    python3 ../astropix/astro_geo_kcu0.py     # out/astro_geo_kcu0.png
+    python3 ../astropix/astro_geo_kcu1_caen.py     # out/astro_geo_kcu1_caen.png
     python3 astro_summary_plot.py      # out/astro_summary.png
-    python3 sfil5_map.py               # out/sfil5_map.png: SFIL5 South vertical array order
+    python3 ../astropix/sfil5_map.py               # out/sfil5_map.png: SFIL5 South vertical array order
     python3 kcu1_align.py              # out/kcu1_align.png: KCU1 -> KCU0 offset and residual
     python3 paddle_trigger.py          # out/paddle_trigger.png: paddle signal and KCU0/CAEN agreement
     python3 sumcheck.py ;;             # out/sumcheck.png: ADC sum check, max - ped vs window - ped - CM
   diag)
     python3 sync_diag.py          # out/sync_diag.png: every link vs run time
-    python3 shower.py             # out/shower.png: shower shape, relative energy response per paddle
+    python3 astro_phase_split.py out/astro_phase_split.npz > out/astro_phase_split.txt   # ts phase per chip / record / time (~10 min)
+    python3 ../calibration/shower.py             # out/shower.png: shower shape, relative energy response per paddle
     python3 wf_keys.py            # out/wfkeys_*.txt: AstroPix phase-band triggers + event-display triggers
     mkdir -p out/wfacc            # waveform sums (stock decoders), ~25 min on 8 cores
     for f in $RAW/beam_ROC_0-$RUN-*.evt; do b=$(basename $f .evt); ./wf_acc kcu0 out/wfkeys_kcu0.txt out/wfacc/kcu0_${b##*-}.root $f > out/wfacc/kcu0_${b##*-}.log 2>&1 & done
@@ -76,8 +82,8 @@ for s in $STAGES; do
     ./wf_acc caen out/wfkeys_caen.txt out/wfacc/caen.root $RAW/beam_CAEN-$RUN-000{0,1,2}.evt > out/wfacc/caen.log 2>&1 &
     waitall
     python3 wf_bkgsub.py          # out/wf_bkgsub.png: waveform-level background subtraction
-    python3 evdisp.py             # out/evdisp/ev<row>.png, events.json
-    python3 evdisp3d.py           # out/evdisp/bic_event_viewer.html (interactive, schematic geometry)
+    python3 ../event_displays/evdisp.py             # out/evdisp/ev<row>.png, events.json
+    python3 ../event_displays/evdisp3d.py           # out/evdisp/bic_event_viewer.html (interactive, schematic geometry)
     python3 slide_panels.py ;;    # out/*_slide.png: reduced figures for the slides
   *) echo "unknown stage $s"; exit 1 ;;
   esac

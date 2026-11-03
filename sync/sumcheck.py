@@ -9,6 +9,7 @@ Sums: KCU0 = 32 SFIL1-4 channels (S+N); KCU1 = 64 connected SFIL5 South channels
  row 1 (old) / row 2 (new): matched pairs, decoy pairs (each KCU0 trigger with a later KCU1 trigger),
  col 3: KCU0 sum for triggers whose KCU1 sum is empty (the band at KCU1 = 0), and r vs pairing shift."""
 import numpy as np, uproot, glob, ROOT
+import sys; sys.path.insert(0, '/sphenix/user/tmengel/eic/bic_testbeam/common')
 from plotstyle import setup, finish, legend, headroom, colz
 setup()
 OFF1 = 1143665946

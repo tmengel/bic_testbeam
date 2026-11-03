@@ -27,6 +27,7 @@ A stream that missed the trigger has has_<stream> = 0 and zeros in its branches.
 """
 import numpy as np, uproot, glob, sys
 sys.path.insert(0, '.')
+import sys; sys.path.insert(0, '/sphenix/user/tmengel/eic/bic_testbeam/common')
 from astro_geo_common import cluster_xy
 
 TT = np.load('out/triggers_3062.npz'); N = len(TT['T'])

@@ -10,6 +10,7 @@
  8 AstroPix readout latency of log10LR > 2.5 matches vs time
  9 AstroPix clusters and log10LR > 2.5 matches per 10 s"""
 import numpy as np, uproot, glob, ROOT
+import sys; sys.path.insert(0, '/sphenix/user/tmengel/eic/bic_testbeam/common')
 from plotstyle import setup, finish, legend, headroom, colz
 setup()
 TT = np.load('out/triggers_3062.npz'); T = TT['T']; t0 = T[0]; sec = lambda x: (x - t0) * 6.25e-9

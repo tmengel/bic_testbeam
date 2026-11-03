@@ -1,0 +1,24 @@
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/decoding/condor
+Executable         = $(initialDir)/kcu_to_root.sh
+Arguments          = $(board) $(seg)
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 3GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/output/root_logs/kcu$(board)_to_root_seg$(seg).out
+Error              = /sphenix/user/tmengel/eic/output/root_logs/kcu$(board)_to_root_seg$(seg).err
+Log                = /tmp/condor-kcu_to_root-$ENV(USER)-$(board)-$(seg).log
+Queue board, seg from (
+  0 0
+  0 1
+  0 2
+  0 3
+  0 4
+  0 5
+  0 6
+  0 7
+  1 0
+  1 1
+  1 2
+)

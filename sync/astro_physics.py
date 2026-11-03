@@ -17,7 +17,6 @@ K=np.round(c['Fmin'][cl]+O+lat/6.25e-6).astype(np.int64)
 j=np.clip(np.searchsorted(ts,K),0,len(ts)-1); found=ts[j]==K
 print("candidate rows in windows:",inwin.sum()," with amplitude lookup:",(inwin&found).mean()/inwin.mean())
 sel=inwin&found
-np.savez('out/astro_cand_amp_idx.npz',rows=np.nonzero(sel)[0],j=j[sel])
 names=[f"S{L+1}c{r+1}" for r in range(4) for L in range(4)]+[f"N{L+1}c{r+1}" for r in range(4) for L in range(4)]+["P3","P4","P5","P6"]
 def mean_ex(x, s):                                          # excess mean = (sum_sig - sum_ctl)/(n_sig - n_ctl)
     sg=s&(band==0); ct=s&(band>0); w=0.5                    # two control bands

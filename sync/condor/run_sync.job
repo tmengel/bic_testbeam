@@ -1,0 +1,14 @@
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/sync/condor
+Executable         = $(initialDir)/run_sync.sh
+Arguments          = $(run) $(mode)
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = $(mem)
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/output/root_logs/sync_$(run).out
+Error              = /sphenix/user/tmengel/eic/output/root_logs/sync_$(run).err
+Log                = /tmp/condor-run_sync-$ENV(USER)-$(run).log
+# one job per run, after its merged files exist; list lines "run memory" (run 3064 needs ~24GB)
+list               = run_sync_list.txt
+Queue run, mem, mode from $(list)

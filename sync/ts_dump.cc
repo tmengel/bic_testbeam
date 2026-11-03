@@ -1,15 +1,24 @@
 // ts_dump: one timestamp per trigger (or per hit) from any BIC stream, using
-// only the stock decoders of the online_distribution Event library.
+// only the stock decoders of the online_distribution Event library and, for the
+// KCU streams, Purschke's ROC_pool, which stitches the waveforms that the UDP
+// readout splits across Packets.
 //
 //   ts_dump <kcu|kcuadc|kcu1adc|caen|caenadc|astro> out.root in1.evt [in2.evt ...]
 //
 // Every row carries the RTCLOCK host time (ns) of its RCDAQ event, so all
 // streams can be put on one coarse timeline before matching in device ticks.
-//   kcu   packet 12001/12002  tree "kcu":   evt rt ts nsamp
+// For the KCU modes a waveform is written when the pool offers it, which can be
+// one Packet after the one it started in; evt and rt are then those of the
+// Packet that completed it (a ~2 ms shift of the coarse anchor, nothing else).
+//   kcu   packet 12001/12002  tree "kcu":   evt rt ts nsamp ncrc nham
 //         ts = lValue(wf,0,0), FPGA timestamp of sample 0 (6.25 ns)
+//         ncrc, nham: lines of the waveform with a CRC error / a hamming flag (local decoder build)
 //   kcuwf   first 200k complete KCU0 waveforms: wf[8][20] raw samples of paddles 3-6 (ch 84,86,81,97)
 //           then SFIL1-4 South beam row (ch 10,29,52,0)
 //   kcutot  first 100k complete KCU0 waveforms: wf[36][20] ADC and tot[36][20] TOT for the kcuadc channels
+//   kcutime first 400k complete KCU0 waveforms: wf[36][20] ADC, tot[36][20] TOT, toa[36][20] TOA (raw
+//           10-bit codes) for the kcuadc channels, plus ncrc; for the TOA/TOT timing study
+//   kcu1time  the same for the first 100k complete KCU1 waveforms, channels 144..179 (SFIL5 South arrays A, B)
 //   kcuadc  as kcu, complete 20-sample waveforms only, plus amp[36]: max - pedestal
 //         (pedestal = mean of samples 1-3, as roc1) for SFIL1-4 South [cell][layer],
 //         SFIL1-4 North [cell][layer], then paddles 3,4,5,6 (8/13 hookup)
@@ -31,6 +40,8 @@
 #include <Event/fileEventiterator.h>
 #include <Event/packet.h>
 #include <Event/EventTypes.h>
+#include <Event/oncsSubConstants.h>
+#include <ROC_pool/h2gcroc3_10G_pool.h>
 
 #include <TFile.h>
 #include <TTree.h>
@@ -42,7 +53,8 @@
 #include <vector>
 
 // median over the unconnected, non-railed channels of one ASIC of (mean of 4 samples from s0) - mean(samples 1-3)
-static float common_mode(Packet *p, int n, int ch0, const std::vector<bool> &used, int s0)
+template <class P>
+static float common_mode(P *p, int n, int ch0, const std::vector<bool> &used, int s0)
 {
   std::vector<float> v;
   for (int ch = ch0; ch < ch0 + 72; ch++)
@@ -57,6 +69,20 @@ static float common_mode(Packet *p, int n, int ch0, const std::vector<bool> &use
   return v[v.size() / 2];
 }
 
+// lines of waveform n with a CRC error / a hamming flag (0 with a decoder build that lacks the accessors)
+template <class P>
+static void integrity(P *p, int n, int nsamp, int &ncrc, int &nham)
+{
+  ncrc = nham = 0;
+  const int nlinks = p->iValue(0, "CHANNELS") / 36;
+  for (int smp = 0; smp < nsamp; smp++)
+    for (int link = 0; link < nlinks; link++)
+      {
+        if (p->iValue(n, smp, 36 * link, "CRCERROR")) ncrc++;
+        if (p->iValue(n, smp, 36 * link, "ERROR")) nham++;
+      }
+}
+
 int main(int argc, char **argv)
 {
   if (argc < 4)
@@ -65,10 +91,11 @@ int main(int argc, char **argv)
       return 1;
     }
   const std::string mode = argv[1];
+  const bool kcu_mode = mode.rfind("kcu", 0) == 0;
   TFile fout(argv[2], "RECREATE");
   TTree t(mode.c_str(), mode.c_str());
 
-  int evt = 0, nsamp = 0, evnr = 0, tot = 0, id = 0, loc = 0, iscol = 0, layer = 0, ats = 0;
+  int evt = 0, nsamp = 0, evnr = 0, tot = 0, id = 0, loc = 0, iscol = 0, layer = 0, ats = 0, ncrc = 0, nham = 0;
   Long64_t rt = 0, ts = 0, gtt = 0;
   UInt_t evttime = 0;
   static const int kAmpCh[36] = {2, 21, 63, 43, 6, 25, 59, 37, 10, 29, 52, 0, 14, 33, 48, 4,
@@ -78,16 +105,18 @@ int main(int argc, char **argv)
   std::vector<bool> used(288, false), used1(288, false);      // connected channels, excluded from the common mode
   for (int k = 0; k < 36; k++) used[kAmpCh[k]] = true;
   for (int ch = 144; ch < 216; ch++) used1[ch] = ((ch - 144) % 9 != 8);   // KCU1 ASIC2: every 9th channel is unconnected
-  Short_t a1[72], neg[16], pos[16], wf[8][20], wf36[36][20], tot36[36][20];
+  Short_t a1[72], neg[16], pos[16], wf[8][20], wf36[36][20], tot36[36][20], toa36[36][20];
   static const int kWfCh[8] = {84, 86, 81, 97, 10, 29, 52, 0};
   Long64_t nfill = 0;
+  bool done = false;   // kcutot / kcuwf stop after their quota
   t.Branch("evt", &evt);
   t.Branch("rt", &rt);
-  if (mode == "kcu") { t.Branch("ts", &ts); t.Branch("nsamp", &nsamp); }
-  else if (mode == "kcuadc") { t.Branch("ts", &ts); t.Branch("amp", amp, "amp[36]/F"); t.Branch("win", win, "win[36]/F"); t.Branch("cm", cm, "cm[4]/F"); }
+  if (mode == "kcu") { t.Branch("ts", &ts); t.Branch("nsamp", &nsamp); t.Branch("ncrc", &ncrc); t.Branch("nham", &nham); }
+  else if (mode == "kcuadc") { t.Branch("ts", &ts); t.Branch("amp", amp, "amp[36]/F"); t.Branch("win", win, "win[36]/F"); t.Branch("cm", cm, "cm[4]/F"); t.Branch("ncrc", &ncrc); t.Branch("nham", &nham); }
   else if (mode == "kcuwf") { t.Branch("ts", &ts); t.Branch("wf", wf, "wf[8][20]/S"); }
   else if (mode == "kcutot") { t.Branch("ts", &ts); t.Branch("wf", wf36, "wf[36][20]/S"); t.Branch("tot", tot36, "tot[36][20]/S"); }
-  else if (mode == "kcu1adc") { t.Branch("ts", &ts); t.Branch("a1", a1, "a1[72]/S"); t.Branch("w1", w1, "w1[72]/F"); t.Branch("cm1", &cm1); }
+  else if (mode == "kcutime" || mode == "kcu1time") { t.Branch("ts", &ts); t.Branch("wf", wf36, "wf[36][20]/S"); t.Branch("tot", tot36, "tot[36][20]/S"); t.Branch("toa", toa36, "toa[36][20]/S"); t.Branch("ncrc", &ncrc); }
+  else if (mode == "kcu1adc") { t.Branch("ts", &ts); t.Branch("a1", a1, "a1[72]/S"); t.Branch("w1", w1, "w1[72]/F"); t.Branch("cm1", &cm1); t.Branch("ncrc", &ncrc); t.Branch("nham", &nham); }
   else if (mode == "caen") { t.Branch("evnr", &evnr); t.Branch("evttime", &evttime); t.Branch("gtt", &gtt); }
   else if (mode == "caenadc") { t.Branch("evnr", &evnr); t.Branch("gtt", &gtt); t.Branch("neg", neg, "neg[16]/S"); t.Branch("pos", pos, "pos[16]/S"); t.Branch("qint", qint, "qint[16]/F"); }
   else if (mode == "astro")
@@ -97,13 +126,113 @@ int main(int argc, char **argv)
     }
   else { std::cerr << "unknown mode " << mode << "\n"; return 1; }
 
-  for (int f = 3; f < argc; f++)
+  // the KCU modes, over the waveforms a pool (or a Packet) offers; same calls either way
+  auto kcu_waveforms = [&](auto *p)
+    {
+      const int nwf = p->iValue(0, "NR_WF");
+      for (int n = 0; n < nwf && !done; n++)
+        {
+          if (mode == "kcutot")
+            {
+              if (nfill >= 100000) { done = true; break; }
+              if (p->iValue(n, "SAMPLESIZE") != 20) continue;
+              ts = p->lValue(n, 0, 0);
+              for (int k = 0; k < 36; k++)
+                for (int smp = 0; smp < 20; smp++)
+                  {
+                    wf36[k][smp] = (Short_t) p->iValue(n, smp, kAmpCh[k]);
+                    tot36[k][smp] = (Short_t) p->iValue(n, smp, kAmpCh[k], "TOT");
+                  }
+              t.Fill(); nfill++;
+            }
+          else if (mode == "kcutime" || mode == "kcu1time")
+            {
+              if (nfill >= (mode == "kcutime" ? 400000 : 100000)) { done = true; break; }
+              if (p->iValue(n, "SAMPLESIZE") != 20) continue;
+              ts = p->lValue(n, 0, 0);
+              for (int k = 0; k < 36; k++)
+                {
+                  const int ch = mode == "kcutime" ? kAmpCh[k] : 144 + k;
+                  for (int smp = 0; smp < 20; smp++)
+                    {
+                      wf36[k][smp] = (Short_t) p->iValue(n, smp, ch);
+                      tot36[k][smp] = (Short_t) p->iValue(n, smp, ch, "TOT");
+                      toa36[k][smp] = (Short_t) p->iValue(n, smp, ch, "TOA");
+                    }
+                }
+              integrity(p, n, 20, ncrc, nham);
+              t.Fill(); nfill++;
+            }
+          else if (mode == "kcuwf")
+            {
+              if (nfill >= 200000) { done = true; break; }
+              if (p->iValue(n, "SAMPLESIZE") != 20) continue;
+              ts = p->lValue(n, 0, 0);
+              for (int k = 0; k < 8; k++)
+                for (int smp = 0; smp < 20; smp++) wf[k][smp] = (Short_t) p->iValue(n, smp, kWfCh[k]);
+              t.Fill(); nfill++;
+            }
+          else if (mode == "kcuadc")
+            {
+              if (p->iValue(n, "SAMPLESIZE") != 20) continue;
+              ts = p->lValue(n, 0, 0);
+              for (int k = 0; k < 36; k++)
+                {
+                  const int ch = kAmpCh[k];
+                  const float ped = (p->iValue(n, 1, ch) + p->iValue(n, 2, ch) + p->iValue(n, 3, ch)) / 3.f;
+                  if (k >= 32)    // paddles: negative PMT pulse saturates the ADC at 0 -> dip depth
+                    {
+                      int mn = 1 << 30;
+                      for (int smp = 8; smp <= 16; smp++) mn = std::min(mn, p->iValue(n, smp, ch));
+                      amp[k] = ped - mn;
+                      continue;
+                    }
+                  int mx = 0;
+                  for (int smp = 0; smp < 20; smp++) mx = std::max(mx, p->iValue(n, smp, ch));
+                  amp[k] = mx - ped;
+                  win[k] = (p->iValue(n, 6, ch) + p->iValue(n, 7, ch) + p->iValue(n, 8, ch) + p->iValue(n, 9, ch)) / 4.f - ped;
+                }
+              for (int a = 0; a < 4; a++) cm[a] = common_mode(p, n, a * 72, used, 6);
+              integrity(p, n, 20, ncrc, nham);
+              t.Fill();
+            }
+          else if (mode == "kcu1adc")
+            {
+              if (p->iValue(n, "SAMPLESIZE") != 20) continue;
+              ts = p->lValue(n, 0, 0);
+              for (int k = 0; k < 72; k++)
+                {
+                  const int ch = 144 + k;
+                  const float ped = (p->iValue(n, 1, ch) + p->iValue(n, 2, ch) + p->iValue(n, 3, ch)) / 3.f;
+                  int mx = 0;
+                  for (int smp = 0; smp < 20; smp++) mx = std::max(mx, p->iValue(n, smp, ch));
+                  a1[k] = (Short_t) (mx - ped);
+                  w1[k] = (p->iValue(n, 5, ch) + p->iValue(n, 6, ch) + p->iValue(n, 7, ch) + p->iValue(n, 8, ch)) / 4.f - ped;
+                }
+              cm1 = common_mode(p, n, 144, used1, 5);
+              integrity(p, n, 20, ncrc, nham);
+              t.Fill();
+            }
+          else   // "kcu"
+            {
+              nsamp = p->iValue(n, "SAMPLESIZE");
+              ts = p->lValue(n, 0, 0);
+              integrity(p, n, nsamp, ncrc, nham);
+              t.Fill();
+            }
+        }
+    };
+
+  h2gcroc3_10G_pool *pool = nullptr;   // locks to the packet id of the first Packet it gets
+  const int kcu_id = (mode == "kcutot" || mode == "kcutime" || mode == "kcuwf") ? 12001 : ((mode == "kcu1adc" || mode == "kcu1time") ? 12002 : 0);   // 0: 12001 or 12002
+
+  for (int f = 3; f < argc && !done; f++)
     {
       int status = 0;
       fileEventiterator it(argv[f], status);
       if (status) { std::cerr << "cannot open " << argv[f] << "\n"; continue; }
       Event *e;
-      while ((e = it.getNextEvent()))
+      while (!done && (e = it.getNextEvent()))
         {
           if (e->getEvtType() != DATAEVENT) { delete e; continue; }
           evt = e->getEvtSequence();
@@ -111,99 +240,20 @@ int main(int argc, char **argv)
           for (int id_rt = 1010; id_rt <= 1013; id_rt++)
             if (Packet *pr = e->getPacket(id_rt)) { rt = pr->lValue(0, "TOTAL"); delete pr; break; }
 
-          if (mode == "kcutot")
+          if (kcu_mode)
             {
-              if (nfill >= 100000) { delete e; break; }
-              if (Packet *p = e->getPacket(12001))
-                {
-                  const int nwf = p->iValue(0, "NR_WF");
-                  for (int n = 0; n < nwf; n++)
-                    {
-                      if (p->iValue(n, "SAMPLESIZE") != 20) continue;
-                      ts = p->lValue(n, 0, 0);
-                      for (int k = 0; k < 36; k++)
-                        for (int smp = 0; smp < 20; smp++)
-                          {
-                            wf36[k][smp] = (Short_t) p->iValue(n, smp, kAmpCh[k]);
-                            tot36[k][smp] = (Short_t) p->iValue(n, smp, kAmpCh[k], "TOT");
-                          }
-                      t.Fill(); nfill++;
-                    }
-                  delete p;
-                }
-            }
-          else if (mode == "kcuwf")
-            {
-              if (nfill >= 200000) { delete e; break; }
-              if (Packet *p = e->getPacket(12001))
-                {
-                  const int nwf = p->iValue(0, "NR_WF");
-                  for (int n = 0; n < nwf; n++)
-                    {
-                      if (p->iValue(n, "SAMPLESIZE") != 20) continue;
-                      ts = p->lValue(n, 0, 0);
-                      for (int k = 0; k < 8; k++)
-                        for (int smp = 0; smp < 20; smp++) wf[k][smp] = (Short_t) p->iValue(n, smp, kWfCh[k]);
-                      t.Fill(); nfill++;
-                    }
-                  delete p;
-                }
-            }
-          else if (mode == "kcuadc")
-            {
-              Packet *p = e->getPacket(12001);
-              if (!p) p = e->getPacket(12002);
+              Packet *p = kcu_id ? e->getPacket(kcu_id) : e->getPacket(12001);
+              if (!p && !kcu_id) p = e->getPacket(12002);
               if (p)
                 {
-                  const int nwf = p->iValue(0, "NR_WF");
-                  for (int n = 0; n < nwf; n++)
+                  if (!pool)
                     {
-                      if (p->iValue(n, "SAMPLESIZE") != 20) continue;
-                      ts = p->lValue(n, 0, 0);
-                      for (int k = 0; k < 36; k++)
-                        {
-                          const int ch = kAmpCh[k];
-                          const float ped = (p->iValue(n, 1, ch) + p->iValue(n, 2, ch) + p->iValue(n, 3, ch)) / 3.f;
-                          if (k >= 32)    // paddles: negative PMT pulse saturates the ADC at 0 -> dip depth
-                            {
-                              int mn = 1 << 30;
-                              for (int smp = 8; smp <= 16; smp++) mn = std::min(mn, p->iValue(n, smp, ch));
-                              amp[k] = ped - mn;
-                              continue;
-                            }
-                          int mx = 0;
-                          for (int smp = 0; smp < 20; smp++) mx = std::max(mx, p->iValue(n, smp, ch));
-                          amp[k] = mx - ped;
-                          win[k] = (p->iValue(n, 6, ch) + p->iValue(n, 7, ch) + p->iValue(n, 8, ch) + p->iValue(n, 9, ch)) / 4.f - ped;
-                        }
-                      for (int a = 0; a < 4; a++) cm[a] = common_mode(p, n, a * 72, used, 6);
-                      t.Fill();
+                      if (p->getHitFormat() != IDH2GCROC3_10G) { std::cerr << "packet " << p->getIdentifier() << " has format " << p->getHitFormat() << ", not IDH2GCROC3_10G\n"; delete p; delete e; return 1; }
+                      pool = new h2gcroc3_10G_pool();
                     }
+                  pool->addPacket(p);
                   delete p;
-                }
-            }
-          else if (mode == "kcu1adc")
-            {
-              if (Packet *p = e->getPacket(12002))
-                {
-                  const int nwf = p->iValue(0, "NR_WF");
-                  for (int n = 0; n < nwf; n++)
-                    {
-                      if (p->iValue(n, "SAMPLESIZE") != 20) continue;
-                      ts = p->lValue(n, 0, 0);
-                      for (int k = 0; k < 72; k++)
-                        {
-                          const int ch = 144 + k;
-                          const float ped = (p->iValue(n, 1, ch) + p->iValue(n, 2, ch) + p->iValue(n, 3, ch)) / 3.f;
-                          int mx = 0;
-                          for (int smp = 0; smp < 20; smp++) mx = std::max(mx, p->iValue(n, smp, ch));
-                          a1[k] = (Short_t) (mx - ped);
-                          w1[k] = (p->iValue(n, 5, ch) + p->iValue(n, 6, ch) + p->iValue(n, 7, ch) + p->iValue(n, 8, ch)) / 4.f - ped;
-                        }
-                      cm1 = common_mode(p, n, 144, used1, 5);
-                      t.Fill();
-                    }
-                  delete p;
+                  while (!done && pool->depth_ok()) { kcu_waveforms(pool); pool->next(); }
                 }
             }
           else if (mode == "caenadc")
@@ -225,22 +275,6 @@ int main(int argc, char **argv)
                       for (int smp = 20; smp < std::min(ns, 160); smp++) qint[ch] += ped - p->iValue(smp, ch);
                     }
                   t.Fill();
-                  delete p;
-                }
-            }
-          else if (mode == "kcu")
-            {
-              Packet *p = e->getPacket(12001);
-              if (!p) p = e->getPacket(12002);
-              if (p)
-                {
-                  const int nwf = p->iValue(0, "NR_WF");
-                  for (int n = 0; n < nwf; n++)
-                    {
-                      nsamp = p->iValue(n, "SAMPLESIZE");
-                      ts = p->lValue(n, 0, 0);
-                      t.Fill();
-                    }
                   delete p;
                 }
             }
@@ -274,6 +308,16 @@ int main(int argc, char **argv)
           delete e;
         }
       std::cout << argv[f] << " done, " << t.GetEntries() << " rows so far\n";
+    }
+  if (pool)   // the end of the stream: everything left, including the last waveform
+    {
+      pool->drain();
+      while (!done && pool->depth_ok()) { kcu_waveforms(pool); pool->next(); }
+      pool->identify(std::cout);
+      std::cout << "pool: CRC errors " << pool->iValue(0, "CRCERRORS") << ", hamming flags " << pool->iValue(0, "HAMMINGERRORS")
+                << ", decoding errors " << pool->iValue(0, "DECODEERRORS") << " (bad lines " << pool->iValue(0, "BADLINES")
+                << ", late lines " << pool->iValue(0, "LATELINES") << ", resets " << pool->iValue(0, "RESETS") << ")\n";
+      delete pool;
     }
   t.Write();
   return 0;

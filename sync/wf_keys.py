@@ -10,6 +10,7 @@ paddle region: the two most confident single AstroPix matches with all three str
 is low on chips 0 and 8, see astro_final.py; the display prints it)."""
 import numpy as np, uproot, glob, sys
 sys.path.insert(0, '.')
+import sys; sys.path.insert(0, '/sphenix/user/tmengel/eic/bic_testbeam/common')
 from astro_geo_common import load
 
 G = load(); TT = np.load('out/triggers_3062.npz')

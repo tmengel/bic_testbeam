@@ -100,7 +100,7 @@ namespace bic
   // Four 16-SiPM arrays (Olaiya layout, Kim deck slides 6/31); every 9th channel
   // (152, 161, ..., 215) has no connector. 53 of 64 fire in run 3062 (A mostly dead).
   //   A = 144-151,153-160   B = 162-169,171-178   C = 180-187,189-196   D = 198-205,207-214
-  // Vertical order from data (sync/sfil5_map.py; AstroPix y and the SFIL3-4
+  // Vertical order from data (astropix/sfil5_map.py; AstroPix y and the SFIL3-4
   // upper-cell fraction agree), bottom to top in AstroPix y: A < B < D < C
   // (B/D and D/C firm, A weak). No height structure is resolved within an array.
   // With the May-board analogy A=SiPM1, B=SiPM2, D=SiPM3, C=SiPM4 this is

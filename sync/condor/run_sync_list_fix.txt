@@ -1,0 +1,3 @@
+3062 8GB decode
+3064 24GB decode
+3088 6GB sync
