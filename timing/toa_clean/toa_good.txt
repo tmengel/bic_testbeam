@@ -1,0 +1,9 @@
+S: noise-word rate before the pulse 0.100 per sample; code bins with purity > 0.5 hold 1.00 of the pulse words
+N: noise-word rate before the pulse 0.398 per sample; code bins with purity > 0.5 hold 0.56 of the pulse words
+
+odd triggers, one paddle, clean pulse and a TOA word at both ends: 103678 showers
+all words                  n 103678 (1.00)  corr 0.852  within 5 ns 0.71 | TOA sigma 2.76-3.16 ns core 0.89  160 mm/ns  sigma_x 221-253 mm  sep 0.71 | ADC same showers: sigma 1.70-2.00 ns  sigma_x 125-146 mm  sep 1.24
++ quiet before the pulse   n  30061 (0.29)  corr 0.862  within 5 ns 0.79 | TOA sigma 2.16-2.51 ns core 0.92  150 mm/ns  sigma_x 162-188 mm  sep 0.94 | ADC same showers: sigma 1.68-2.02 ns  sigma_x 119-143 mm  sep 1.27
++ one word only            n  28059 (0.27)  corr 0.887  within 5 ns 0.83 | TOA sigma 2.15-2.48 ns core 0.96  154 mm/ns  sigma_x 165-191 mm  sep 0.92 | ADC same showers: sigma 1.64-1.96 ns  sigma_x 117-140 mm  sep 1.29
++ pure code                n  17631 (0.17)  corr 0.838  within 5 ns 0.87 | TOA sigma 1.75-1.89 ns core 0.96  166 mm/ns  sigma_x 145-156 mm  sep 1.10 | ADC same showers: sigma 1.64-1.91 ns  sigma_x 119-138 mm  sep 1.31
+wrote toa_good.npz

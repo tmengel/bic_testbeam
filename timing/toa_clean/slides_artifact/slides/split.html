@@ -1,0 +1,15 @@
+<section id="split" style="background:#FFFFFF;color:#000000;font-family:Arial, sans-serif;padding:24px 28px 84px 28px;display:flex;flex-direction:column;gap:20px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Why the TOA is not better</h2>
+<div style="display:flex;gap:32px;align-items:center">
+<div style="flex:1;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:34px;line-height:1.35"><b>Black:</b> ~1.5 ns shared by TOA and ADC, from the light itself</p>
+<p style="font-size:34px;line-height:1.35"><b>Red:</b> the TOA adds ~1.7 ns of its own</p>
+<p style="font-size:34px;line-height:1.35"><b>Blue:</b> the ADC adds only ~0.9 ns</p>
+<p style="font-size:34px;line-height:1.35;color:#97243A"><b>Floor for this channel: ~100 mm</b></p>
+</div>
+<img src="/_blob/32df7f3e891bb27e8fc858c102638122" alt="Contributions to the North minus South spread against pulse height: TOA only, ADC only, and the part common to both" style="width:1250px;height:700px;object-fit:contain">
+</div>
+<p style="position:absolute;left:14px;bottom:20px;width:600px;font-size:32px">October 27, 2026</p>
+<p style="position:absolute;right:28px;bottom:20px;width:120px;font-size:32px;text-align:right">11</p>
+<aside>Split from three widths per pulse-height bin (TOA N-S, ADC N-S, TOA minus ADC), assuming independent errors: shared 1.4-1.9 ns, TOA own 1.6-1.8 ns, ADC own 0.8-1.2 ns. The shared part limits any readout of this summed channel. The TOA error does not shrink for bigger pulses, so it is not electronic noise; a likely cause is the low threshold firing on the first few photons of the slow summed pulse (not tested).</aside>
+</section>

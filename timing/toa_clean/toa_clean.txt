@@ -1,0 +1,14 @@
+S end: 396739 clean pulses; TOA word on k or k+1 for 0.85 (both 0.001); word on k-1 (before the pulse) 0.14; no-pulse word rate 0.08 per sample; unwrap c0 0
+N end: 474194 clean pulses; TOA word on k or k+1 for 0.65 (both 0.111); word on k-1 (before the pulse) 0.37; no-pulse word rate 0.26 per sample; unwrap c0 640
+odd-trigger showers with a clean pulse at both ends and one paddle: 176609; with a TOA word at both ends: 103678 (0.59)
+amplitude/baseline correction (even triggers): 3.64 ns per ln A_S, -3.24 per ln A_N, 0.088 ns per ADC of baseline S, -0.117 N
+raw TOA times: corr(t_N, t_S) 0.852 over 103678 showers (spread of t_S 10.8 ns rms, of t_N - t_S 5.1 ns rms)
+TOA raw N - S, same 103678 showers: per paddle P4/P3/P6/P5 mean -2.60 / -1.46 / -0.75 / +0.28 ns, core sigma 4.07 / 4.24 / 4.37 / 4.46 ns, core fraction 0.91 / 0.92 / 0.92 / 0.92; slope 0.0172 ns/mm -> v_eff 116 mm/ns; sigma_x 236 / 246 / 254 / 259 mm; P5 vs P4 separated by 0.67 sigma
+TOA N - S, same 103678 showers: per paddle P4/P3/P6/P5 mean -5.61 / -4.74 / -4.26 / -3.52 ns, core sigma 2.76 / 2.82 / 3.04 / 3.16 ns, core fraction 0.89 / 0.89 / 0.90 / 0.89; slope 0.0125 ns/mm -> v_eff 160 mm/ns; sigma_x 221 / 226 / 243 / 253 mm; P5 vs P4 separated by 0.71 sigma
+ADC N - S, same 103678 showers: per paddle P4/P3/P6/P5 mean -0.47 / +0.43 / +1.04 / +1.80 ns, core sigma 1.70 / 1.73 / 1.87 / 2.00 ns, core fraction 0.99 / 0.99 / 1.00 / 1.00; slope 0.0137 ns/mm -> v_eff 146 mm/ns; sigma_x 125 / 126 / 137 / 146 mm; P5 vs P4 separated by 1.24 sigma
+within a paddle, TOA and ADC N - S residuals (both inside 2 sigma, 85097 showers): correlation 0.38
+S end, diagnostic only: TOA - ADC crossing: within 5 ns 0.76, beyond 12.5 ns 0.02; core sigma 4.12 ns
+N end, diagnostic only: TOA - ADC crossing: within 5 ns 0.62, beyond 12.5 ns 0.04; core sigma 5.65 ns
+TOA vs AstroPix (2476 showers): mean x per paddle P3/P6/P5 -3 / +29 / +79 mm (AstroPix -20 / +28 / +86); per shower rms of x - x_AstroPix inside +-400 mm 232 mm
+ADC vs AstroPix (2476 showers): mean x per paddle P3/P6/P5 -16 / +14 / +56 mm (AstroPix -20 / +28 / +86); per shower rms of x - x_AstroPix inside +-400 mm 128 mm
+wrote toa_clean.npz

@@ -1,0 +1,16 @@
+<section id="selection" style="background:#FFFFFF;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 100px 28px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Data used</h2>
+<table style="font-size:34px;color:#000000">
+<tr><th style="width:62%;text-align:left;color:#5C6E73">selection</th><th style="width:19%;text-align:right;color:#5C6E73">South</th><th style="width:19%;text-align:right;color:#5C6E73">North</th></tr>
+<tr><td>Run 3062 triggers</td><td style="text-align:right">1.2 M</td><td style="text-align:right">1.2 M</td></tr>
+<tr><td>Clean pulse, 150–950 ADC</td><td style="text-align:right">532 k</td><td style="text-align:right">537 k</td></tr>
+<tr><td>Good TOA word</td><td style="text-align:right">360 k</td><td style="text-align:right">274 k</td></tr>
+<tr><td>Both ends good</td><td style="text-align:right">193 k</td><td style="text-align:right">193 k</td></tr>
+<tr style="background:#F7F8F6"><td><b>Test half (odd triggers)</b></td><td style="text-align:right"><b>97 k</b></td><td style="text-align:right"><b>97 k</b></td></tr>
+<tr><td>Also matched to AstroPix</td><td style="text-align:right">2.4 k</td><td style="text-align:right">2.4 k</td></tr>
+</table>
+<p style="font-size:30px;color:#33444A">Calibration built on even triggers, every result shown on odd triggers</p>
+<p style="position:absolute;left:14px;bottom:20px;width:600px;font-size:32px">October 27, 2026</p>
+<p style="position:absolute;right:28px;bottom:20px;width:120px;font-size:32px;text-align:right">3</p>
+<aside>Clean pulse: valid waveform, pedestal (mean of samples 1-3) subtracted, amplitude 150-950 ADC (below clipping), peak in samples 5-14. Good TOA word: on the ADC 50 percent crossing sample or the next one, and within 6 ns of the crossing after calibration (this window truncates the TOA residuals at 6 ns; widths are core fits well inside it). Pedestal TOA words are removed by this choice. Both-ends counts are showers: 40 percent of the 487k showers with pulses on both ends. Paddle tag from the common trigger table; AstroPix purity at least 0.3.</aside>
+</section>

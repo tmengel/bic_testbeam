@@ -1,0 +1,16 @@
+triggers 3766023, joined to the event table 3492254, with an AstroPix x 91101 (purity > 0.7: 23494)
+
+SFIL2 c3: valid TOA South 1622556, North 1235912, both 1102716 (0.63 of pulses with both ends > 200 ADC)
+  dt = tN - tS: median -9.84 ns, 16-84 % -36.05-2.04, rms (clipped +-15) 7.53
+  walk: dt vs ln(AN/AS) slope -3.64 ns per unit, intercept -8.25
+  vs AstroPix x (6891 showers, purity > 0.7), raw: slope 0.0045 ns/mm -> v_eff = 2/slope = 445 mm/ns; intercept -7.91 ns at x = 0; corr 0.016; residual rms 7.31 ns -> position rms 812 mm
+  vs AstroPix x (6895 showers, purity > 0.7), walk-corrected: slope 0.0038 ns/mm -> v_eff = 2/slope = 531 mm/ns; intercept -8.24 ns at x = 0; corr 0.014; residual rms 7.28 ns -> position rms 965 mm
+  per paddle median walk-corrected dt: P4 (x -80) -10.72 ns (n 217010)  P3 (x -30) -10.30 ns (n 222259)  P6 (x +30) -10.04 ns (n 262625)  P5 (x +80) -9.87 ns (n 310516)
+
+SFIL4 c3: valid TOA South 1213804, North 409126, both 280290 (0.21 of pulses with both ends > 200 ADC)
+  dt = tN - tS: median 3.03 ns, 16-84 % -21.67-30.63, rms (clipped +-15) 6.29
+  walk: dt vs ln(AN/AS) slope -1.65 ns per unit, intercept 1.14
+  vs AstroPix x (1514 showers, purity > 0.7), raw: slope 0.0029 ns/mm -> v_eff = 2/slope = 699 mm/ns; intercept 1.78 ns at x = 0; corr 0.012; residual rms 6.16 ns -> position rms 1077 mm
+  vs AstroPix x (1514 showers, purity > 0.7), walk-corrected: slope 0.0021 ns/mm -> v_eff = 2/slope = 972 mm/ns; intercept 0.71 ns at x = 0; corr 0.009; residual rms 6.09 ns -> position rms 1479 mm
+  per paddle median walk-corrected dt: P4 (x -80) -0.77 ns (n 58234)  P3 (x -30) 1.11 ns (n 56959)  P6 (x +30) 2.61 ns (n 65223)  P5 (x +80) 4.39 ns (n 78023)
+wrote toa_position.png

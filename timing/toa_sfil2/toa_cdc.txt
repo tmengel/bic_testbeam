@@ -1,0 +1,8 @@
+SFIL2 S c3: pulses 390876, with a word on k/k+1 311816 (0.80), pedestal word rate 0.140/sample; unwrap offset c0 = 16; TOA - crossing MAD-sigma 3.93 ns (before cut), kept |r| < 6 ns: 266386 (0.85 of words); after walk core sigma 2.49 ns; walk span 5.04 ns over A 200-900
+SFIL2 N c3: pulses 447463, with a word on k/k+1 282470 (0.63), pedestal word rate 0.361/sample; unwrap offset c0 = 528; TOA - crossing MAD-sigma 5.68 ns (before cut), kept |r| < 6 ns: 204731 (0.72 of words); after walk core sigma 3.21 ns; walk span 2.57 ns over A 200-900
+
+both ends with a good TOA: 136727 of 362871 showers with both pulses (0.38)
+TOA          N - S per paddle P4/P3/P6/P5: mean 0.10 / 0.82 / 1.30 / 1.89 ns, core sigma 3.20 / 3.30 / 3.42 / 3.56 ns; slope 0.0108 ns/mm -> v_eff 185 mm/ns; position sigma per shower 296 / 306 / 317 / 330 mm
+ADC crossing N - S per paddle P4/P3/P6/P5: mean -0.46 / 0.44 / 1.09 / 1.87 ns, core sigma 1.49 / 1.56 / 1.71 / 1.87 ns; slope 0.0141 ns/mm -> v_eff 142 mm/ns; position sigma per shower 106 / 110 / 121 / 133 mm
+residual correlation TOA vs ADC N - S: 0.446; rms of their difference 3.02 ns
+wrote toa_cdc.png

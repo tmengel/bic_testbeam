@@ -1,0 +1,21 @@
+event 1375 (P4): A_S 645 A_N 526, t_S 161.91 t_N 162.04, N - S 0.13 ns (paddle mean 0.13)
+event 1489 (P6): A_S 652 A_N 685, t_S 137.96 t_N 138.84, N - S 0.88 ns (paddle mean 1.11)
+event 3159 (P5): A_S 643 A_N 403, t_S 157.20 t_N 159.01, N - S 1.82 ns (paddle mean 1.59)
+TOA: slope 0.0089 ns/mm (v_eff 226 mm/ns), offset 0.88 ns
+ADC: slope 0.0137 ns/mm (v_eff 146 mm/ns), offset 0.75 ns
+TOA P4: mean x -85 mm, core sigma 225 mm
+TOA P3: mean x -21 mm, core sigma 248 mm
+TOA P6: mean x 26 mm, core sigma 270 mm
+TOA P5: mean x 80 mm, core sigma 294 mm
+ADC P4: mean x -84 mm, core sigma 112 mm
+ADC P3: mean x -21 mm, core sigma 121 mm
+ADC P6: mean x 24 mm, core sigma 134 mm
+ADC P5: mean x 82 mm, core sigma 149 mm
+
+per bin of min(A_S, A_N), odd triggers: core sigma_x [mm] TOA / ADC / combined
+  A 150-250 n   7109: TOA 284  ADC 165  combined 165 mm
+  A 250-350 n  12885: TOA 281  ADC 140  combined 140 mm
+  A 350-450 n  15720: TOA 248  ADC 128  combined 128 mm
+  A 450-600 n  23525: TOA 238  ADC 114  combined 114 mm
+  A 600-950 n  30358: TOA 252  ADC 125  combined 125 mm
+wrote slides/wf_events.png, wf_persist.png, xres.png

@@ -1,0 +1,11 @@
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/waveforms/condor
+Executable         = $(initialDir)/kcu0_fit.sh
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 3GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/output/root_logs/kcu0_fit_full.out
+Error              = /sphenix/user/tmengel/eic/output/root_logs/kcu0_fit_full.err
+Log                = /tmp/condor-kcu0_fit-$ENV(USER).log
+Queue

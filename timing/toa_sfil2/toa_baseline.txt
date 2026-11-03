@@ -1,0 +1,35 @@
+S: baseline rms 20.0 ADC; odd triggers: TOA - crossing core sigma 2.37 ns before, 1.91 ns after the (baseline, A) table
+   table (rows baseline [np.int64(-200), np.int64(-30), np.int64(-20), np.int64(-12), np.int64(-6), np.int64(0), np.int64(6), np.int64(12), np.int64(20), np.int64(30), np.int64(200)], columns A [np.int64(150), np.int64(250), np.int64(350), np.int64(450), np.int64(600), np.int64(950)]) [ns]:
+       2.07   2.12   2.12   2.20   1.79
+       1.85   1.66   1.49   1.61   0.99
+       1.58   1.11   1.12   1.04   0.42
+       1.32   0.68   0.66   0.50  -0.05
+       0.89   0.31   0.21  -0.07  -0.30
+       0.41  -0.15  -0.23  -0.51   0.34
+      -0.07  -0.59  -0.93  -1.03  -0.01
+      -1.07  -1.37  -1.68  -1.66  -0.31
+      -2.51  -2.78  -2.97  -2.76  -0.81
+      -4.30  -4.99  -4.67  -4.26  -1.79
+N: baseline rms 28.4 ADC; odd triggers: TOA - crossing core sigma 2.60 ns before, 2.12 ns after the (baseline, A) table
+   table (rows baseline [np.int64(-200), np.int64(-30), np.int64(-20), np.int64(-12), np.int64(-6), np.int64(0), np.int64(6), np.int64(12), np.int64(20), np.int64(30), np.int64(200)], columns A [np.int64(150), np.int64(250), np.int64(350), np.int64(450), np.int64(600), np.int64(950)]) [ns]:
+       2.95   2.37   2.07   2.03   1.80
+       2.00   1.31   1.14   1.14   0.87
+       1.29   0.56   0.57   0.60   0.30
+       0.22  -0.09   0.06   0.19  -0.13
+      -0.49  -0.46  -0.27  -0.24  -0.43
+      -0.76  -0.49  -0.42  -0.56  -0.80
+      -0.84  -0.63  -0.59  -0.81  -1.05
+      -0.85  -0.66  -0.86  -1.25  -0.72
+      -0.76  -0.86  -1.27  -1.85  -0.99
+      -1.23  -1.97  -2.64  -2.78  -1.61
+TOA N - S paddle means 0.13 / 0.70 / 1.11 / 1.59 ns; slope 0.0089 ns/mm -> v_eff 226 mm/ns
+ADC N - S paddle means -0.40 / 0.46 / 1.07 / 1.86 ns; slope 0.0137 ns/mm -> v_eff 146 mm/ns
+
+odd triggers, both ends good; per bin of min(A_S, A_N): core sigma of N - S [ns]; per-estimator errors from the three-cornered split; inverse-variance combination
+  A 150-250 n   7109: TOA 2.52  ADC 2.25  combined 2.21 ns (162 mm)   [TOA-only 1.66, ADC-only 1.22, common 1.90]
+  A 250-350 n  12885: TOA 2.49  ADC 1.91  combined 1.90 ns (139 mm)   [TOA-only 1.81, ADC-only 0.85, common 1.71]
+  A 350-450 n  15720: TOA 2.20  ADC 1.75  combined 1.74 ns (128 mm)   [TOA-only 1.58, ADC-only 0.84, common 1.53]
+  A 450-600 n  23525: TOA 2.11  ADC 1.56  combined 1.56 ns (114 mm)   [TOA-only 1.61, ADC-only 0.78, common 1.36]
+  A 600-950 n  30358: TOA 2.23  ADC 1.70  combined 1.72 ns (126 mm)   [TOA-only 1.73, ADC-only 0.95, common 1.41]
+wrote toa_baseline.png
+wrote toa_baseline.npz

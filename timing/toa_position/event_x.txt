@@ -1,0 +1,15 @@
+calibration of each handle on the paddle positions (showers, beam cell unsaturated at both ends where amplitude is used):
+  SFIL1 time: fitted slope 0.0068 ns/mm (v_eff 295), offset 20.52 ns; x_time - x_paddle rms per paddle {4: 319, 3: 324, 6: 325, 5: 328} mm; usable 292314
+  SFIL2 time: fitted slope 0.0169 ns/mm (v_eff 118), offset 1.44 ns; x_time - x_paddle rms per paddle {4: 164, 3: 173, 6: 189, 5: 202} mm; usable 1728100
+  SFIL2 amplitude: x_amp - x_paddle median per paddle {4: -9, 3: 9, 6: -3, 5: 5} mm, rms {4: 152, 3: 146, 6: 144, 5: 145} mm; usable 1234413
+  SFIL3 time: fitted slope 0.0224 ns/mm (v_eff 89), offset 0.74 ns; x_time - x_paddle rms per paddle {4: 171, 3: 171, 6: 195, 5: 217} mm; usable 1686918
+  SFIL3 amplitude: x_amp - x_paddle median per paddle {4: -26, 3: 7, 6: -2, 5: 3} mm, rms {4: 170, 3: 172, 6: 177, 5: 187} mm; usable 718038
+  SFIL4 time: fitted slope 0.0339 ns/mm (v_eff 59), offset 5.20 ns; x_time - x_paddle rms per paddle {4: 252, 3: 271, 6: 287, 5: 288} mm; usable 986833
+
+combined x (weights 1/rms^2 of each handle): defined for 1870765 of 1971542 showers
+  P4 (x -80): n  422485  median residual -42 mm, rms 141 mm, 16-84 % -154 / +71
+  P3 (x -30): n  421094  median residual +5 mm, rms 139 mm, 16-84 % -110 / +129
+  P6 (x +30): n  475558  median residual +12 mm, rms 155 mm, 16-84 % -114 / +166
+  P5 (x +80): n  551628  median residual +44 mm, rms 173 mm, 16-84 % -98 / +242
+  against the AstroPix x (45108 showers): median +5 mm, rms 143 mm, corr 0.267
+wrote event_x.png

@@ -1,0 +1,21 @@
+
+SFIL2 c3: calibrated against the ADC 50 % crossing; TOA - crossing residual rms South 3.95 ns, North 6.54 ns (over 1040948 / 935447 pulses); table span South -33.1--7.4 ns, North -34.8-12.5 ns
+  both valid 686638; N - S from TOA: median 2.53, clipped rms 7.29 ns; from the ADC crossings alone: median 0.66, rms 2.06 ns
+  P4 (x -80): n 154120  N - S TOA median -0.634 +- 0.029 ns (rms 7.17)   ADC-crossing median -0.420 ns (rms 1.76)
+  P3 (x -30): n 148704  N - S TOA median 0.023 +- 0.030 ns (rms 7.23)   ADC-crossing median 0.400 ns (rms 1.77)
+  P6 (x +30): n 162019  N - S TOA median 0.347 +- 0.030 ns (rms 7.31)   ADC-crossing median 0.984 ns (rms 1.89)
+  P5 (x +80): n 170190  N - S TOA median 0.688 +- 0.030 ns (rms 7.40)   ADC-crossing median 1.689 ns (rms 2.04)
+  TOA: slope 0.0079 ns/mm -> v_eff = 2/slope = 253 mm/ns (expected 160-200 for scintillating fibres); offset at x = 0: 0.11 ns
+  ADC crossing: slope 0.0128 ns/mm -> v_eff = 2/slope = 157 mm/ns (expected 160-200 for scintillating fibres); offset at x = 0: 0.66 ns
+  vs AstroPix x (10063 showers, purity > 0.3, x 63-137 mm): slope 0.0045 ns/mm, corr 0.019
+
+SFIL4 c3: calibrated against the ADC 50 % crossing; TOA - crossing residual rms South 6.61 ns, North 8.14 ns (over 683200 / 348586 pulses); table span South -31.5--2.0 ns, North -44.7-9.0 ns
+  both valid 104488; N - S from TOA: median 7.62, clipped rms 7.72 ns; from the ADC crossings alone: median 2.97, rms 2.65 ns
+  P4 (x -80): n  35995  N - S TOA median 9.499 +- 0.065 ns (rms 7.77)   ADC-crossing median 2.161 ns (rms 2.33)
+  P3 (x -30): n  25870  N - S TOA median 9.499 +- 0.076 ns (rms 7.67)   ADC-crossing median 3.014 ns (rms 2.43)
+  P6 (x +30): n  20580  N - S TOA median 9.683 +- 0.086 ns (rms 7.68)   ADC-crossing median 3.601 ns (rms 2.62)
+  P5 (x +80): n  13747  N - S TOA median 9.683 +- 0.108 ns (rms 7.74)   ADC-crossing median 4.240 ns (rms 2.98)
+  TOA: slope 0.0014 ns/mm -> v_eff = 2/slope = 1442 mm/ns (expected 160-200 for scintillating fibres); offset at x = 0: 9.59 ns
+  ADC crossing: slope 0.0126 ns/mm -> v_eff = 2/slope = 159 mm/ns (expected 160-200 for scintillating fibres); offset at x = 0: 3.25 ns
+  vs AstroPix x (1581 showers, purity > 0.3, x 63-134 mm): slope -0.0132 ns/mm, corr -0.051
+wrote toa_adc_calib.png

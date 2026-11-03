@@ -1,0 +1,12 @@
+KCU0 entries 1200000, with a CAEN partner within 1 us: 0.193; ts0 mod 4 values [0, 3]
+  trigger phase only         : slope of (t_N + t_S)/2 0.649, correlation 0.522, spread of (t_N + t_S)/2 - x 8.25 ns
+  CAEN paddle in window only : slope of (t_N + t_S)/2 0.399, correlation 0.226, spread of (t_N + t_S)/2 - x 10.26 ns
+  both                       : slope of (t_N + t_S)/2 0.977, correlation 0.732, spread of (t_N + t_S)/2 - x 4.58 ns
+odd-trigger showers with TOA at both ends and a CAEN partner: 22301 of 103678
+slope of (t_N + t_S)/2 against t0: 0.977; correlation 0.732; (t_N - t_S)/2 against t0: correlation -0.087
+spread (half 16-84 %): (t_N + t_S)/2 10.09 ns -> minus t0 4.58 ns; (t_N - t_S)/2 2.39 ns
+correlation t_N vs t_S 0.850 -> t_N - t0 vs t_S - t0 0.710
+P4 x  -80 mm: median t_N - t0  176.53, t_S - t0  178.93, (N + S)/2 - t0  177.57, N - S -2.43 ns (5459 showers)
+P3 x  -30 mm: median t_N - t0  177.28, t_S - t0  178.55, (N + S)/2 - t0  177.76, N - S -1.31 ns (5194 showers)
+P6 x  +30 mm: median t_N - t0  175.48, t_S - t0  175.92, (N + S)/2 - t0  175.55, N - S -0.49 ns (5672 showers)
+P5 x  +80 mm: median t_N - t0  178.58, t_S - t0  177.96, (N + S)/2 - t0  178.11, N - S +0.54 ns (5976 showers)

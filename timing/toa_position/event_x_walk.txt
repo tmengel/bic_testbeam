@@ -1,0 +1,18 @@
+showers 1971542 (with paddle 1971542)
+  SFIL1: n       0; without walk term slope 0.0000 ns/mm (v_eff inf); three-parameter fit slope 0.0000 ns/mm (v_eff inf) with a = 0.00 ns per unit ln(A_N/A_S) (degenerate with x, not applied); offset 0.00 ns; x_time rms vs paddle: all nan, unclipped nan, clipped nan mm; per-paddle median residual {4: None, 3: None, 6: None, 5: None}
+  SFIL2: n  398842; without walk term slope 0.0124 ns/mm (v_eff 162); three-parameter fit slope 0.0171 ns/mm (v_eff 117) with a = 2.89 ns per unit ln(A_N/A_S) (degenerate with x, not applied); offset 1.46 ns; x_time rms vs paddle: all 199, unclipped 201, clipped 193 mm; per-paddle median residual {4: -35, 3: -22, 6: -57, 5: -50}
+  SFIL2 amplitude handle: n 307541, rms vs paddle 138 mm, medians {4: -11, 3: 10, 6: -9, 5: -5}
+  SFIL3: n 1155034; without walk term slope 0.0133 ns/mm (v_eff 150); three-parameter fit slope 0.0147 ns/mm (v_eff 136) with a = 0.93 ns per unit ln(A_N/A_S) (degenerate with x, not applied); offset 0.66 ns; x_time rms vs paddle: all 151, unclipped 154, clipped 142 mm; per-paddle median residual {4: 0, 3: 5, 6: -35, 5: -37}
+  SFIL3 amplitude handle: n 512134, rms vs paddle 150 mm, medians {4: -21, 3: 17, 6: 8, 5: 22}
+  SFIL4: n  605812; without walk term slope 0.0146 ns/mm (v_eff 137); three-parameter fit slope 0.0152 ns/mm (v_eff 132) with a = 0.17 ns per unit ln(A_N/A_S) (degenerate with x, not applied); offset 5.02 ns; x_time rms vs paddle: all 258, unclipped 256, clipped 251 mm; per-paddle median residual {4: -51, 3: -32, 6: -53, 5: -49}
+
+weights (1/rms^2, rms in mm): amp SFIL2 138, amp SFIL3 150, time SFIL2 199, time SFIL3 151, time SFIL4 258
+combined x: defined for 1422941 of 1971542 showers
+  P4 (x -80): n  340025  median residual -16 mm, rms 132 mm, 16-84 % -126 / +83
+  P3 (x -30): n  339527  median residual +2 mm, rms 137 mm, 16-84 % -107 / +112
+  P6 (x +30): n  346745  median residual -27 mm, rms 149 mm, 16-84 % -149 / +101
+  P5 (x +80): n  396644  median residual -25 mm, rms 175 mm, 16-84 % -164 / +154
+  against the AstroPix x (35195 showers, purity >= 0.3): median -19 mm, rms 145 mm, corr 0.143
+  time-only combination: n 1415915, rms vs paddle 171 mm, medians {4: -15, 3: -7, 6: -44, 5: -48}
+  amplitude-only combination: n 725361, rms vs paddle 143 mm, medians {4: -15, 3: 16, 6: 3, 5: 11}
+wrote event_x_walk.png

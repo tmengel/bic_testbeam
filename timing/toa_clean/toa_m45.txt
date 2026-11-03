@@ -1,0 +1,5 @@
+P4 x  -80 mm:  5459 showers; centroid t_S +1.09 +- 0.07, t_N -0.42 +- 0.10 ns; along -45 deg (t_N - t_S)/sqrt2 -1.06, along +45 deg (t_N + t_S)/sqrt2 +0.47
+P3 x  -30 mm:  5194 showers; centroid t_S +0.70 +- 0.07, t_N +0.32 +- 0.10 ns; along -45 deg (t_N - t_S)/sqrt2 -0.26, along +45 deg (t_N + t_S)/sqrt2 +0.72
+P6 x  +30 mm:  5672 showers; centroid t_S -1.93 +- 0.06, t_N -1.47 +- 0.10 ns; along -45 deg (t_N - t_S)/sqrt2 +0.33, along +45 deg (t_N + t_S)/sqrt2 -2.40
+P5 x  +80 mm:  5976 showers; centroid t_S +0.11 +- 0.06, t_N +1.63 +- 0.09 ns; along -45 deg (t_N - t_S)/sqrt2 +1.07, along +45 deg (t_N + t_S)/sqrt2 +1.23
+P4 -> P5 (160 mm): dt_S -0.97, dt_N +2.04 ns; -45 deg component 2.13 ns, +45 deg component 0.76 ns

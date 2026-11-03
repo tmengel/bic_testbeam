@@ -1,0 +1,19 @@
+S tick   per-end core sigma vs ADC crossing (odd): 6.28 ns
+S lin    per-end core sigma vs ADC crossing (odd): 3.44 ns
+S table  per-end core sigma vs ADC crossing (odd): 2.92 ns
+S walk   per-end core sigma vs ADC crossing (odd): 2.36 ns
+S base   per-end core sigma vs ADC crossing (odd): 1.91 ns
+N tick   per-end core sigma vs ADC crossing (odd): 5.89 ns
+N lin    per-end core sigma vs ADC crossing (odd): 5.44 ns
+N table  per-end core sigma vs ADC crossing (odd): 3.11 ns
+N walk   per-end core sigma vs ADC crossing (odd): 2.59 ns
+N base   per-end core sigma vs ADC crossing (odd): 2.12 ns
+
+same 97164 showers (odd triggers, both ends good); N - S after paddle means removed: pooled core sigma, range over amplitude bins, rms
+  ADC sample only (25 ns steps)            0.53 ns  (0.52-0.53)  rms 4.66
+  pulse word, unwrapped, 24.4 ps/code      3.00 ns  (2.68-3.35)  rms 6.27
+  + code-to-time table                     2.68 ns  (2.43-3.00)  rms 3.19
+  + pulse-height correction                2.55 ns  (2.40-2.91)  rms 3.13
+  + baseline correction                    2.30 ns  (2.11-2.52)  rms 2.94
+  ADC 50 % crossing (reference)            1.77 ns  (1.56-2.25)  rms 2.21
+wrote slides/ladder.png

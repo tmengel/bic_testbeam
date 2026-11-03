@@ -1,0 +1,18 @@
+SFIL2 S c3: pulses 531529; pedestal word rate 0.140/sample; unwrap c0 0; table: ADC-referenced mode per 16 codes; frac of words within 3 ns 0.61; kept (|r| < 6 ns) 359934 = 0.68 of pulses; TOA - crossing core sigma 2.37 ns; walk span 4.2 ns
+   per unwrapped-code range, core sigma TOA - crossing [ns]: 0-127: 1.91 (23432);  128-255: 1.95 (30274);  256-383: 2.25 (11504);  384-511: 2.60 (33562);  512-639: 2.46 (53290);  640-767: 2.24 (64710);  768-895: 2.30 (85583);  896-1023: 2.49 (57579)
+   per amplitude: A 150-250: 2.16;  A 250-400: 2.31;  A 400-600: 2.34;  A 600-950: 2.39
+SFIL2 N c3: pulses 537389; pedestal word rate 0.361/sample; unwrap c0 528; table: ADC-referenced mode per 16 codes; frac of words within 3 ns 0.48; kept (|r| < 6 ns) 274027 = 0.51 of pulses; TOA - crossing core sigma 2.61 ns; walk span 3.7 ns
+   per unwrapped-code range, core sigma TOA - crossing [ns]: 0-127: 1.17 (288);  128-255: 0.77 (139);  256-383: 1.35 (9931);  384-511: 2.13 (44118);  512-639: 3.06 (59368);  640-767: 2.65 (103436);  768-895: 2.71 (50582);  896-1023: 1.56 (6165)
+   per amplitude: A 150-250: 3.17;  A 250-400: 2.74;  A 400-600: 2.73;  A 600-950: 2.39
+
+both ends with a good TOA: 193192 of 487177 showers with both pulses (0.40)
+TOA: paddle means 0.18 / 0.73 / 1.14 / 1.62 ns, slope 0.0087 ns/mm, v_eff 229 mm/ns
+ADC: paddle means -0.40 / 0.45 / 1.07 / 1.86 ns, slope 0.0137 ns/mm, v_eff 146 mm/ns
+
+per bin of min(A_S, A_N): core sigma of N - S [ns] (TOA / ADC / mean of the two / weighted), and the three-cornered split
+  A 150-250 n  14030: TOA 2.95  ADC 2.26  TOA-ADC 2.50  -> TOA-only error 2.21, ADC error 1.16 (N-S); combined 2.23 ns = 174 mm
+  A 250-350 n  25593: TOA 2.85  ADC 1.91  TOA-ADC 2.31  -> TOA-only error 2.22, ADC error 0.65 (N-S); combined 1.90 ns = 149 mm
+  A 350-450 n  31455: TOA 2.51  ADC 1.75  TOA-ADC 2.11  -> TOA-only error 1.96, ADC error 0.77 (N-S); combined 1.74 ns = 136 mm
+  A 450-600 n  46588: TOA 2.34  ADC 1.56  TOA-ADC 2.02  -> TOA-only error 1.89, ADC error 0.72 (N-S); combined 1.56 ns = 122 mm
+  A 600-950 n  60530: TOA 2.38  ADC 1.70  TOA-ADC 2.22  -> TOA-only error 1.97, ADC error 1.04 (N-S); combined 1.73 ns = 135 mm
+wrote toa_cdc2.png

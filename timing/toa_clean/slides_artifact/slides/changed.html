@@ -1,0 +1,15 @@
+<section id="changed" style="background:#FFFFFF;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 100px 28px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">What changed from the earlier version</h2>
+<table style="font-size:34px;color:#000000">
+<tr><th style="width:34%;text-align:left;color:#5C6E73"></th><th style="width:33%;text-align:left;color:#5C6E73">earlier</th><th style="width:33%;text-align:left;color:#5C6E73">now</th></tr>
+<tr><td>TOA calibration</td><td>built from the ADC crossing</td><td>TOA codes only</td></tr>
+<tr><td>Word selection</td><td>within 6 ns of the ADC</td><td>any word on the pulse</td></tr>
+<tr><td>TOA North − South</td><td>2.1–2.5 ns</td><td><b>2.8–3.2 ns</b> + 10 % tail</td></tr>
+<tr><td>Light speed from TOA</td><td>226 mm/ns</td><td><b>160 mm/ns</b></td></tr>
+<tr><td>Position per shower</td><td>225–294 mm</td><td><b>220–250 mm</b></td></tr>
+</table>
+<p style="font-size:36px;line-height:1.35">The earlier timing looked better because it was tuned to the ADC; <b>the position answer is the same</b></p>
+<p style="position:absolute;left:14px;bottom:20px;width:600px;font-size:32px">October 28, 2026</p>
+<p style="position:absolute;right:28px;bottom:20px;width:120px;font-size:32px;text-align:right">9</p>
+<aside>The earlier code-to-time table was the most likely ADC crossing phase per code, and only words within 6 ns of the ADC crossing were kept; both pull the TOA towards the ADC, which made the TOA narrower and compressed its time scale (226 mm/ns instead of the fibre value). The split of the spread into TOA-only, ADC-only and shared parts assumed independent errors, which those calibrations were not, so it is dropped. With independent calibrations, the TOA and ADC North - South residuals inside a paddle correlate by 0.38.</aside>
+</section>

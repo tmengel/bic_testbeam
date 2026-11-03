@@ -1,0 +1,46 @@
+KCU1 triggers joined 1175836, with KCU0 layers and SFIL1-4 sum > 600: 393626; T_c = 419, per-sample TOT step 166
+
+model L5 (cells 1-3, South light) quantile ratios q90/q50, q97/q50:
+  x = 30 mm, 3 GeV: 1.452  1.701  (n 5000)
+  x = 30 mm, 4 GeV: 1.387  1.570  (n 5000)
+  x = 30 mm, 5 GeV: 1.342  1.506  (n 5000)
+  x = 30 mm, 6 GeV: 1.314  1.466  (n 5000)
+  x = 80 mm, 5 GeV: 1.341  1.495  (n 5000)
+  x = 80 mm, 6 GeV: 1.322  1.471  (n 5000)
+
+data A5(b) quantile ratios per paddle (showers):
+  P4 (n 89233): b 0.00: 1.502/1.859  b 0.25: 1.548/1.967  b 0.50: 1.600/2.095  b 0.75: 1.655/2.223  b 1.00: 1.714/2.358  b 1.25: 1.774/2.493  b 1.50: 1.834/2.620  b 2.00: 1.955/2.888  b 2.50: 2.070/3.141  b 3.00: 2.184/3.383  b 4.00: 2.413/3.864
+  P3 (n 89239): b 0.00: 1.420/1.654  b 0.25: 1.468/1.747  b 0.50: 1.522/1.852  b 0.75: 1.579/1.963  b 1.00: 1.637/2.079  b 1.25: 1.695/2.196  b 1.50: 1.752/2.311  b 2.00: 1.866/2.534  b 2.50: 1.976/2.743  b 3.00: 2.080/2.936  b 4.00: 2.265/3.293
+  P6 (n 99557): b 0.00: 1.383/1.587  b 0.25: 1.435/1.679  b 0.50: 1.492/1.790  b 0.75: 1.552/1.908  b 1.00: 1.612/2.023  b 1.25: 1.670/2.138  b 1.50: 1.730/2.247  b 2.00: 1.840/2.454  b 2.50: 1.942/2.648  b 3.00: 2.035/2.818  b 4.00: 2.195/3.120
+  P5 (n 115597): b 0.00: 1.330/1.487  b 0.25: 1.380/1.570  b 0.50: 1.440/1.674  b 0.75: 1.503/1.785  b 1.00: 1.564/1.894  b 1.25: 1.623/1.997  b 1.50: 1.679/2.097  b 2.00: 1.781/2.275  b 2.50: 1.869/2.432  b 3.00: 1.947/2.568  b 4.00: 2.078/2.798
+
+b (ADC per TOT unit) from q90/q50 | q97/q50 per paddle, for energy hypotheses and model energy spreads:
+  spread  0 %  P4: 3 GeV 0.00|0.00   4 GeV 0.00|0.00
+  spread  0 %  P3: 3 GeV 0.17|0.13   4 GeV 0.00|0.00   5 GeV 0.00|0.00
+  spread  0 %  P6: 4 GeV 0.02|0.00   5 GeV 0.00|0.00
+  spread  0 %  P5: 5 GeV 0.05|0.02   6 GeV 0.00|0.00
+    -> median b = 0.00
+  spread 10 %  P4: 3 GeV 0.00|0.00   4 GeV 0.00|0.00
+  spread 10 %  P3: 3 GeV 0.30|0.27   4 GeV 0.03|0.00   5 GeV 0.00|0.00
+  spread 10 %  P6: 4 GeV 0.15|0.11   5 GeV 0.00|0.00
+  spread 10 %  P5: 5 GeV 0.17|0.23   6 GeV 0.15|0.17
+    -> median b = 0.01
+  spread 20 %  P4: 3 GeV 0.25|0.03   4 GeV 0.00|0.00
+  spread 20 %  P3: 3 GeV 0.64|0.55   4 GeV 0.37|0.34   5 GeV 0.21|0.12
+  spread 20 %  P6: 4 GeV 0.50|0.42   5 GeV 0.45|0.36
+  spread 20 %  P5: 5 GeV 0.53|0.53   6 GeV 0.48|0.49
+    -> median b = 0.40
+  spread 30 %  P4: 3 GeV 0.68|0.35   4 GeV 0.40|0.11
+  spread 30 %  P3: 3 GeV 1.06|0.93   4 GeV 0.96|0.70   5 GeV 0.63|0.47
+  spread 30 %  P6: 4 GeV 0.90|0.82   5 GeV 0.70|0.64
+  spread 30 %  P5: 5 GeV 0.95|0.90   6 GeV 0.88|0.87
+    -> median b = 0.76
+
+central b = 0.40 (20 % energy spread), band 0.00 (no spread) to 0.76 (30 % spread); the toe slope below the ceiling is 0.33
+  b = 0.00: mean A5 in showers 7539, mean over triggers with >= 4 clipped channels 9928
+  b = 0.00: mean A5 in showers 7539, mean over triggers with >= 4 clipped channels 9928
+  b = 0.40: mean A5 in showers 8236, mean over triggers with >= 4 clipped channels 11304
+  b = 0.76: mean A5 in showers 8879, mean over triggers with >= 4 clipped channels 12574
+  b = 1.00: mean A5 in showers 9302, mean over triggers with >= 4 clipped channels 13410
+wrote sfil5_recovered.npz (A5 at b = 0.40; A5lo/A5hi at 0.00/0.76; A5old = ceiling only)
+wrote kcu1_tot_shape.png

@@ -1,0 +1,15 @@
+<section id="attempts" style="background:#FFFFFF;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 100px 28px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Calibration attempts</h2>
+<table style="font-size:34px;color:#000000">
+<tr><th style="width:12%;text-align:left;color:#5C6E73">#</th><th style="width:58%;text-align:left;color:#5C6E73">what changed</th><th style="width:30%;text-align:right;color:#5C6E73">N − S spread</th></tr>
+<tr><td>1</td><td>first TOA word, code read as linear</td><td style="text-align:right">7.3 ns</td></tr>
+<tr><td>2</td><td>right word, code unwrapped</td><td style="text-align:right">3.2–3.6 ns</td></tr>
+<tr><td>3</td><td>+ code-to-time table, pulse-height correction</td><td style="text-align:right">2.3–3.0 ns</td></tr>
+<tr style="background:#F7F8F6"><td><b>4</b></td><td><b>+ baseline correction</b></td><td style="text-align:right"><b>2.1–2.5 ns</b></td></tr>
+<tr><td>–</td><td>ADC alone, for comparison</td><td style="text-align:right">1.6–2.3 ns</td></tr>
+</table>
+<p style="font-size:30px;color:#33444A">Each step helped, but the TOA never beats the ADC</p>
+<p style="position:absolute;left:14px;bottom:20px;width:600px;font-size:32px">October 27, 2026</p>
+<p style="position:absolute;right:28px;bottom:20px;width:120px;font-size:32px;text-align:right">4</p>
+<aside>Attempt 1 is the Oct 24 version (rms within plus or minus 15 ns, double peak from the North code wrap); attempts 2-4 are Oct 27 and quoted as core sigma, so 1 vs 2 is partly a change of measure. Ranges run over pulse-height bins. An even earlier pass (Oct 21) concluded the KCU0 TOA was noise (MAD 9.6 ns) because it took the first word, which is often a pedestal word.</aside>
+</section>

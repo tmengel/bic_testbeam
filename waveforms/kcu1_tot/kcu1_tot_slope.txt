@@ -1,0 +1,35 @@
+clipped pulses (live B+C+D channels): fraction with a TOT word by nsat, and median TOT
+  nsat  1: n  961893  with TOT 0.63  median TOT   502  16-84 %   407-  596
+  nsat  2: n  615985  with TOT 0.89  median TOT   668  16-84 %   564-  852
+  nsat  3: n  406969  with TOT 0.90  median TOT  1148  16-84 %   868- 1356
+  nsat  4: n  293904  with TOT 0.91  median TOT  1588  16-84 %  1380- 1852
+  nsat  5: n  184766  with TOT 0.92  median TOT  2116  16-84 %  1868- 2316
+  nsat  6: n   78318  with TOT 0.92  median TOT  2396  16-84 %  2220- 2588
+  nsat  7: n   21693  with TOT 0.94  median TOT  2820  16-84 %  2572- 3068
+  nsat  8: n    5503  with TOT 0.94  median TOT  3300  16-84 %  3036- 3548
+  nsat  9: n    1151  with TOT 0.84  median TOT  3636  16-84 %  1535- 3900
+  nsat 10: n     347  with TOT 0.59  median TOT  2060  16-84 %  1297- 2613
+  nsat 11: n     183  with TOT 0.70  median TOT  2212  16-84 %  1708- 2556
+ceiling crossing T_c = 419 (nsat 1 median 502, per-sample step 166 units)
+KCU1 triggers joined 1175836; with KCU0 fit layers 581598; SFIL4 unsaturated and A4 > 100: 256516
+
+model <L5|L4> in L4 quantile bins (cells 1-3, South light, beam under P6), ratio to a straight line through the origin fitted to the bins:
+  3 GeV: slope 0.165 intercept 20.3 (= 79 % of <L5>); <L5>/<L4> 0.770; bin ratios L5/L4: 1.02 0.90 0.85 0.80 0.77 0.71 0.69 0.64 0.59
+  4 GeV: slope 0.180 intercept 28.1 (= 78 % of <L5>); <L5>/<L4> 0.802; bin ratios L5/L4: 1.01 0.92 0.89 0.84 0.79 0.77 0.71 0.68 0.61
+  5 GeV: slope 0.185 intercept 36.4 (= 79 % of <L5>); <L5>/<L4> 0.842; bin ratios L5/L4: 1.07 0.98 0.92 0.87 0.83 0.79 0.75 0.72 0.67
+  6 GeV: slope 0.216 intercept 43.0 (= 76 % of <L5>); <L5>/<L4> 0.869; bin ratios L5/L4: 1.08 0.98 0.95 0.90 0.87 0.82 0.79 0.73 0.69
+
+data <A5(b)> / <A4> in A4 bins (SFIL4 South unsaturated), normalised to the 300-400 bin; the model (4 GeV) bin ratios normalised the same way are the target shape
+  model 4 GeV L5/L4 normalised: 1.14 1.04 1.00 0.95 0.89 0.87 0.80 0.77 0.69 (L4 quantile bins)
+  b = 0.00:  1.33  1.31  1.00  0.81  0.69  0.57  0.48  0.44  0.43  0.39   nan   (ratio 1500-3000 / 300-400 = nan)
+  b = 0.25:  1.33  1.31  1.00  0.81  0.69  0.57  0.48  0.45  0.45  0.42   nan   (ratio 1500-3000 / 300-400 = nan)
+  b = 0.50:  1.32  1.30  1.00  0.81  0.70  0.58  0.49  0.46  0.48  0.45   nan   (ratio 1500-3000 / 300-400 = nan)
+  b = 0.75:  1.31  1.30  1.00  0.81  0.70  0.58  0.49  0.47  0.50  0.48   nan   (ratio 1500-3000 / 300-400 = nan)
+  b = 1.00:  1.31  1.30  1.00  0.81  0.70  0.58  0.49  0.48  0.52  0.51   nan   (ratio 1500-3000 / 300-400 = nan)
+  b = 1.50:  1.29  1.30  1.00  0.82  0.70  0.59  0.50  0.49  0.55  0.55   nan   (ratio 1500-3000 / 300-400 = nan)
+  b = 2.00:  1.29  1.29  1.00  0.82  0.70  0.59  0.51  0.51  0.58  0.59   nan   (ratio 1500-3000 / 300-400 = nan)
+  b = 3.00:  1.27  1.29  1.00  0.82  0.71  0.59  0.51  0.53  0.63  0.66   nan   (ratio 1500-3000 / 300-400 = nan)
+  A4 bin counts: [np.int64(29736), np.int64(24125), np.int64(27100), np.int64(29418), np.int64(30051), np.int64(58437), np.int64(45078), np.int64(10890), np.int64(1534), np.int64(140), np.int64(7)]
+
+model target for (1500-3000)/(300-400): 0.69  ->  b = 0.00 ADC per TOT unit (0 ADC per clipped 25 ns sample)
+wrote sfil5_recovered.npz with b = 0.00 (A5old field = ceiling-only, b = 0); mean A5: b = 0 5004, chosen 5004, per-trigger ratio for >= 4 clipped channels 1.00

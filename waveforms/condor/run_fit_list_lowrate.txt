@@ -1,0 +1,3 @@
+kcu0 3065 /sphenix/tg/tg01/jets/tmengel/eic/kcu0/fit_runs/3064_part00/kcu0_sfil_fit_3064_part00.root
+kcu0 3069 /sphenix/tg/tg01/jets/tmengel/eic/kcu0/fit_runs/3064_part00/kcu0_sfil_fit_3064_part00.root
+kcu1 3065 /sphenix/tg/tg01/jets/tmengel/eic/kcu1/fit_runs/3064_part04/kcu1_sfil5_fit_3064_part04.root

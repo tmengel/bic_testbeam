@@ -1,0 +1,15 @@
+<section id="eventtime" style="background:#FFFFFF;color:#000000;font-family:Arial, sans-serif;padding:24px 28px 84px 28px;display:flex;flex-direction:column;gap:20px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">Why both ends move together: the event time</h2>
+<div style="display:flex;gap:32px;align-items:center">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:34px;line-height:1.35">The KCU latches the trigger on the 25 ns sample clock, so the particle’s phase is a <b>common time on both ends</b> (±10 ns): t_N vs t_S runs at +45°</p>
+<p style="font-size:34px;line-height:1.35">The event time from the CAEN paddle (trigger phase + paddle crossing) follows (t_N + t_S) / 2 with <b>slope 0.98</b>; removing it shrinks the common spread from 10.1 to 4.6 ns</p>
+<p style="font-size:34px;line-height:1.35">The position anticorrelation shows only across paddles (N − S from −2.4 to +0.5 ns, P4 to P5); the beam spot inside one paddle is far below the resolution</p>
+<p style="font-size:34px;line-height:1.35;color:#2B6B47"><b>North − South is unaffected: the position result stands</b></p>
+</div>
+<img src="/_blob/4a61b209ab0718d47a90801e6120f1eb" alt="North against South TOA time, the common time against the CAEN event time, the same after removing the event time, and the per-paddle means" style="width:900px;height:780px;object-fit:contain">
+</div>
+<p style="position:absolute;left:14px;bottom:20px;width:600px;font-size:32px">October 28, 2026</p>
+<p style="position:absolute;right:28px;bottom:20px;width:120px;font-size:32px;text-align:right">11</p>
+<aside>timing/toa_clean/toa_t0.py, fig_t0.png; docs/method.md 4.19. Event time t0 = minus the CAEN-KCU0 match residual (the trigger phase) plus the CAEN paddle crossing in the DRS4 window (particle versus trigger, ±6.6 ns). The KCU0 paddle channels cannot give t0 (they rail at 0 ADC and carry no TOA word). This explains the diagonal band of slide 5 and is not a timing error of the TOA.</aside>
+</section>

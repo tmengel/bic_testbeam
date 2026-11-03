@@ -1,0 +1,12 @@
+<section id="calib" style="background:#FFFFFF;color:#000000;font-family:Arial, sans-serif;padding:24px 28px 84px 28px;display:flex;flex-direction:column;gap:20px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">How the TOA is calibrated</h2>
+<img src="/_blob/7de5b661aa3b4f9faab61af9c7a3578d" alt="TOA code against ADC crossing time for South and North, with the code-to-time table drawn over the band" style="width:1864px;height:601px;object-fit:contain">
+<ol style="font-size:32px;line-height:1.35;padding:0 0 0 40px">
+<li>Take the word on the pulse's rising edge; other words are pedestal noise</li>
+<li>Unwrap the code (North rolls over near 850), then map code → time with the ADC (red line)</li>
+<li>Correct for pulse height and for the baseline shift of each trigger</li>
+</ol>
+<p style="position:absolute;left:14px;bottom:20px;width:600px;font-size:32px">October 27, 2026</p>
+<p style="position:absolute;right:28px;bottom:20px;width:120px;font-size:32px;text-align:right">5</p>
+<aside>The pulse word sits on the ADC 50 percent crossing sample (57 percent South, 53 percent North) or the next one (23 / 20 percent); before that only pedestal words appear (14 percent of samples South, 36 percent North). Unwrap: code minus 528 mod 1024 on the North end. Table: most likely crossing phase per 16 codes. Pulse height: walk in ln A, about 4 ns span. Baseline: the per-trigger baseline moves by 20-28 ADC rms and shifts the TOA by about -0.05 ns per ADC count, because the TOA threshold acts on the raw input; correcting it took the per-end error from 2.4-2.6 to 1.9-2.1 ns.</aside>
+</section>

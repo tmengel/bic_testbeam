@@ -1,0 +1,18 @@
+<section id="method" style="background:#FFFFFF;color:#000000;font-family:Arial, sans-serif;padding:36px 56px 100px 28px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:80px;font-weight:400;line-height:1.1">TOA time without the ADC</h2>
+<p style="font-size:48px;line-height:1.3"><b>t = 25 ns × (sample of the word) + T(code)</b></p>
+<ul style="font-size:36px;line-height:1.4;padding:0 0 0 40px">
+<li>The ADC only finds the pulse and its 25 ns sample; the TOA word on that sample, else the next</li>
+<li>T(code): the code distribution spread over 0–25 ns (the beam is not locked to the 40 MHz clock)</li>
+<li>No time window, no tuning against the ADC; built on even triggers, every result on odd triggers</li>
+</ul>
+<table style="font-size:32px;color:#000000">
+<tr><th style="width:60%;text-align:left;color:#5C6E73">sample</th><th style="width:20%;text-align:right;color:#5C6E73">South</th><th style="width:20%;text-align:right;color:#5C6E73">North</th></tr>
+<tr><td>Clean pulses (150–950 ADC, not clipped)</td><td style="text-align:right">397 k</td><td style="text-align:right">474 k</td></tr>
+<tr><td>TOA word on the pulse</td><td style="text-align:right">85 %</td><td style="text-align:right">65 %</td></tr>
+</table>
+<p style="font-size:36px;line-height:1.35"><b>104 k showers</b> with a word at both ends (odd triggers, 59 % of clean showers)</p>
+<p style="position:absolute;left:14px;bottom:20px;width:600px;font-size:32px">October 28, 2026</p>
+<p style="position:absolute;right:28px;bottom:20px;width:120px;font-size:32px;text-align:right">3</p>
+<aside>First 1.2 M triggers of run 3062. Clean pulse: pedestal from samples 1-3 subtracted, amplitude 150-950 ADC, peak in samples 5-14, raw maximum below 1000. The pulse sample k is the first sample above half the peak. The word is taken on k if present, else on k+1 (words on both: 0.1 percent South, 11 percent North). Codes are unwrapped at the empty code band (North starts after code 640; South wraps at 0). The only correction applied later uses ADC amplitudes and pedestals, never an ADC time. The last row: 104 k of 177 k odd-trigger single-paddle showers with clean pulses at both ends.</aside>
+</section>
