@@ -1,0 +1,36 @@
+/sphenix/tg/tg01/jets/tmengel/eic/kcu0/cosmics/cosmic_3088.root: 983811 triggers, 549851 with stored waveforms
+
+per cell: muons (both ends > 8, peak at samples 7-9 within one sample of each other, pulse shape at one end at least), accidental expectation for independent ends, MPV of sqrt(A_S A_N), A_S, A_N [ADC] (Landau width, Gauss sigma, chi2/ndf)
+cell     muons  accid. | GM: MPV +- err (w, s, chi2) | South                  | North                 
+S1c1   32047 29978.1 |  15.1 +-  0.0 ( 0.3  6.4  7.9) |  11.3 +-  0.0 ( 0.3  5.4 16.1) |  20.8 +-  0.0 ( 0.5 10.5  3.2) | GM median  18.0 [14.9, 22.0]
+S1c2   22120 16769.6 |  13.7 +-  0.1 ( 0.3  4.8  4.7) |  10.5 +-  0.2 ( 0.3  3.9  8.5) |  18.3 +-  0.1 ( 0.5  9.5  4.0) | GM median  16.0 [13.6, 19.1]
+S1c3   13948 10785.2 |  11.7 +-  0.2 ( 0.3  2.3  2.7) |  10.4 +-  0.1 ( 0.3  4.5  3.7) |   8.8 +-  0.2 ( 0.3  4.3  2.2) | GM median  11.8 [10.4, 13.8]
+S1c4   27592 29051.3 |  15.6 +-  0.1 ( 0.4  5.3  4.5) |  10.1 +-  0.1 ( 0.3  4.8  6.7) |  21.4 +-  0.1 ( 0.7 10.4  2.9) | GM median  17.8 [14.8, 21.6]
+S2c1     366   694.4 |       -                |       -                |       -                | GM median  12.0 [10.3, 15.8]
+S2c2     644  1019.8 |       -                |       -                |       -                | GM median  11.5 [ 9.9, 14.1]
+S2c3    4435  4472.2 |   6.1 +-  0.5 ( 0.3  5.7  1.2) |  12.3 +-  0.3 ( 1.4  0.5  2.2) |   3.0 +-  0.1 ( 0.4  9.0  1.9) | GM median  12.8 [10.9, 15.8]
+S2c4    6227  7645.3 |   6.6 +-  0.1 ( 0.3  7.0  1.7) |   7.1 +-  0.3 ( 0.5  9.6  1.7) |   3.9 +-  0.1 ( 0.3  9.5  1.8) | GM median  14.5 [12.3, 17.8]
+S3c1     196     0.8 |       -                |       -                |       -                | GM median  20.8 [14.0, 36.2]
+S3c2     171    35.6 |  16.5 +-  1.7 ( 4.3  0.5  1.4) |  18.0 +-  1.8 ( 5.4  0.5  1.1) |  16.0 +-  2.3 ( 4.8  0.5  1.1) | GM median  22.4 [17.1, 40.9]
+S3c3     270     0.3 |       -                |       -                |  18.4 +-  4.1 ( 6.2  9.3  1.3) | GM median  33.5 [19.9, 56.6]
+S3c4     326    35.3 |       -                |  19.9 +-  1.4 ( 7.1  0.5  0.8) |  26.1 +-  1.5 ( 9.4  0.5  1.2) | GM median  34.0 [18.3, 56.0]
+S4c1     289   147.4 |       -                |       -                |       -                | GM median  10.2 [ 9.3, 12.2]
+S4c2     142   400.2 |       -                |       -                |       -                | GM median  12.7 [ 9.9, 18.6]
+S4c3     216   299.8 |       -                |  11.6 +-  2.2 ( 2.0  0.5  0.7) |       -                | GM median  11.0 [ 9.5, 15.1]
+S4c4     144   141.8 |       -                |       -                |       -                | GM median  11.5 [10.1, 16.3]
+
+vertical tag within a board (other two cells of 1-3 > 8 at samples 7-9 with the shape; cell 4 by cells 2-3): tagged, accidental expectation, MPV or median of the cell [ADC]
+  SFIL1 S:  c1 21045 ( 1227) MPV  14.8+- 0.1 med  15.9 |  c2 23871 ( 1764) MPV   9.9+- 0.0 med  10.9 |  c3 21170 ( 1552) MPV  11.4+- 0.0 med  12.0 |  c4 21160 ( 1227) MPV  13.5+- 0.0 med  14.1 |
+  SFIL1 N:  c1 36163 (10271)                med  25.4 |  c2 37537 (10978)                med  21.4 |  c3 68756 (15966)                med   8.8 |  c4 35014 (10271)                med  27.9 |
+  SFIL2 S:  c1  5628 (  249) MPV   7.3+- 0.2 med   8.9 |  c2  4560 (  194) MPV   9.2+- 0.1 med  10.6 |  c3  4198 (  102) MPV  17.6+- 0.2 med  18.4 |  c4  5513 (  249) MPV  20.3+- 0.0 med  21.2 |
+  SFIL2 N:  c1 11819 ( 1125)                med  10.4 |  c2  9789 ( 1021)                med  10.8 |  c3 10002 (  609)                med  18.4 |  c4 11598 ( 1125)                med  18.9 |
+  SFIL3 S:  c1     4 (    2)                med  27.9 |  c2     9 (    0)                med  38.6 |  c3    26 (    3)                med   0.9 |  c4     0 (    2)                med   0.0 |
+  SFIL3 N:  c1     8 (    0)                med  28.4 |  c2    12 (    0)                med  22.4 |  c3    24 (    0)                med   3.1 |  c4     1 (    0)                med  32.4 |
+  SFIL4 S:  c1   754 (  149) MPV   7.1+- 0.3 med   8.1 |  c2   721 (  143) MPV   9.7+- 0.1 med  10.4 |  c3   821 (   24) MPV  10.7+- 0.1 med  12.9 |  c4   784 (  149) MPV  10.6+- 0.2 med  12.2 |
+  SFIL4 N:  c1   235 (   11)                med   6.0 |  c2   105 (   11)                med   7.8 |  c3   412 (   30)                med   2.8 |  c4   254 (   11)                med   6.9 |
+
+SFIL5 North (KCU0 ch 153/156/163/167), muons tagged by the other two of cells 1-3 > 8 with the shape cut:
+  N5c1: 12414 tagged, MPV 10.8 +- 0.0
+  N5c2: 11568 tagged, MPV 12.3 +- 0.0
+  N5c3: 13271 tagged, MPV 10.4 +- 0.0
+  N5c4: 10724 tagged, MPV 10.3 +- 0.0

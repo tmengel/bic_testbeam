@@ -1,0 +1,18 @@
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/calibration/condor
+Executable         = $(initialDir)/run_cosmic.sh
+Arguments          = $(run) $(start) $(nmax)
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 2GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/output/root_logs/cosmic_$(run)_$(start).out
+Error              = /sphenix/user/tmengel/eic/output/root_logs/cosmic_$(run)_$(start).err
+Log                = /tmp/condor-run_cosmic-$ENV(USER).log
+Queue run, start, nmax from (
+  3088 0 260000
+  3088 260000 260000
+  3088 520000 260000
+  3088 780000 -1
+  3091 0 -1
+)

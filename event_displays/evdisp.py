@@ -14,6 +14,7 @@ the wf_acc classes 100+i (out/wfacc/*.root). Panels:
  7 KCU1 SFIL5 South array sums
  8 CAEN waveforms: Baby BCAL South sum, paddles"""
 import numpy as np, uproot, glob, json, os, ROOT
+import sys; sys.path.insert(0, '/sphenix/user/tmengel/eic/bic_testbeam/common')
 from plotstyle import setup, finish, legend, headroom, colz
 setup(); ROOT.gStyle.SetPaintTextFormat(".0f")
 os.makedirs('out/evdisp', exist_ok=True)

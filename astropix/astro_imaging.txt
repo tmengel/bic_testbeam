@@ -1,0 +1,15 @@
+showers 2209056; with an AstroPix match (n_astro > 0) 125253 (0.057); purity >= 0.3: 75437; >= 0.7: 35108
+per paddle: showers, matched fraction, matched with purity >= 0.3, chips of those, cluster hits (median / 90 %%), beam rows (median, 16-84 %%)
+  P4:  494193  matched 0.017  purity>=0.3    112  chips {3: 102, 6: 10}  nhits 1.0 / 2.0  y [mm] (5.8, 1.8, 7.2)
+  P3:  495492  matched 0.080  purity>=0.3  30674  chips {2: 14, 3: 30646, 5: 2, 6: 12}  nhits 1.0 / 2.0  y [mm] (8.2, 5.2, 10.2)
+  P6:  556029  matched 0.103  purity>=0.3  40718  chips {3: 77, 5: 18141, 6: 22500}  nhits 1.0 / 2.0  y [mm] (7.8, 4.8, 9.8)
+  P5:  663342  matched 0.030  purity>=0.3   3933  chips {3: 10, 5: 2, 6: 62, 8: 3859}  nhits 1.0 / 2.0  y [mm] (7.2, 4.8, 9.8)
+
+per chip (purity >= 0.3): clusters, median hits per cluster, rows: median and rms (0.5 mm pixels) -> beam height sigma [mm]
+  chip 3:  30835 clusters, hits/cluster median 1.0 (90 % 2), row median 16.5, rms 5.59 rows = 2.79 mm
+  chip 5:  18145 clusters, hits/cluster median 1.0 (90 % 2), row median 15.5, rms 5.77 rows = 2.88 mm
+  chip 6:  22584 clusters, hits/cluster median 1.0 (90 % 2), row median 14.5, rms 5.69 rows = 2.84 mm
+  chip 8:   3859 clusters, hits/cluster median 1.0 (90 % 2), row median 14.5, rms 5.69 rows = 2.84 mm
+
+hit records per chip over the run (2822632 valid, 1486 s): [624657, 357947, 302027, 261957, 239203, 244914, 260561, 245240, 286126]  -> row records per second [210.0, 120.0, 102.0, 88.0, 80.0, 82.0, 88.0, 83.0, 96.0]
+wrote astro_imaging.png

@@ -23,6 +23,7 @@ Single-ended sums carry an attenuation bias that grows toward the South end (P5)
  6 fitted lateral width vs layer"""
 import numpy as np, uproot, sys, ROOT
 sys.path.insert(0, '.')
+import sys; sys.path.insert(0, '/sphenix/user/tmengel/eic/bic_testbeam/common')
 from astro_geo_common import load, cluster_xy, wmean
 from plotstyle import setup, finish, legend, headroom, colz
 setup()

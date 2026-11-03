@@ -1,0 +1,21 @@
+# per-cell DRS4 pedestal correction of the CAEN stream of the new runs (caen_apply.py FILE TAG): 3088 cosmics, 3064 parts
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/calibration/condor
+Executable         = $(initialDir)/caen_apply.sh
+Arguments          = /sphenix/user/tmengel/eic/bic_testbeam/data/caen_$(tag).root $(tag)
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 8GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/output/root_logs/caen_apply_$(tag).out
+Error              = /sphenix/user/tmengel/eic/output/root_logs/caen_apply_$(tag).err
+Log                = /tmp/condor-caen_apply-$ENV(USER).log
+Queue tag from (
+  3088
+  3091
+  3064_part00
+  3064_part01
+  3064_part02
+  3064_part03
+  3064_part04
+)

@@ -1,0 +1,21 @@
+fit-cache showers 1971542; with an AstroPix x of purity >= 0.3 (chips 3, 5, 6, 8): 45593; x range -32 to 88 mm (stack frame, North negative)
+model (epic two-component attenuation) slope of ln(N/S) vs x over +-100 mm: -0.00085 per mm -> lambda_eff = -2/slope = 2341 mm
+
+attenuation per layer from the beam-row cell (both ends unsaturated, A_S and A_N > 50 ADC):
+  SFIL1: too few populated x bins (0 events)
+  SFIL2: n  29950; profile fit slope -0.00150 /mm -> lambda_eff 1329 mm; gN/gS at x = 0: 0.851 (event fit: slope -0.00128, ratio 0.869); profile residual rms 0.013; ratio of the slope to the model 1.76
+  SFIL3: n  17261; profile fit slope -0.00122 /mm -> lambda_eff 1646 mm; gN/gS at x = 0: 1.032 (event fit: slope -0.00107, ratio 1.064); profile residual rms 0.010; ratio of the slope to the model 1.42
+  SFIL4: n  19623; profile fit slope -0.00323 /mm -> lambda_eff 619 mm; gN/gS at x = 0: 0.289 (event fit: slope -0.00361, ratio 0.283); profile residual rms 0.039; ratio of the slope to the model 3.78
+
+geometric mean sqrt(A_N A_S) of the beam cell versus x (median per 10 mm, normalised at x = 0): the energy curve E(x) up to attenuation residuals
+  SFIL2 (unsaturated both ends, n 29950): linear slope 0.0012 per mm -> 20 % change over 160 mm; values at x = -80/-30/+30/+80: nan 1.022 0.985 1.146
+  SFIL3 (unsaturated both ends, n 17261): linear slope 0.0005 per mm -> 8 % change over 160 mm; values at x = -80/-30/+30/+80: nan 1.003 0.953 1.053
+  SFIL4 (unsaturated both ends, n 19623): linear slope 0.0000 per mm -> 1 % change over 160 mm; values at x = -80/-30/+30/+80: nan 1.029 0.991 1.023
+  sum of SFIL2-4 geometric-mean layer sums (fits, all showers, n 42547): slope 0.0012 per mm -> 19 % over 160 mm; at -80/-30/+30/+80: nan 1.000 1.002 1.125
+
+earlier model-anchored paddle energies (share fits): P4 3.37, P3 3.53, P6 3.73, P5 3.91 GeV at x = -80/-30/+30/+80 -> relative to x = 0 (interp 3.63): 0.93 / 0.97 / 1.03 / 1.08
+  paddle P4: matched showers 38, AstroPix x median -14, 16-84 % -22--12 mm
+  paddle P3: matched showers 16967, AstroPix x median -20, 16-84 % -24--14 mm
+  paddle P6: matched showers 25788, AstroPix x median 34, 16-84 % 22-40 mm
+  paddle P5: matched showers 2800, AstroPix x median 86, 16-84 % 83-88 mm
+wrote astro_x_attenuation.png

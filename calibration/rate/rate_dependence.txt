@@ -1,0 +1,39 @@
+showers 1971542; dt_prev percentiles 1/10/50/90 %: [0.101 0.116 0.203 0.447] ms; rate percentiles: [2760. 3560. 3980.] Hz
+note: dt_prev is measured between recorded triggers; the 100 us busy means no dt below 0.1 ms, and UDP loss removes some neighbours
+
+<total SFIL1-4 South> / paddle mean against the time since the previous trigger:
+  dt_prev   0.10-  0.15 ms: n  560240  ratio 1.0004 +- 0.0004   per layer [1.    1.    1.    1.001]
+  dt_prev   0.15-  0.20 ms: n  402365  ratio 1.0006 +- 0.0005   per layer [1.001 1.002 1.001 0.999]
+  dt_prev   0.20-  0.30 ms: n  489119  ratio 0.9992 +- 0.0005   per layer [1.001 0.999 0.999 1.   ]
+  dt_prev   0.30-  0.50 ms: n  375929  ratio 0.9998 +- 0.0005   per layer [0.997 1.    0.999 1.001]
+  dt_prev   0.50-  0.70 ms: n   97631  ratio 1.0001 +- 0.0011   per layer [1.006 0.999 1.002 0.999]
+  dt_prev   0.70-  1.00 ms: n   30535  ratio 0.9986 +- 0.0019   per layer [0.977 0.997 0.999 1.001]
+  dt_prev   1.00-  1.50 ms: n    6191  ratio 1.0009 +- 0.0042   per layer [1.021 0.995 1.004 1.002]
+  dt_prev   1.50-  2.00 ms: n    2044  ratio 0.9926 +- 0.0069   per layer [1.052 1.01  0.978 0.991]
+  dt_prev   2.00-  3.00 ms: n    3059  ratio 1.0016 +- 0.0061   per layer [0.998 0.99  1.    1.015]
+  dt_prev   3.00-  5.00 ms: n     767  ratio 1.0007 +- 0.0121   per layer [1.067 1.003 1.021 0.969]
+  dt_prev   5.00- 10.00 ms: n     281  ratio 0.9923 +- 0.0190   per layer [1.033 1.017 1.011 0.945]
+
+... against the time to the NEXT trigger (a check: no causal effect expected):
+  dt_next   0.10-  0.15 ms: n  574913  ratio 0.9999
+  dt_next   0.15-  0.20 ms: n  408273  ratio 1.0001
+  dt_next   0.20-  0.30 ms: n  492868  ratio 1.0005
+  dt_next   0.30-  0.50 ms: n  370751  ratio 0.9993
+  dt_next   0.50-  0.70 ms: n   93331  ratio 0.9991
+  dt_next   0.70-  1.00 ms: n   27162  ratio 1.0037
+  dt_next   1.00-  1.50 ms: n    3957  ratio 1.0004
+
+... against the trigger rate in a +-50 ms window:
+  rate     0- 1000 Hz: n     354  ratio 0.9661 +- 0.0169  per layer [0.992 0.977 0.954 0.969]
+  rate  1000- 2000 Hz: n   47671  ratio 1.0044 +- 0.0017  per layer [0.998 1.005 1.005 1.003]
+  rate  2000- 3000 Hz: n  256357  ratio 1.0009 +- 0.0007  per layer [1.005 1.001 1.    1.001]
+  rate  3000- 4000 Hz: n 1480718  ratio 0.9998 +- 0.0003  per layer [1. 1. 1. 1.]
+  rate  4000- 5000 Hz: n  186442  ratio 0.9992 +- 0.0008  per layer [0.997 0.999 1.    0.998]
+
+ratio against the previous trigger's own SFIL sum (dt_prev < 0.5 ms):
+  previous sum     0-  100: n 130503  ratio 1.0006
+  previous sum   100-  600: n 199511  ratio 1.0010
+  previous sum   600- 2000: n 343832  ratio 0.9992
+  previous sum  2000- 4000: n 644711  ratio 0.9999
+  previous sum  4000-20000: n  16223  ratio 1.0060
+wrote rate_dependence.png

@@ -1,0 +1,3 @@
+waveform example: trigger 2891, paddle P6, A_S 519, A_N 406
+single-paddle triggers with both ends above 100 ADC: 197700; of these clipped at either end: 0.355
+CFD example: zero crossing between samples 6 and 7 at 162.70 ns; peak sample 8

@@ -1,0 +1,13 @@
+# raw-peak off-beam cell ratios (cell_equalisation.py) on the first 800k triggers of 3064 part 00 (the fit trees cannot give them: minAmp 60)
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/calibration/condor
+Executable         = $(initialDir)/run_py.sh
+Arguments          = /sphenix/user/tmengel/eic/bic_testbeam/calibration/cells/cell_equalisation.py /sphenix/tg/tg01/jets/tmengel/eic/sim /sphenix/user/tmengel/eic/bic_testbeam/data/kcu0_3064_part00.root _3064_part00
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 8GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/output/root_logs/cell_equalisation_3064_part00.out
+Error              = /sphenix/user/tmengel/eic/output/root_logs/cell_equalisation_3064_part00.err
+Log                = /tmp/condor-run_py-$ENV(USER).log
+Queue

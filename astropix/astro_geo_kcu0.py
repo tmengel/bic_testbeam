@@ -2,6 +2,7 @@
 Paddle panels use the common-trigger paddle pattern (KCU0, else CAEN); SFIL panels need a KCU0 waveform."""
 import numpy as np, ROOT, sys
 sys.path.insert(0,'.')
+import sys; sys.path.insert(0, '/sphenix/user/tmengel/eic/bic_testbeam/common')
 from astro_geo_common import load, wmean
 from plotstyle import setup, finish, legend, headroom, colz
 setup()

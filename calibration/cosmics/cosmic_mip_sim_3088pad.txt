@@ -1,0 +1,21 @@
+data /sphenix/tg/tg01/jets/tmengel/eic/kcu0/cosmics/cosmic_3088.root: 983811 triggers; noise per channel after the common-mode subtraction [ADC]: [2.2, 1.7, 1.8, 2.0, 7.9, 6.7, 4.0, 9.1, 1.1, 1.1, 1.2, 1.8, 1.4, 1.3, 2.5, 2.5, 0.9, 1.6, 1.0, 1.1, 0.8, 0.9, 0.9, 0.7, 1.5, 1.5, 2.5, 2.7, 1.6, 1.2, 1.3, 1.1, 1.8, 2.1, 1.7, 1.6]
+simulation: 20 files, 2000000 muons, 80814 with a paddle hit (> 0.5 MeV); paddle-tagged subsample used: True
+
+per cell: data tags, simulated crossings; fitted light yield Y [pe per MeV of end light] and ADC per MeV of end light Y x G (G = ADC/pe used: South, North),
+for G, 0.7 G and 1.4 G; beam-anchored gain for the layer (ADC per MeV of South light, 4 GeV anchor); tag efficiency of the simulated crossings
+SFIL1 c1: data 32047, sim crossings 90246 (  223 with a paddle; light S/N median 0.87 / 0.88 MeV) | Y 0.77 [0.75, 0.79] pe/MeV -> 7.7 ADC/MeV (G 10.0 / 10.0); 0.7G: 7.6, 1.4G: 5.7; beam 7.8; tag eff 0.23
+SFIL1 c2: data 22120, sim crossings 87217 (  341 with a paddle; light S/N median 1.26 / 1.24 MeV) | Y 0.57 [0.56, 0.59] pe/MeV -> 5.7 ADC/MeV (G 10.0 / 10.0); 0.7G: 4.6, 1.4G: 4.2; beam 7.8; tag eff 0.22
+SFIL1 c3: data 13948, sim crossings 83911 (  726 with a paddle; light S/N median 0.86 / 0.87 MeV) | Y 0.30 [0.29, 0.31] pe/MeV -> 3.0 ADC/MeV (G 10.0 / 10.0); 0.7G: 2.1, 1.4G: 4.2; beam 7.8; tag eff 0.06
+SFIL1 c4: data 27592, sim crossings 79991 ( 1675 with a paddle; light S/N median 1.00 / 1.01 MeV) | Y 0.66 [0.65, 0.68] pe/MeV -> 6.6 ADC/MeV (G 10.0 / 10.0); 0.7G: 8.0, 1.4G: 5.9; beam 7.8; tag eff 0.20
+SFIL2 c1: data   366, sim crossings 54529 (   22 with a paddle; light S/N median 0.96 / 0.90 MeV)  - too few
+SFIL2 c2: data   644, sim crossings 55991 (   21 with a paddle; light S/N median 0.57 / 0.54 MeV)  - too few
+SFIL2 c3: data  4435, sim crossings 56594 (   17 with a paddle; light S/N median 0.69 / 0.67 MeV)  - too few
+SFIL2 c4: data  6227, sim crossings 56311 (   26 with a paddle; light S/N median 0.45 / 0.48 MeV)  - too few
+SFIL3 c1: data   196, sim crossings 29341 (    2 with a paddle; light S/N median 0.38 / 0.40 MeV)  - too few
+SFIL3 c2: data   171, sim crossings 31752 (    4 with a paddle; light S/N median 0.24 / 0.26 MeV)  - too few
+SFIL3 c3: data   270, sim crossings 33765 (    6 with a paddle; light S/N median 0.15 / 0.16 MeV)  - too few
+SFIL3 c4: data   326, sim crossings 35649 (   12 with a paddle; light S/N median 1.02 / 1.09 MeV)  - too few
+SFIL4 c1: data   289, sim crossings 15140 (    2 with a paddle; light S/N median 0.15 / 0.15 MeV)  - too few
+SFIL4 c2: data   142, sim crossings 17568 (    2 with a paddle; light S/N median 0.37 / 0.40 MeV)  - too few
+SFIL4 c3: data   216, sim crossings 19542 (    1 with a paddle; light S/N median 3.13 / 3.42 MeV)  - too few
+SFIL4 c4: data   144, sim crossings 20888 (    1 with a paddle; light S/N median 1.35 / 1.48 MeV)  - too few

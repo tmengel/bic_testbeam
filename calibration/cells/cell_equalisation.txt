@@ -1,0 +1,31 @@
+first 800000 KCU0 triggers from the raw trees (cells by branch name Sc1-Sc4 / Nc1-Nc4): 482599 showers
+noise bias of the raw peak in empty triggers (ADC), South / North per layer and cell: [[-0.5, -1.0, -0.5, -0.6], [-3.1, -3.2, -3.9, -3.4], [-2.0, -2.3, -1.7, -1.9], [-0.3, -0.2, -0.6, -0.4]] / [[53.5, 54.7, 24.3, 68.5], [1.2, 1.9, 6.5, 9.1], [4.3, 2.8, 2.8, 3.7], [9.8, 8.1, 1.5, 3.0]]
+  SFIL1 S (v2 board): (<A_c> - bias)/(<A_3> - bias) = cell1 0.0331  cell2 0.0343  cell4 0.0272  cells1+2 0.0673   (medians 0.0187 0.0203 0.0171; n 80131)
+  SFIL2 S (v2 board): (<A_c> - bias)/(<A_3> - bias) = cell1 0.0161  cell2 0.0179  cell4 0.0100  cells1+2 0.0340   (medians 0.0074 0.0073 0.0059; n 291292)
+  SFIL3 S (v2 board): (<A_c> - bias)/(<A_3> - bias) = cell1 0.1162  cell2 0.1683  cell4 0.0075  cells1+2 0.2836   (medians 0.0250 0.0511 0.0048; n 182612)
+  SFIL4 S (v2 board): (<A_c> - bias)/(<A_3> - bias) = cell1 0.0518  cell2 0.0467  cell4 0.0056  cells1+2 0.0984   (medians 0.0097 0.0086 0.0034; n 270802)
+  SFIL1 N (v1 board): (<A_c> - bias)/(<A_3> - bias) = cell1 -0.0879  cell2 0.0014  cell4 -0.1141  cells1+2 -0.0865   (medians -0.0792 -0.0233 -0.1141; n 174997)
+  SFIL2 N (v2 board): (<A_c> - bias)/(<A_3> - bias) = cell1 0.0022  cell2 0.0011  cell4 -0.0068  cells1+2 0.0033   (medians 0.0002 -0.0010 -0.0028; n 333957)
+  SFIL3 N (v2 board): (<A_c> - bias)/(<A_3> - bias) = cell1 0.1157  cell2 0.1061  cell4 -0.0014  cells1+2 0.2215   (medians 0.0301 0.0174 -0.0013; n 195860)
+  SFIL4 N (v2 board): (<A_c> - bias)/(<A_3> - bias) = cell1 0.2748  cell2 0.2715  cell4 0.0013  cells1+2 0.5461   (medians 0.0772 0.0696 0.0001; n 250671)
+
+model (4 GeV) light fraction per cell over cell 3, by beam y (mm):
+  y = -14.0: South SFIL1 0.008 0.021 0.230 | SFIL2 0.014 0.062 0.305 | SFIL3 0.030 0.128 0.391 | SFIL4 0.058 0.203 0.482
+  y =  -9.5: South SFIL1 0.008 0.051 0.059 | SFIL2 0.015 0.111 0.115 | SFIL3 0.036 0.193 0.196 | SFIL4 0.069 0.284 0.284
+  y =  -5.0: South SFIL1 0.010 0.222 0.018 | SFIL2 0.023 0.301 0.061 | SFIL3 0.053 0.390 0.127 | SFIL4 0.098 0.478 0.200
+  y =  -2.0: South SFIL1 0.014 0.574 0.016 | SFIL2 0.037 0.633 0.052 | SFIL3 0.086 0.702 0.113 | SFIL4 0.141 0.744 0.187
+  y =  +0.0: South SFIL1 0.018 0.976 0.020 | SFIL2 0.052 0.993 0.054 | SFIL3 0.112 1.001 0.111 | SFIL4 0.183 1.001 0.180
+  y =  +2.0: South SFIL1 0.034 1.905 0.027 | SFIL2 0.087 1.687 0.058 | SFIL3 0.166 1.495 0.119 | SFIL4 0.255 1.379 0.188
+
+implied relative gains g_c / g_3 = data ratio / model ratio (model at the nominal beam y = -5 mm; the spread over the beam-y runs is the lateral-position systematic):
+  SFIL1 S: cell1 3.48 [0.98-4.40]  cell2 0.15 [0.02-1.66]  cell4 1.535 [0.118-1.672]   cells 1+2 pair: data 0.067 / model 0.231 = 0.29
+  SFIL2 S: cell1 0.71 [0.18-1.19]  cell2 0.06 [0.01-0.29]  cell4 0.163 [0.033-0.194]   cells 1+2 pair: data 0.034 / model 0.324 = 0.11
+  SFIL3 S: cell1 2.18 [0.70-3.83]  cell2 0.43 [0.11-1.32]  cell4 0.059 [0.019-0.068]   cells 1+2 pair: data 0.284 / model 0.443 = 0.64
+  SFIL4 S: cell1 0.53 [0.20-0.89]  cell2 0.10 [0.03-0.23]  cell4 0.028 [0.012-0.031]   cells 1+2 pair: data 0.098 / model 0.576 = 0.17
+  SFIL1 N: cell1 -9.27 [-11.63--2.61]  cell2 0.01 [0.00-0.07]  cell4 -6.414 [-6.972--0.495]   cells 1+2 pair: data -0.087 / model 0.231 = -0.37
+  SFIL2 N: cell1 0.10 [0.02-0.16]  cell2 0.00 [0.00-0.02]  cell4 -0.110 [-0.131--0.022]   cells 1+2 pair: data 0.003 / model 0.324 = 0.01
+  SFIL3 N: cell1 2.17 [0.70-3.81]  cell2 0.27 [0.07-0.83]  cell4 -0.011 [-0.012--0.004]   cells 1+2 pair: data 0.222 / model 0.443 = 0.50
+  SFIL4 N: cell1 2.80 [1.08-4.73]  cell2 0.57 [0.20-1.34]  cell4 0.007 [0.003-0.007]   cells 1+2 pair: data 0.546 / model 0.576 = 0.95
+
+reading: cell 4 is empty in the data (ratio ~0.01 against a model 0.05-0.11), the v2-board South cells 1 and 2 of one layer are a summed pair on the summing boards (Bobae deck p18), so their individual gains are not separable; use the cell 1 + cell 2 sum where needed.
+wrote cell_equalisation.png

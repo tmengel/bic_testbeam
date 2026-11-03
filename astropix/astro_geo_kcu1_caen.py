@@ -4,6 +4,7 @@ KCU1 and CAEN rows come from the common-trigger table (trigger_table.py), so tri
 without a complete KCU0 waveform contribute too."""
 import numpy as np, uproot, glob, ROOT, sys
 sys.path.insert(0,'.')
+import sys; sys.path.insert(0, '/sphenix/user/tmengel/eic/bic_testbeam/common')
 from astro_geo_common import load, wmean
 from plotstyle import setup, finish, legend, headroom, colz
 setup()

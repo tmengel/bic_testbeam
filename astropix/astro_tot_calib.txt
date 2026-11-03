@@ -1,0 +1,32 @@
+expected MIP most-probable energy loss in 128 um Si: 120 GeV protons (beta gamma 128) 33.9 keV; 4 GeV positrons (beta gamma 7830) 34.0 keV; 3 / 6 GeV 34.0 / 34.0 keV
+records: 2864554 total, 2592065 clean (valid, chip 0-8, location 0-34, upper nibble 0)
+pixel hits (row + column records paired with |dToA| <= 1 and |dToT|/ToT_col < 10 %): 543221; row-only records with ToT > 0 left unpaired: 405579
+per chip: hits, median column ToT, fraction of column records with ToT = 0 (chips 5-8 carry no ToT):
+  chip 0: hits  131379  median ToT   830   zero-ToT column records 0.001
+  chip 1: hits  106411  median ToT   576   zero-ToT column records 0.004
+  chip 2: hits   94164  median ToT   682   zero-ToT column records 0.008
+  chip 3: hits   81936  median ToT   833   zero-ToT column records 0.011
+  chip 4: hits   72756  median ToT   393   zero-ToT column records 0.015
+  chip 5: hits   26589  median ToT     7   zero-ToT column records 0.384
+  chip 6: hits   10301  median ToT     6   zero-ToT column records 0.789
+  chip 7: hits    9069  median ToT     4   zero-ToT column records 0.718
+  chip 8: hits   10616  median ToT     3   zero-ToT column records 0.652
+chips with a working ToT: [0, 1, 2, 3, 4]
+
+chip-level ToT spectra (beam band rows 10-24, columns >= 3), Landau x Gauss fits: MPV, Landau width, Gauss sigma [ToT units; x 5 ns if the ToT clock is 200 MHz]
+  chip 0: hits 104893, mode  740, MPV  676.0 +-  1.9, width  57.4, sigma 291.2, chi2/ndf 12.5
+  chip 1: hits  85597, mode  500, MPV  483.7 +-  1.0, width  44.0, sigma 133.0, chi2/ndf 34.4
+  chip 2: hits  76807, mode  580, MPV  585.4 +-  1.3, width  43.5, sigma 174.2, chi2/ndf 16.1
+  chip 3: hits  66593, mode  780, MPV  723.6 +-  2.0, width  37.8, sigma 264.3, chi2/ndf 10.6
+  chip 4: hits  58852, mode  340, MPV  331.4 +-  0.9, width  29.2, sigma  95.8, chi2/ndf 61.7
+
+pixels with >= 150 paired hits: 1411 (of 9782 hit pixels); per-pixel Landau fits
+  chip 0: 384 pixels, per-pixel MPV median   702, 16-84 %   523-  961, rms/median 0.371, median fit error 3.0 %
+  chip 1: 319 pixels, per-pixel MPV median   506, 16-84 %   397-  671, rms/median 0.290, median fit error 2.2 %
+  chip 2: 289 pixels, per-pixel MPV median   618, 16-84 %   474-  776, rms/median 0.265, median fit error 2.2 %
+  chip 3: 235 pixels, per-pixel MPV median   731, 16-84 %   572-  930, rms/median 0.269, median fit error 2.8 %
+  chip 4: 184 pixels, per-pixel MPV median   338, 16-84 %   280-  426, rms/median 0.233, median fit error 2.8 %
+all fitted pixels: 1411, MPV median 602, rms/median 0.389 (the paper: 4.7 % pixel-to-pixel spread in keV after per-pixel calibration)
+
+one-point energy scale: E = 34.0 keV x ToT / MPV_pixel (relative per pixel; absolute anchored to the FTBF MIP value, +-6 %%; the ToT-energy curve is not linear through zero, threshold ~20 keV, so this holds near the MIP only). In ToT units per keV at the chip level: chip 0 19.9, chip 1 14.2, chip 2 17.2, chip 3 21.3, chip 4 9.7
+wrote astro_tot_calib.png, astro_tot_mpv_map.png, astro_tot_pixels.npz

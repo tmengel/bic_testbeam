@@ -1,0 +1,26 @@
+data /sphenix/tg/tg01/jets/tmengel/eic/kcu0/cosmics/cosmic_3088.root: 983811 triggers; noise per channel after the common-mode subtraction [ADC]: [2.2, 1.7, 1.8, 2.0, 7.9, 6.7, 4.0, 9.1, 1.1, 1.1, 1.2, 1.8, 1.4, 1.3, 2.5, 2.5, 0.9, 1.6, 1.0, 1.1, 0.8, 0.9, 0.9, 0.7, 1.5, 1.5, 2.5, 2.7, 1.6, 1.2, 1.3, 1.1, 1.8, 2.1, 1.7, 1.6]
+simulation: 20 files, 2000000 muons, 20610 with a paddle hit (> 0.5 MeV); paddle-tagged subsample used: False
+
+per element: data tags, simulated crossings; fitted light yield Y [pe per MeV of end light] and ADC per MeV of end light Y x G (G = ADC/pe used: South, North),
+for G, 0.7 G and 1.4 G; beam-anchored gain for the layer (ADC per MeV of South light, 4 GeV anchor, v4); tag efficiency of the simulated crossings
+c1+2 = channel sums of cells 1 and 2 (one SiPM pair read by both channels) against the light of physical cells 1 + 2
+SFIL1 c1  : data 32047, sim crossings 31615 (  811 with a paddle, 31615 used; light S/N median 1.13 / 1.14 MeV) | Y 0.81 [0.79, 0.83] pe/MeV -> 8.1 ADC/MeV (G 10.0 / 10.0); 0.7G: 9.3, 1.4G: 6.2; beam 8.6; tag eff 0.27
+SFIL1 c2  : data 22120, sim crossings 31417 (  714 with a paddle, 31417 used; light S/N median 1.14 / 1.14 MeV) | Y 0.66 [0.65, 0.68] pe/MeV -> 6.6 ADC/MeV (G 10.0 / 10.0); 0.7G: 5.9, 1.4G: 4.2; beam 8.6; tag eff 0.23
+SFIL1 c3  : data 13948, sim crossings 30766 (  648 with a paddle, 30766 used; light S/N median 1.14 / 1.14 MeV) | Y 0.32 [0.31, 0.32] pe/MeV -> 3.2 ADC/MeV (G 10.0 / 10.0); 0.7G: 2.1, 1.4G: 4.4; beam 8.6; tag eff 0.08
+SFIL1 c4  : data 27592, sim crossings 30082 (  668 with a paddle, 30082 used; light S/N median 1.13 / 1.13 MeV) | Y 0.77 [0.75, 0.79] pe/MeV -> 7.7 ADC/MeV (G 10.0 / 10.0); 0.7G: 8.4, 1.4G: 4.9; beam 8.6; tag eff 0.26
+SFIL1 c1+2: data 36297, sim crossings 41363 ( 1137 with a paddle, 41363 used; light S/N median 1.70 / 1.70 MeV) | Y 1.20 [1.17, 1.23] pe/MeV -> 12.0 ADC/MeV (G 10.0 / 10.0); 0.7G: 13.1, 1.4G: 12.5; beam 8.6; tag eff 0.45
+SFIL2 c1  : data   366, sim crossings 31300 (  186 with a paddle, 31300 used; light S/N median 1.14 / 1.14 MeV) | Y 0.32 [0.31, 0.32] pe/MeV -> 4.4 ADC/MeV (G 14.1 / 12.0); 0.7G: 3.8, 1.4G: 5.9; beam 24.2; tag eff 0.10
+SFIL2 c2  : data   644, sim crossings 31298 (  106 with a paddle, 31298 used; light S/N median 1.13 / 1.13 MeV) | Y 0.32 [0.31, 0.32] pe/MeV -> 4.4 ADC/MeV (G 14.1 / 12.0); 0.7G: 3.1, 1.4G: 6.2; beam 24.2; tag eff 0.10
+SFIL2 c3  : data  4435, sim crossings 31004 (   60 with a paddle, 31004 used; light S/N median 1.14 / 1.14 MeV) | Y 0.30 [0.29, 0.31] pe/MeV -> 4.2 ADC/MeV (G 14.1 / 12.0); 0.7G: 4.6, 1.4G: 5.9; beam 24.2; tag eff 0.09
+SFIL2 c4  : data  6227, sim crossings 30510 (   88 with a paddle, 30510 used; light S/N median 1.14 / 1.14 MeV) | Y 0.30 [0.29, 0.31] pe/MeV -> 4.2 ADC/MeV (G 14.1 / 12.0); 0.7G: 6.2, 1.4G: 6.2; beam 24.2; tag eff 0.09
+SFIL2 c1+2: data   896, sim crossings 41193 (  239 with a paddle, 41193 used; light S/N median 1.68 / 1.69 MeV) | Y 0.52 [0.50, 0.53] pe/MeV -> 7.3 ADC/MeV (G 14.1 / 12.0); 0.7G: 5.1, 1.4G: 5.9; beam 24.2; tag eff 0.27
+SFIL3 c1  : data   196, sim crossings 31934 (   50 with a paddle, 31934 used; light S/N median 1.13 / 1.12 MeV) | Y 1.87 [1.83, 1.92] pe/MeV -> 17.8 ADC/MeV (G 9.5 / 9.8); 0.7G: 16.0, 1.4G: 13.1; beam 18.4; tag eff 0.66
+SFIL3 c2  : data   171, sim crossings 31833 (   19 with a paddle, 31833 used; light S/N median 1.14 / 1.13 MeV) | Y 2.07 [1.83, 2.23] pe/MeV -> 19.7 ADC/MeV (G 9.5 / 9.8); 0.7G: 16.8, 1.4G: 16.8; beam 18.4; tag eff 0.67
+SFIL3 c3  : data   270, sim crossings 31457 (   19 with a paddle, 31457 used; light S/N median 1.14 / 1.13 MeV) | Y 2.93 [2.72, 3.00] pe/MeV -> 27.8 ADC/MeV (G 9.5 / 9.8); 0.7G: 23.7, 1.4G: 24.9; beam 18.4; tag eff 0.79
+SFIL3 c4  : data   326, sim crossings 30976 (   20 with a paddle, 30976 used; light S/N median 1.12 / 1.12 MeV) | Y 2.93 [2.86, 3.15] pe/MeV -> 27.8 ADC/MeV (G 9.5 / 9.8); 0.7G: 27.5, 1.4G: 22.6; beam 18.4; tag eff 0.79
+SFIL3 c1+2: data   251, sim crossings 42277 (   59 with a paddle, 42277 used; light S/N median 1.66 / 1.66 MeV) | Y 1.97 [1.92, 2.12] pe/MeV -> 18.7 ADC/MeV (G 9.5 / 9.8); 0.7G: 21.5, 1.4G: 21.5; beam 18.4; tag eff 0.60
+SFIL4 c1  : data   289, sim crossings 31787 (    9 with a paddle, 31787 used; light S/N median 1.13 / 1.13 MeV) | Y 0.30 [0.29, 0.34] pe/MeV -> 3.0 ADC/MeV (G 10.0 / 2.9); 0.7G: 4.2, 1.4G: 4.2; beam 14.7; tag eff 0.00
+SFIL4 c2  : data   142, sim crossings 31697 (    5 with a paddle, 31697 used; light S/N median 1.14 / 1.14 MeV) | Y 0.45 [0.43, 0.46] pe/MeV -> 4.5 ADC/MeV (G 10.0 / 2.9); 0.7G: 2.7, 1.4G: 5.4; beam 14.7; tag eff 0.01
+SFIL4 c3  : data   216, sim crossings 31214 (    3 with a paddle, 31214 used; light S/N median 1.14 / 1.13 MeV) | Y 0.35 [0.29, 0.36] pe/MeV -> 3.5 ADC/MeV (G 10.0 / 2.9); 0.7G: 3.3, 1.4G: 4.4; beam 14.7; tag eff 0.01
+SFIL4 c4  : data   144, sim crossings 30460 (    5 with a paddle, 30460 used; light S/N median 1.14 / 1.13 MeV) | Y 0.37 [0.36, 0.37] pe/MeV -> 3.7 ADC/MeV (G 10.0 / 2.9); 0.7G: 3.8, 1.4G: 4.6; beam 14.7; tag eff 0.01
+SFIL4 c1+2: data   412, sim crossings 42034 (   11 with a paddle, 42034 used; light S/N median 1.66 / 1.66 MeV) | Y 0.38 [0.37, 0.39] pe/MeV -> 3.8 ADC/MeV (G 10.0 / 2.9); 0.7G: 4.9, 1.4G: 4.6; beam 14.7; tag eff 0.01

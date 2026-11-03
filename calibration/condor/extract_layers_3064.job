@@ -1,0 +1,29 @@
+# per-event SFIL layer sums (sim/analysis/extract_fit_layers.py) for the 14 KCU0 parts of run 3064 -> sim/analysis/data_fit_layers_3064_partPP.npz
+# (parts are slices of ~3.85 M triggers, 0.65 h each; the TAC period after 9.08 h is a ~50k-trigger tail inside part 13)
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/calibration/condor
+Executable         = $(initialDir)/run_py.sh
+Arguments          = /sphenix/user/tmengel/eic/bic_testbeam/sim/analysis/extract_fit_layers.py /sphenix/tg/tg01/jets/tmengel/eic/kcu0/fit_runs/3064_part$(part)/kcu0_sfil_fit_3064_part$(part).root data_fit_layers_3064_part$(part).npz
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 5GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/output/root_logs/extract_layers_3064_part$(part).out
+Error              = /sphenix/user/tmengel/eic/output/root_logs/extract_layers_3064_part$(part).err
+Log                = /tmp/condor-run_py-$ENV(USER).log
+Queue part from (
+00
+01
+02
+03
+04
+05
+06
+07
+08
+09
+10
+11
+12
+13
+)

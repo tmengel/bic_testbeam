@@ -1,0 +1,13 @@
+# run 3064 SFIL1-4 performance (sim/analysis/performance_3064.py) on the 14 layer-sum caches -> sim/analysis/performance_3064.txt/.png
+Universe           = vanilla
+initialDir         = /sphenix/user/tmengel/eic/bic_testbeam/calibration/condor
+Executable         = $(initialDir)/run_py.sh
+Arguments          = /sphenix/user/tmengel/eic/bic_testbeam/sim/analysis/performance_3064.py data_fit_layers_3064_part*.npz /sphenix/tg/tg01/jets/tmengel/eic/sim/v4
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 12GB
+Priority           = 20
+Output             = /sphenix/user/tmengel/eic/output/root_logs/performance_3064.out
+Error              = /sphenix/user/tmengel/eic/output/root_logs/performance_3064.err
+Log                = /tmp/condor-bic_perf-$ENV(USER).log
+Queue 1
